@@ -1,0 +1,900 @@
+
+php8 	-> released on November 2020
+php8.1  -> released on November 2021
+php8.2	-> released on December 2022
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+							What's new in PHP 8 version
+1. Constructor Property Promotion
+
+2. Allow ::class syntax on objects
+-- To fetch the name (FQN) of a class, we can use the Foo\Bar::class syntax. This RFC proposes to extend the same syntax to objects 
+   so that it’s now possible to fetch the name of the class of a given object,
+   $object = new stdClass;
+   var_dump($object::class); // "stdClass"
+ 
+   $object = null;
+   var_dump($object::class); // TypeError
+-- With PHP 8, $object::class provides the same result as get_class($object). If $object is not an object, it throws a TypeError exception.
+
+3. PHP Named Arguments
+-- Named arguments allow passing arguments to a function based on the parameter name, rather than the parameter position
+-- Position (or) Order of params to function doesn't matter.
+-- don't have to take their order into consideration, and you can also skip optional parameters!
+
+
+4. Nullsafe Operator
+-- With the addition of the nullsafe operator, we can now have null coalescing-like behaviour on methods!
+$dateAsString = $booking->getStartDate()?->asDateTimeString();
+
+5. Match Expressions
+
+6. PHP Union Types 
+-- Union types are a collection of two or more types which indicate that either one of those can be used.
+-- public function foo(Foo|Bar $input): int|float;
+-- Note that void can never be part of a union type, since it indicates "no return value at all". void can only be used as a standalone type
+-- nullable unions can be written using |null, or by using the existing ? notation.  ?int -> int|null,  ?string -> string|null
+-- public function bar(?Bar $bar): void;    ==>  public function bar(Bar|null $bar): void;
+-- we are not allowed to include the ?T notation in union types (?T1|T2 is not allowed and we should use T1|T2|null instead).
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+			PSR - PHP Standard Recommendations
+
+-- The PHP Standard Recommendation is a PHP specification published by the PHP Framework Interoperability Group. (PHP-FIG))
+	PSR-1		:	Basic Coding Standard		-->	https://www.php-fig.org/psr/psr-1/
+	PSR-12	: 	Extended Coding Style		-->	https://www.php-fig.org/psr/psr-12/   (psr-12 replaces psr-2[deprecated])
+	PSR-3		: 	Logger Interface			-->	https://www.php-fig.org/psr/psr-3/
+	PSR-4		: 	Autoloader				-->	https://www.php-fig.org/psr/psr-4/  (psr-4 replaces psr-0[deprecated]).
+	PSR-6		: 	Caching Interface 		-->	https://www.php-fig.org/psr/psr-6/
+	PSR-7		: 	HTTP message interfaces		-->	https://www.php-fig.org/psr/psr-7/
+	PSR-11	:	Container interface		-->	https://www.php-fig.org/psr/psr-11/
+	
+
+
+### PSR-1: Basic Coding Standard
+-- php long tags <?php ?> (or) short-echo tags <?= ?>
+-- Files MUST use only UTF-8 without BOM encoding for PHP code.
+-- Namespaces and classes MUST follow an "autoloading" PSR: [PSR-0, PSR-4].
+-- This means each class is in a file by itself, and is in a namespace of at least one level: a top-level vendor name.
+-- The term "class" refers to all classes, interfaces, and traits.
+-- Class names MUST be declared in `StudlyCaps` or `PascalCase`. Ex : CustomerManagementController 
+-- Class constants MUST be declared in all upper case with underscore separators. Ex : CUSTOMER_APPROVED_DATE
+-- Method and Property names MUST be declared in camelCase. Ex : getProductDetailsArray, thisShouldBeCamelCase
+
+### PSR-12: Extended Coding Style
+-- All PHP files MUST end with a non-blank line, terminated with a single LF.
+-- The closing ?> tag MUST be omitted from files containing only PHP.
+-- The soft limit on line length MUST be 120 characters.
+-- There MUST NOT be trailing whitespace at the end of lines.
+-- There MUST NOT be more than one statement per line.
+-- Code MUST use an indent of `4 spaces` for each indent level, and MUST NOT use tabs for indenting. (indent of 4 spaces,  No Tabs)
+-- All PHP reserved keywords and types MUST be in lower case.
+-- Keywords
+	1. function,for,foreach,while,do_while,if,elseif,switch,case,default,break,continue,true,false,return etc,.
+	2. class,interface,abstract,use,namespace,extends,implements,public,private,protected,const,final,static,new etc,.
+-- types
+	1. int,bool,float,string,object,array,null etc,.
+
+-- Import statements MUST never begin with a leading backslash as they must always be fully qualified.
+-- When instantiating a new class, parentheses MUST always be present even when there are no arguments passed to the constructor.
+	new Foo();
+-- The extends and implements keywords MUST be declared on the same line as the class name.
+-- The use keyword used inside the classes to implement traits MUST be declared on the next line after the opening brace.
+	<?php
+	namespace Vendor\Package;
+	use Vendor\Package\FirstTrait;
+	class ClassName
+	{
+    	    use FirstTrait;
+	}	
+
+-- Visibility MUST be declared on all properties.
+-- Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
+-- The var keyword MUST NOT be used to declare a property.
+-- Method and function arguments with default values MUST go at the end of the argument list.
+   public function fooBarBaz(int $arg1, &$arg2, $arg3 = [], $arg4 = null)
+    {
+        // method body
+    }
+-- When present, the `abstract` and `final` declarations MUST precede the visibility declaration.
+-- the static declaration MUST come after the visibility declaration.
+	abstract class ClassName
+	{
+    	protected static $foo;
+
+    	abstract protected function zim();
+
+    	final public static function bar()
+    	{
+        	// method body
+    	}
+	}
+
+--::  Control Structures
+-- The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words.
+if ($expr1) {
+    // if body
+} elseif ($expr2) {
+    // elseif body
+} else {
+    // else body;
+}
+
+try {
+    // try body
+} catch (FirstThrowableType $e) {
+    // catch body
+} catch (OtherThrowableType | AnotherThrowableType $e) {
+    // catch body
+} finally {
+    // finally body
+}
+
+-- Type casting operators MUST NOT have any space within the parentheses:
+	$intValue = (int) $input;
+
+
+### PSR-3: Logger Interface
+-- 
+
+
+
+
+
+
+
+### PSR-4: Autoloader
+-- This PSR describes a specification for autoloading classes from file paths.
+-- This PSR also describes where to place files that will be autoloaded according to the specification.
+-- The term "class" refers to classes, interfaces, traits, and other similar structures.
+-- The fully qualified class name MUST have a top-level namespace name, also known as a "vendor namespace".
+	 \<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+-- The fully qualified class name MUST have a terminating class name.
+-- Autoloader implementations MUST NOT throw exceptions, MUST NOT raise errors of any level, and SHOULD NOT return a value.
+
+
+----------------------------------------------------------------------------------------------------------------------
+		Control Structures
+
+break  -- jump out of loop or terminate loop
+continue -- skip iteration or go to next iteration
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+						PHP Functions
+
+
+### Callback function
+-- A callback is a function that is to be executed after another function has finished executing
+-- A callback function, which is passed as an argument into another function.
+-- To use a function as a callback function, pass a string containing the name of the function as the argument of another function.
+	array_map('myCallbackFunction', $strings)
+-- Starting with version 7, PHP can pass anonymous functions as callback functions:
+	array_map( function($item) { return strlen($item); } , $strings);
+
+### Function arguments
+-- PHP supports passing arguments by value (the default), passing by reference, and default argument values. 
+   Variable-length argument lists and Named Arguments are also supported.
+-- PHP 5.6 added the splat operator (...) which is used to unpack arrays to be used as function arguments.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+						Type Hinting (or) Type Declarations in PHP
+-- Type declarations can be added to function arguments, return values, and class properties(as of PHP 7.4.0). 
+   They ensure that the value is of the specified type at call time, otherwise a `TypeError` is thrown.
+
+### Type hinting for basic data types (or) scalar data types [string, int, bool, float]
+
+-- PHP7 supports scalar type hinting.
+
+	function sampleData(int $number = 3, array $data = ['name' => 'default'], Car $car)
+	{
+		echo $number.PHP_EOL;
+		echo $data['name'];
+		var_dump($car);
+	}
+
+	class Car
+	{
+	  // class properties and methods
+	}
+
+
+### Type hinting for php objects and arrays
+
+-- PHP5 doesn’t allow type hinting for basic data types (int, float, string and bool). php5 allows type hinting for object and array data types. 
+   Valid types are class names for arguments that receive objects and array for those that receive arrays.
+
+	function enroll(Student $student, array $guests, array $food = null) {
+
+	}
+-- Type Hinting is method by which we can force function to accept the desired data type.
+-- Type hinting is a concept that provides hints to function for the expected data type of arguments.
+-- Type hinting can also be used to force a function to get an argument of type Object. For this purpose,  
+   we put the name of the class in front of the argument name in the function.
+
+	
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+					Type Casting (Converting one data type to another)
+
+
+Type casting is converting a variable or value into desired data type.
+This is very useful when preforming arithmetic computations that require variables 
+to be of same data type.
+Type casting in PHP is done by the interpreter. 1+1.1 = 2.01 (automatic casting in php by default).
+PHP also allows you to cast the data type. This is known as explicit casting.
+
+Data Types define the type of data a variable can store. PHP data types are loosely coupled.
+The type of the data is decided at runtime by PHP depending on the context in which that variable is used.
+PHP supports TEN primitive types.
+
+To check type&value of a expression use var_dump() predefined function.
+To get a human-readable representation of a type for debugging, use the "gettype()" function. ("For DEBUGGING purpose only").
+To check for a certain type, do NOT use gettype(), but rather the is_type (is_int, is_array, ) functions
+
+* Scalar variables are those containing an int, float, string or bool. Types array, object, resource and null are not scalar.
+is_scalar — Finds whether a variable is a scalar ->  is_scalar(mixed $value): bool
+
+is_numeric — Finds whether a variable is a number or a numeric string
+is_numeric(mixed $value): bool
+Returns true if value is a number or a numeric string, false otherwise.
+
+Four scalar or simple data types
+1. bool
+2. int
+3. float (floating-point number)
+4. string
+Four compound types:
+5. array
+6. object
+7. callable
+8. iterable
+And finally two special types:
+9. resource
+10. NULL
+
+
+
+/*** settype() and gettype() functions in php 
+
+settype — Set the type of a variable. settype(mixed &$var, string $type): bool
+Possibles values of type are:
+"boolean" or "bool"
+"integer" or "int"
+"float" or "double"
+"string"
+"array"
+"object"
+"null"
+
+gettype — Get the type of a variable. gettype(mixed $value): string
+
+----------------------------------------------------------------------------------------------------------------------
+					Date and Time
+
+The PHP date() function converts timestamp to a more readable date and time format.
+date(format, timestamp)
+
+d: day of month(two digits with leading zeros 01 or 30)
+dS : day(th) 1st 2nd 3rd 4th etc...
+D: Represents day of the week in the text as an abbreviation (Mon to Sun).
+m: Represents month in numbers with leading zeros (01 or 12).
+M: Represents month in text, abbreviated (Jan to Dec).
+F : Full month name (October nd December)
+y: Represents year in two digits (08 or 14).
+Y: Represents year in four digits (2008 or 2014).
+
+time formats
+h : 12-hour format (01 to 12)
+H : 24-hour format (00 to 23)
+i: Represents minutes with leading zeros (00 to 59).
+s: Represents seconds with leading zeros (00 to 59).
+a: Represents lowercase antemeridian and post meridian (am or pm).
+A: Represents uppercase antemeridian and post meridian (AM or PM).
+
+mktime(hour, minute, second, month, day, year)
+
+DateTime::createFromFormat('d/m/t','01/04/2022');
+$date = new DateTime()
+echo $date->format('d-m-t');
+
+$currentTimezone = date_default_timezone_get();
+$setTimezone = date_default_timezone_set('Asia/Kolkata'); IST
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+/*** PHP variables and data types  ***/
+
+A variable is name given to a memory location that stores data at runtime. 
+Variables are used to store data and provide data when needed.
+The scope of a variable determines its visibility.
+
+PHP has three different `variable` scopes:
+1. local (inside functions and variable can be accessed inside fun)
+2. global (outside function, can used outside function. Use global keyword to access global variables in local scope)
+3. static
+	Normally, when a function is completed/executed, all of its variables are deleted. 
+	However, sometimes we want a local variable NOT to be deleted. We need it for a further job.
+	To do this, use the static keyword when you first declare the variable:
+function myTest() {
+  static $x = 0;
+  echo $x;
+  $x++;
+}
+myTest(); 0
+myTest(); 1
+myTest(); 2
+
+
+
+Type casting is converting a variable or value into desired data type.
+This is very useful when preforming arithmetic computations that require variables 
+to be of same data type.
+Type casting in PHP is done by the interpreter. 1+1.1 = 2.01 (automatic casting in php by default).
+PHP also allows you to cast the data type. This is known as explicit casting.
+
+Data Types define the type of data a variable can store. PHP data types are loosely coupled.
+The type of the data is decided at runtime by PHP depending on the context in which that variable is used.
+PHP supports TEN primitive types.
+
+To check type&value of a expression use var_dump() predefined function.
+To get a human-readable representation of a type for debugging, use the "gettype()" function. ("For DEBUGGING purpose only").
+To check for a certain type, do NOT use gettype(), but rather the is_type (is_int, is_array, ) functions
+
+
+Four scalar or simple data types
+1. bool
+2. int
+3. float (floating-point number)
+4. string
+Four compound types:
+5. array
+6. object
+7. callable
+8. iterable
+And finally two special types:
+9. resource
+10. NULL
+
+
+
+/*** settype() and gettype() functions in php 
+
+settype — Set the type of a variable. settype(mixed &$var, string $type): bool
+Possibles values of type are:
+"boolean" or "bool"
+"integer" or "int"
+"float" or "double"
+"string"
+"array"
+"object"
+"null"
+
+gettype — Get the type of a variable. gettype(mixed $value): string
+
+function_exists() - Return true if the given function has been defined
+method_exists() - Checks if the class method exists
+
+
+$var = 2+ (int) 3.2;
+var_dump($var);
+
+$data = '32';
+$data = (integer) '32';
+$data = 32.98456;
+
+settype($data, 'integer');
+settype($data, 'string');
+settype($data, 'double');
+
+echo is_string($data);
+echo is_float($data);
+echo is_double($data);
+echo gettype($data); //for debugging purpose only
+
+
+/*** NULL or null datatype
+The special null value represents a variable with no value.
+There is only one value of type null, and that is the case-insensitive constant null.
+
+
+A bool or boolean expresses a truth value. It can be either true or false. 
+Boolean data types are used in conditional testing. 
+To specify a bool literal, use the constants true or false. Both are case-insensitive.
+
+An int is a number of the set ℤ = {..., -2, -1, 0, 1, 2, ...}.
+The range of integers must lie between -2^31 to 2^31. 
+integer literals
+$a = 1234; // decimal number base(10)
+$a = 0123; // octal number base(8)  (equivalent to 83 decimal)
+$a = 0o123; // octal number base(8)  (as of PHP 8.1.0)
+$a = 0x1A; // hexadecimal number base(16)  (equivalent to 26 decimal)
+$a = 0b11111111; // binary number base(2) (equivalent to 255 decimal)
+$a = 1_234_567; // decimal number (as of PHP 7.4.0)
+
+There is no int division operator in PHP, to achieve this use the intdiv() function.
+intdiv(dividend, divisor) --> Returns the integer quotient of the division
+intval — Get the integer value of a variable --> Returns the int value of value, using the specified base for the conversion (the default is base 10)
+intval(mixed $value, int $base = 10): int
+
+round() - Rounds a float
+ceil() - Round fractions up
+floor() -  Round fractions down
+
+boolval() - Get the boolean value of a variable
+floatval() - Get float value of a variable
+strval() - Get string value of a variable
+
+A value can be converted to a string using the (string) cast or the strval() function.
+
+Most PHP values can also be converted to strings for permanent storage. This method is called "serialization", 
+and is performed by the "serialize()" function.
+serialize — Generates a storable representation of a value
+To make the serialized string into a PHP value again, use unserialize().
+
+Need to check __sleep and __awake. All magic methods.
+
+PHP arrays ::
+The count() function can be used to count the number of items in an array.
+PHP 5.6 added the splat operator (...) which is used to unpack arrays to be used as function arguments.
+
+isset() function returns TRUE if var exists and its value is not equal to NULL and FALSE otherwise.
+
+### ternary and Null coalescing(from php7) operator
+
+ternalry operater is conditional operator
+ternary --  (expression)? expression1 : expression2
+if expression is true -> evalueate to expression1
+if expression is false -> evalueate to expression2
+
+The null coalescing operator is available since PHP 7.0. It similar to the ternary operator, but will behave like isset on the lefthand operand 
+instead of just using its boolean value. This makes this operator especially useful for arrays and assigning defaults when a variable is not set.
+   $unassigned;
+   $unassigned ?? 'fallback'; // 'fallback'
+
+   $assigned = 'foo';
+   $assigned ?? 'fallback'; // 'foo'
+
+	'' ?? 'fallback'; // ''
+	'foo' ?? 'fallback'; // 'foo'
+	'0' ?? 'fallback'; // '0'
+	0 ?? 'fallback'; // 0
+	false ?? 'fallback'; // false
+	null ?? 'fallback'; // 'fallback'
+
+
+----------------------------------------------------------------------------------------
+			FileSystem && File Handling in PHP
+
+-- File paths in php
+echo 'File : '.__FILE__.'<br>'; 	// C:\xampp\htdocs\coding\App\index.php
+echo 'Dir : '.__DIR__.'<br>'; 	// C:\xampp\htdocs\coding\App
+echo 'basename of dir : '.basename(__DIR__).'<br>'; 	// App
+echo  dirname(__DIR__);	// C:\xampp\htdocs\coding
+echo 'basename of file : '.basename(__FILE__).'<br>'; 	// index.php
+echo 'basename of file without extension : '.basename(__FILE__, '.php').'<br><br>';  	//index
+echo   realpath(__DIR__.'./vendor/autoload.php');     // C:\xampp\htdocs\PSR-4-Autoloading\vendor\autoload.php
+
+echo 'DIR pathinfo : <br>';
+print_r(pathinfo(__DIR__));
+// Array
+// (
+//     [dirname] => C:\xampp\htdocs\coding
+//     [basename] => App
+//     [filename] => App
+// )
+
+echo "<br>";
+echo 'FILE pathinfo : <br>';
+print_r(pathinfo(__FILE__)).'<br><br>';
+// Array
+// (
+//     [dirname] => C:\xampp\htdocs\coding\App
+//     [basename] => index.php
+//     [extension] => php
+//     [filename] => index
+// )
+
+
+
+$file_handle = fopen("logs.txt", "a");
+fwrite($file_handle, print_r($data,true));
+chmod('logs.txt',0777);
+fclose($file_handle);
+
+
+-- File upload in php
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+							Regular Expressions & Regular Expressions in PHP
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+							Exception Handing
+
+
+
+
+
+
+
+https://php.watch/articles/PHP-exception-hierarchy
+
+https://www.php.net/manual/en/spl.exceptions.php
+------------------------------------------------------------------------------------------------------------------------------------------
+							PHP OOPs (Object-Oriented Programming System)
+
+
+
+### Namespaces and Autoloading (with & without composer).
+
+-- namespace (virtual directory structure) and use 
+	1. without namespace definition, fuctions, classes and constants have global scope. With namespace , they have namespace scope, attached to namespace
+	2. Fixes the problem of name collisions (classes and functions with same name).
+	3. Better structure and organized code.
+	4.  __NAMESPACE__ is a string that contains the current namespace name
+	5. use --> Aliasing/Importing
+	6. To access built-in fuctions in local(current) namespace from global space use backslash(\).  (Ex : \Exception, new \DateTime(), \PDO )
+	7. SomeClass::class will return the fully qualified name of SomeClass including the namespace. (php magic constant ::class)
+	   This feature was implemented in PHP 5.5. It's very useful for 2 reasons. 
+	   You can use the use keyword to resolve your class and you don't need to write the full class name.
+	8. Fallback works for built-in functions and consts. Not for global php Classes.
+		Fallback (First check in local namespace, if it fails -> it looks in global namespace or scope).
+		Global classes should mention with backslash(\) or use importing classes.
+
+-- Namespace name definitions (or) Name resolution rules
+1. Unqualified name : This is an identifier without a namespace separator, such as Foo
+2. Qualified name : This is an identifier with a namespace separator, such as Foo\Bar.  Prepend with namespace; 
+3. Fully qualified name (prefixed with backslash `\`))
+	This is an identifier with a namespace separator that begins with a namespace separator, 
+	such as \Foo\Bar. The namespace \Foo is also a fully qualified name.
+4. Relative name : This is an identifier starting with namespace, such as namespace\Foo\Bar.
+   Relative names always resolve to the name with namespace replaced by the current namespace.
+
+
+
+
+
+### PHP Magic Constants
+
+
+
+
+
+
+
+
+### PHP Magic Methods
+
+
+
+
+
+
+
+
+
+
+### PHP class static properties VS constants 
+-- In the context of a class, static variables are on the class scope (not the object scope), but unlike a const, their values can be changed.
+--  A class static properties and methods are on the class scope (No need to create object to access). They can be accessed 
+   using `Scope Resolution` (::) operator.
+
+-- class ClassName {
+    	static $my_var = 10;  /* defaults to public unless otherwise specified */
+    	const MY_CONST = 5;
+	
+	public static getPersonName()
+	{
+	    return 'david';
+	}
+   }
+	echo ClassName::$my_var;   // returns 10
+	echo ClassName::MY_CONST;  // returns 5
+	ClassName::$my_var = 20;   // now equals 20
+	ClassName::MY_CONST = 20;  // error! won't work.
+
+-- Declaring a class method or property as static makes them accessible without needing an instantiation of the class.
+-- private, public and protected are `Access Modifiers` that describes who can access which properties/method.
+-- public, protected, and private are irrelevant in terms of consts (which are always public); 
+   they are only useful for class variables, including static variable.
+-- public static variables can be accessed anywhere via ClassName::$variable.
+-- protected static variables can be accessed by the defining class or extending classes via ClassName::$variable.
+-- private static variables can be accessed only by the defining class via ClassName::$variable.
+
+
+
+### PHP object method chaining
+-- Method chaining is a fluent interface design pattern used to simplyify your code.
+-- Essentially your objects return themselves, allowing you to "chain" multiple actions together.
+-- Implementation is extremely simple - simply return the object instance once the method has completed:
+	function someMethod (params)
+	{
+	 /* do stuff */
+	 retur $this;
+	}	
+-- Ex : echo $a->addA()->addB()->getStr();
+	  $table->select()->from('foo')->where('bar = 1')->order('ASC);
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+							PHP Composer
+
+-- Composer is a tool that is used for dependencies management in your PHP Project. Composer is used to autoload files.
+-- Composer is not a package manager in the same sense as Yum or Apt are. Yes, it deals with "packages" or libraries, but it manages 
+       them on a per-project basis, installing them in a directory (e.g. vendor) inside your project.
+-- Composer lets you declare the libraries on which your PHP project depends and manage it for you. 
+   It installs and updates the libraries that you need for your project.
+--  Composer is strongly inspired by node's npm and ruby's bundler.
+-- Vendor directory where all composer dependencies are installed.
+This idea is not new and Composer is strongly inspired by node's npm and ruby's bundler.
+
+
+
+
+
+
+### Autoloading Files in PHP
+
+-- Using autoloader we can include required file only. Autoload saves memory space.
+-- Basically, when you use a class in your application, the autoloader checks if it’s already loaded, and if not, the autoloader 
+       loads the necessary class into memory. So the class is loaded on the fly where it’s needed—this is called autoloading.
+--  The spl_autoload_register() function allows you to register functions that will be put into a queue to be triggered 
+   sequentially when PHP tries to load classes that are not loaded yet.
+-- PHP will execute all the registered autoloader functions sequentially.
+-- spl_autoload_register('customLoaderFunction');
+   	function customLoaderFunction($class){
+		$path = 'Code/'.$class.'.php';
+		if(file_exists($path))
+		{
+			include $path;
+		}
+	}
+-- whenever we create or instantiate object using new keyword , autoloader will catch the class name and pass it to 
+   to customLoaderFunction. 
+-- When you’re using autoloading, you don’t need to include all the library files manually; you just need to include the autoloader file which contains 
+       the logic of autoloading, and the necessary classes will be included dynamically.
+-- The problem with the spl_autoload_register() function is that you have to implement the autoloader functions by yourself.
+
+-- Autoloading with Composer. (Composer Autoloading)
+-- Specifically, Composer provides four different methods for autoloading files:
+	1. file autoloading
+	2. classmap autoloading
+	3. PSR-0 autoloading
+	4. PSR-4 autoloading
+-- As per the official Composer documentation, `PSR-4` is the recommended way of autoloading
+-- the steps that you need to perform when you want to use Composer autoloading.
+	1. Define the composer.json file in the root of your project or library. It should contain  directives based on the type of autoloading.
+	2. Run the composer dump-autoload command to generate the necessary files that Composer will use for autoloading.
+	3. Include the require 'vendor/autoload.php' statement at the top of the file where you want to use autoloading.
+
+-- Autoloading: The  `files`  Directive (file autoloading)
+	{
+    		"autoload": {
+        			"files": ["lib/Foo.php", "lib/Bar.php"]
+    		}
+	}
+	1. File autoloading works similarly to include or require statements that allow you to load entire source files.
+	2. All the source files that are referenced with the files directive will be loaded every time your application runs. 
+	     This is useful for loading source files that do not use classes.
+	3. After you create the composer.json file in your project root with the above contents, you just need to run 
+	  the composer dump-autoload command to create the necessary autoloader files.
+	4. These will be created under the vendor directory. Finally, you need to include the require 'vendor/autoload.php' 
+	   statement at the top of the file where you want to autoload files with Composer
+
+
+-- Autoloading: The classmap Directive (classmap autoloading)
+	{
+    	"autoload": {
+        		"classmap": ["lib","app/models", "app/services"]
+    		}
+	}
+	1. Classmap autoloading is an improved version of file autoloading. You just need to provide a list of directories, 
+	      and Composer will scan all the files in those directories.
+	2. For each file, Composer will make a list of classes that are contained in that file, and whenever one of those 
+	       classes is needed, Composer will autoload the corresponding file.
+	3. Run the composer dump-autoload command, and Composer will read the files in the lib directory to create a map of classes that can be autoloaded.
+	4. From now,  whenever you have a new class in the  directory, you need to run the command composer dump-autoload again to regenerate the autoload.php file.
+
+-- Autoloading: PSR-0 
+	{
+    		"autoload": {
+        		"psr-0": {
+            		"Tutsplus\\Library": "src"
+        			}
+    		}
+	}
+	1. PSR-0 is a standard recommended by the PHP-FIG group for autoloading.
+	2. In the PSR-0 standard, you must use namespaces to define your libraries.
+	3. The fully qualified class name must reflect the \<Vendor Name>\(<Namespace>\)*<Class Name> structure.
+	4. In PSR-0 autoloading, you need to map namespaces to directories.
+	5. In the above example, we’re telling Composer that anything which starts with the Tutsplus\Library namespace 
+	   should be available in the src\Tutsplus\Library directory.
+	6. In PSR-0 autoloading, you must map namespaces to the directory structure. As we discussed in the previous section, 
+	      if you want to autoload the Tutsplus\Library\Foo class, it must be located at src\Tutsplus\Library\Foo.php. 
+	
+
+--  `PSR-4 Autoloading Works With Composer` :::
+
+	1. PSR-4 is similar to PSR-0 autoloading in that you need to use namespaces, but you don’t need to mimic the directory structure with namespaces.
+	2. In PSR-4 autoloading, you can shorten the directory structure, which results in a much simpler directory structure compared to PSR-0 autoloading.
+	4. composer dump-autoload
+		PATH vendor/composer/autoload_classmap.php
+		Composer dump-autoload won’t download a thing.
+		It just regenerates the list of all classes that need to be included in the project (autoload_classmap.php).
+		Ideal for when you have a new class inside your project.
+	5. composer dump-autoload -o   //https://getcomposer.org/doc/articles/autoloader-optimization.md
+		Autoloader optimization
+		Class map generation is faster than psr-0/psr-4. no filesystem check needed. the class map returns instantly the path
+		Used for only production env.
+		If you add a new class, you need run autoload optimize command again to load class loading. Not recommended in devlopment.
+
+	{
+		"autoload" : {
+		"psr-4" : {
+			"App\\" : "App/src"
+			}
+		},
+		"require": {
+		"ramsey/uuid": "^4.2",
+		"ramsey/uuid-doctrine": "^1.8",
+		"psr/log": "^1.1"
+			}
+	}		
+		
+	There are a few options to enable this:
+	Set "optimize-autoloader": true inside the config key of composer.json
+	Call install or update with -o / --optimize-autoloader
+	Call dump-autoload with -o / --optimize
+
+	6. Vendor directory where all composer dependencies are installed.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+							PHP Packages
+
+--	https://packagist.org/    --> The PHP Package Repository or A repository for PHP packages.
+--	All php packages are stored under `vendor` directory.
+
+--	add a composer package
+	composer require vendor/package
+--	remove a composer package
+	composer remove vendor/package
+
+	1. ramsey/uuid 
+		A PHP library for generating and working with universally unique identifiers (UUIDs).
+		
+	2. mpdf/mpdf
+		PHP library generating PDF files from UTF-8 encoded HTML
+	
+	3. psr/log
+		Common interface for logging libraries
+		The main goal is to allow libraries to receive a Psr\Log\LoggerInterface object and write logs to it in a simple and universal way.
+
+	4. phpmailer/phpmailer
+		PHPMailer is a full-featured email creation and transfer class for PHP
+
+	5. symfony/routing
+		Maps an HTTP request to a set of configuration variables
+	
+	6. laravel/laravel
+		The Laravel PHP Framework.
+
+	7. symfony/symfony
+		The Symfony PHP framework
+	
+	8. aws/aws-sdk-php
+		AWS SDK for PHP - Use Amazon Web Services in your PHP project.
+		The AWS SDK is a modern, open-source `PHP library` that makes it easy to integrate your PHP application with
+		AWS services like `Amazon S3`, `Amazon Glacier`, and `Amazon DynamoDB`.
+
+	9. doctrine/instantiator
+		A small, lightweight utility to instantiate objects in PHP without invoking their constructors
+
+		The Doctrine Project is the home to several PHP libraries primarily focused on database storage 
+		and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+		Many other popular PHP projects use libraries from Doctrine. Some use the full ORM and others may only use one small library such as the Inflector
+		
+	
+	10. doctrine/inflector
+		PHP Doctrine Inflector is a small library that can perform string manipulations with regard to 
+		upper/lowercase and singular/plural forms of words.
+
+	11. guzzlehttp/guzzle
+		Guzzle is a PHP HTTP client library. guzzle/guzzle is deprecated.
+
+	12. twig/twig
+		Twig, the flexible, fast, and secure template language for PHP
+
+	13. slim/slim
+		Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
+		Slim framework plays well with good software practices including SOLID principles, design patterns, 
+		security principles and dependency injection. Slim's easier to learn than fullstack frameworks such Laravel or Symfony.
+		
+		(https://accesto.com/blog/solid-php-solid-principles-in-php/)
+		*SOLID Principles in PHP (https://medium.com/successivetech/s-o-l-i-d-the-first-5-principles-of-object-oriented-design-with-php-b6d2742c90d7)
+			Following are the five concepts that make up SOLID principles:
+			1. Single Responsibility principle
+			2. Open/Closed principle
+			3. Liskov Substitution principle
+			4. Interface Segregation principle
+			5. Dependency Inversion principle.
+		*Design Patterns
+		*Security Principles
+		*Design Patterns
+
+	14. php-di/php-di
+		The dependency injection container for humans
+
+	15. doctrine/orm
+		Object-Relational-Mapper for PHP
+
+	16. vlucas/phpdotenv
+		Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
+
+		1. You can then load .env in your application with:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+		$dotenv->load();
+
+		print_r($_ENV);
+		print_r($_SERVER);
+
+		2. To suppress the exception that is thrown when there is no .env file, you can:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+		$dotenv->safeLoad();
+
+		3. Optionally you can pass in a filename as the second parameter, if you would like to use something other than .env:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'myconfig');
+		$dotenv->load();
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+/*** PHP Articles or Blogs ***/
+https://www.php.net/manual/en/language.types.intro.php
+https://www.geeksforgeeks.org/php-data-types/
+https://www.php.net/manual/en/language.types.type-juggling.php#language.types.typecasting
+https://www.php.net/manual/en/language.types.object.php
+https://www.wdb24.com/how-to-upload-csv-and-save-in-mysql-database-using-php/
+
+
+
+

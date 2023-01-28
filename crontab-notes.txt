@@ -1,0 +1,55 @@
+						/*** CRONTAB  ***/
+
+
+
+
+usage:  crontab [-u user] file
+        crontab [ -u user ] [ -i ] { -e | -l | -r }
+                (default operation is replace, per 1003.2)
+        -e      (edit user's crontab)
+        -l      (list user's crontab)
+        -r      (delete user's crontab)
+        -i      (prompt before deleting user's crontab)
+
+
+
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.basic
+  3. /usr/bin/vim.tiny
+  4. /bin/ed
+
+
+run as super user -- sudo crontab -e
+change editor -- sudo VISUAL=vi crontab -e
+open vi editor -- sudo VISUAL=vi crontab -e
+
+
+
+*/10 * * * * /usr/bin/php /opt/lampp/htdocs/docsmith/utils/cronC2MFetchProduction.php
+*/10 * * * * cp /opt/lampp/htdocs/ten.pdf  /opt/lampp/htdocs/docsmith-git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://crontab.org/
+https://crontab.guru/

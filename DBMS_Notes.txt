@@ -1,0 +1,759 @@
+/*** DBMS (Database Management System) ***/
+
+https://www.mysqltutorial.org/mysql-basics/
+
+
+https://www.scaler.com/topics/dbms/
+https://www.geeksforgeeks.org/relational-model-in-dbms/
+https://www.scaler.com/topics/dbms/relational-model-in-dbms/
+https://www.scaler.com/topics/dbms/joins-in-dbms/ -- joins in dbms
+https://www.scaler.com/topics/sql/cascade-in-sql/  -- on delete/update cascade
+https://vertabelo.com/blog/database-index-types/
+https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
+
+https://www.educba.com/data-science/data-science-tutorials/mysql-tutorial/
+https://www.mysqltutorial.org/mysql-basics/
+https://stackoverflow.com/questions/409286/should-i-use-the-datetime-or-timestamp-data-type-in-mysql
+
+-- Data -> Information or any fact that can be recorded.
+-- Database -> It's a collection related data.
+-- Data Wharehouse -> Its stores very large or huge data.
+-- DBMS (Database Management System) -> It's a software (or) set of programs which are used to define, 
+construct and mainpulate (add, edit, update and delete) database.
+-- The collection of (DB+DBMS) is called DBS(Database Systems).
+
+### Database Level
+1. Conceptual Level (ER Model)
+2. Representation Level (Relational Model)
+3. Physical Level. ()
+
+
+/*** ER - Model  (Entity Relationship Model) ***/
+-- A basic ER model is composed of entity types and specifies relationships that can exist between entities (instances of those entity types).
+-- The ER model becomes an abstract data model, that defines a data or information structure 
+   which can be implemented in a database, typically a relational database.
+-- Entity - any object or thing in our real world which can be recorded in your db
+-- Reationship - A relationship type represents the association between entity types. . association among entities.(verbs)
+-- Attributes - Attributes are the properties which define the entity type.
+-- Entities and relationships can both have attributes.
+-- ER-Model develops a conceptual design for the database.
+
+### Strong entity
+It can exist without any other entity. Strong entities are also called independent entities.
+Example
+Customer(customerid, name, surname)
+
+### Weak entity
+Weak entities are also called dependent entities, since it's existence depends on other entities. 
+Such entities are represented by a double outline rectangle in the E-R diagram..
+Example
+Address(addressid, addressName, customerid)
+
+
+English grammar structure	ER structure
+Common noun  	--	Entity type
+Proper noun  	--	Entity
+Transitive verb   --	Relationship type
+Intransitive verb -- 	Attribute type
+Adjective		-- 	Attribute for entity
+Adverb		--	Attribute for relationship
+
+
+/*** Relational Model ***/ 
+-- Most popular representational model is Relational DBMS.
+-- After designing the conceptual model of Database using ER diagram, we need to convert the conceptual model in 
+   the relational model which can be implemented using any RDBMS languages like Oracle SQL, MySQL etc.
+-- The relational model in DBMS is an abstract model used to organize and manage the data stored in a database.
+-- It stores data in two-dimensional inter-related tables, also known as relations in which each row represents 
+   an entity and each column represents the properties of the entity.
+-- Relational Model represents how data is stored in Relational Databases.
+-- A relational database stores data in the form of relations (Two-dimensional tables)
+-- Each row in the relation is known as tuple.
+-- The number of attributes in the relation is known as degree of the relation.
+-- The number of tuples in a relation is known as cardinality.
+-- The value which is not known or unavailable is called NULL value. It is represented by blank space.
+
+
+-- Relation : Two-dimensional table used to store a collection of data elements.
+-- Tuple : Row of the relation, depicting a real-world entity.
+-- Attribute/Field : Column of the relation, depicting properties that define the relation.
+-- Attribute Domain : Set of pre-defined atomic values that an attribute can take i.e., it describes the legal values that an attribute can take.
+-- Degree : It is the total number of attributes present in the relation.
+-- Cardinality : It specifies the number of entities involved in the relation i.e., it is the total number of rows present in the relation.
+-- Relational Schema : It is the logical blueprint of the relation i.e., it describes the design and the structure of the relation. It contains the table name, its attributes, and their types:
+-- Relational Instance : It is the collection of records present in the relation at a given time.
+-- Relation Key : It is an attribute or a group of attributes that can be used 
+   to uniquely identify an entity in a table or to determine the relationship between two tables. 6 types
+	1. Candidate Key
+	2. Super Key
+	3. Composite Key
+	4. Primary Key
+	5. Alternate Key
+	6. Foreign Key
+
+### Cascade Syntax In Sql With Code Examples
+DELETE Rules:
+1. ON DELETE NO ACTION
+2. ON DELETE CASCADE
+3. ON DELETE SET NULL
+4. ON DELETE SET DEFAULT
+UPDATE Rules:
+1. ON UPDATE NO ACTION
+2. ON UPDATE CASCADE
+3. ON UPDATE SET NULL
+4. ON UPDATE SET DEFAULT
+
+
+### Constraints in Relational Model
+SQL constrains are used to specify rules for the data and limit the type of data that is entered into a table.
+These constraints are checked before performing any operation (insertion, deletion and updation) in database. 
+If there is a violation in any of constrains, operation will fail. 
+
+Domain Constraints: These are attribute level constraints. An attribute can only take values which lie inside the domain range. 
+			  e.g,; If a constrains AGE>0 is applied on STUDENT relation, inserting negative value of AGE will result in failure. 
+
+Key Integrity: Every relation in the database should have atleast one set of attributes which defines a tuple uniquely. 
+		   Those set of attributes is called key. e.g.; ROLL_NO in STUDENT is a key. No two students can have same 
+		   roll number. So a key has two properties: 
+		-- It should be unique for all tuples.
+		-- It can’t have NULL values.
+
+Referential Integrity: When one attribute of a relation can only take values from other attribute of same relation or any other relation, 
+			     it is called referential integrity.
+
+
+Types of SQL Constraints
+1. NOT NULL -- Records in a column cannot have a NULL value. Every field in this column always has a non-Null value.
+		   A null value means that a particular field has been left empty, and values such as zero or blank space do not come under Null values.
+2. CHECK -- It ensures that the values in a column statifies a specific conditon/rule given. This constraint limits the values.
+3. UNIQUE -- It ensures that the particular column accepts only unique values, and repetitive values are not allowed.
+		 We can create multiple UNIQUE constraints on various columns in a table. A UNIQUE constraint allows NULL values to be entered.
+4. PRIMARY KEY -- Primary key on a column ensures that the values are NOT NULL and Unique. We can use this to uniquely identify a row in the table.
+5. FOREIGN KEY -- This constraint helps the data in one table to establish a relationship with the data in another table in the database. 
+			Foreign Key can be a single column or a set of columns. Foreign key on a column refers to the primary key
+			of the another table.
+6. DEFAULT -- This constraint is used to specify the default value for a particular column in the table. 
+		  This way, if there is no value inserted for that column explicitly, the database engine 
+		  can always refer to the default value specified and insert that in the column.
+7. INDEX --  It is used to create index which helps to retrieve data from the database quickly.
+
+
+
+
+
+
+
+
+
+
+
+
+/*** PHP PDO (PHP Data Objects) PHP Extension ***/
+
+https://phpdelusions.net/pdo
+https://stackoverflow.com/questions/1179874/what-is-the-difference-between-bindparam-and-bindvalue
+
+
+-- PDO is a Database access abstraction layer.
+-- Works with multiple databases. Especially for OOPS.
+-- PDO is db driver (or) PHP extension
+
+### PDO benefits
+-- Multiple databased
+-- Security/Prepared statements (data prevents from sql injection, separates sql instruction from data)
+-- Usability (many helper functions to automate routine operations).
+-- Reusability (unified API to access multitude of databases, from SQLite to Oracle).
+-- Excellent Error Handling.
+
+### Main PDO Classes 
+-- PDO : Represents a connection between PHP and Database
+-- PDOStatement : Represents a prepared statement and after executed an associated result.
+-- PDOException : Represents errors raised by PDO.
+
+### Creating a PDO instance
+
+try {
+
+$host = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$dbname = 'posts';
+//set  DSN - Domain Source Name (string).
+$dsn = "mysql:host=$host;dbname=$dbname";  // database driver, host, db(schema) name.
+
+$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ];  //this is optional
+
+$pdo = new PDO($dsn,$dbuser,$dbpass,$options);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ); // PDO::FETCH_OBJ , PDO::FETCH_ASSOC
+ 
+-- There are two ways to run a query in PDO. // $pdo->query() and $pdo->prepare()
+-- If no variables or placeholders are going to be used in the query, you can use PDO::query().
+PDO Query ::
+$stmt = $pdo->query('select * from posts');
+print_r($stmt->fetchAll()); // get all records at once
+while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+{
+		print_r($row);
+}
+
+PDO prepared statements. Pretection from SQL injections ::
+
+-- FLOW :: new PDO($dsn,$dbuser,$dbpass,$options)->prepare($query)->execute($placeholders)->fetch/fetchAll();
+-- Note that PDO supports positional(?) and named(:) placeholders.
+-- You cannot mix positional and named placeholders in the same query.
+-- Having a query with placeholders, you have to prepare it, using the PDO::prepare() method. This function will return PDOStatement.
+-- if you want to get the number of affected rows : $count = $stmt->rowCount();
+
+	A. POSITIONAL placeholders (or) params  (sensitive to the order of arguments)
+		$stmt = $pdo->prepare('select * from posts where id = ?');
+		$stmt->execute([5]);
+		print_r($stmt->fetch());
+
+		$stmt = $pdo->prepare('select * from posts where id = ? && title = ?');
+		$stmt->execute([3,'testtt']); // basic or regular array
+		print_r($stmt->fetch());
+
+	B. NAMED placeholders (or) params (more verbose, allow random binding order).
+	1. add record
+	$title = 'test4567';
+	$body = 'test4567 body goes here.....';
+	$author = 'author4567';
+	$stmt = $pdo->prepare('insert into posts (title,body,author) values (:titlevar, :bodyvar, :authorvar)');
+	$stmt->execute(['titlevar'=>$title,'bodyvar'=>$body,'authorvar'=>$author]); // associative array
+
+	2. read record
+		$stmt = $pdo->prepare('select * from posts where id = :id && title = :title');
+		$stmt->execute(['id'=>3,'title'=>'testtt']);
+		print_r($stmt->fetch());
+
+		$stmt = $pdo->prepare('select * from posts');
+		$stmt->execute([]);
+		print_r($stmt->fetchAll(PDO::FETCH_ASSOC));
+
+		$stmt = $pdo->prepare('select * from posts order by id desc');
+		$stmt->execute([]);
+		print_r($stmt->fetchAll());
+
+	3. update recored
+		
+		var_dump($stmt);
+
+	// GET ROW COUNT
+		$sql = 'select * from posts where is_published = ?';
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute([1]);
+		echo 'Rows count '.$stmt->rowCount();
+	
+	search data
+	$search = '%test%';
+	$stmt = $pdo->prepare('select * from posts where title like ?');
+	$stmt->execute([$search]);
+	print_r($stmt->fetchAll());
+
+
+ } catch (PDOException $e) {
+    // throw new pdoDbException($e);
+    echo $e->getMessage();
+    // print_r($e);
+}
+
+### Fetch modes in PDO
+PDO::FETCH_NUM returns enumerated array
+PDO::FETCH_ASSOC returns associative array
+PDO::FETCH_BOTH - both of the above
+PDO::FETCH_OBJ returns object
+PDO::FETCH_LAZY allows all three (numeric associative and object) methods without memory overhead.
+PDO::FETCH_CLASS  create an object of particular class
+PDOStatement::fetchAll() returns an array that consists of all the rows returned by the query.
+
+
+-- Note that default mode is PDO::FETCH_BOTH, but you can change it using PDO::ATTR_DEFAULT_FETCH_MODE configuration option 
+   as shown in the connection example. Thus, once set, it can be omitted most of the time.
+   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
+
+Getting a column:
+$data = $pdo->query('SELECT name FROM users')->fetchAll(PDO::FETCH_COLUMN);
+/* array (
+  0 => 'John',
+  1 => 'Mike',
+  2 => 'Mary',
+  3 => 'Kathy',
+)*/
+
+
+Getting key-value pairs.
+-- Also extremely useful format, when we need to get the same column, but indexed not by numbers in order 
+   but by another field. Here goes PDO::FETCH_KEY_PAIR constant:
+-- Note that you have to select only two columns for this mode, first of which has to be unique.
+$data = $pdo->query('SELECT id, name FROM users')->fetchAll(PDO::FETCH_KEY_PAIR);
+/* array (
+  104 => 'John',
+  110 => 'Mike',
+  120 => 'Mary',
+  121 => 'Kathy',
+)*/
+
+-- Getting rows indexed by unique field : PDO::FETCH_UNIQUE
+-- Getting rows grouped by some field
+   PDO::FETCH_GROUP will group rows into a nested array, where indexes will be unique values from the first column, 
+   and values will be arrays similar to ones returned by regular fetchAll().
+
+
+Error handling. Exceptions
+$dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+-- Getting row count with PDO: PDOstatement::rowCount()
+   $stmt->rowCount() , used to check resulted query count. 
+   One should never use the rowCount() to count rows in database!. For rows count in db use count(*) in sql query.
+
+-- Prepared statements and LIKE clause
+   $search = "%$search%";
+   $stmt  = $pdo->prepare("SELECT * FROM table WHERE name LIKE ?");
+   $stmt->execute([$search]);
+   $data = $stmt->fetchAll();
+
+   
+   
+
+### Binding methods
+-- To set data type explicitly
+-- For explicit binding we have two methods.  bindValue() and bindParam().
+https://stackoverflow.com/questions/1179874/what-is-the-difference-between-bindparam-and-bindvalue
+
+Unlike PDOStatement::bindValue(), the variable is bound as a reference and will only be evaluated at the time that PDOStatement::execute() is called.
+Use bindParam to insert multiple rows with one time binding:
+bindParam: reference
+bindValue: variable
+
+
+
+
+
+/*** MySqli (MySql Improved) PHP Extension ***/
+-- MYSQLi doesn't support named placeholders(parameters). It only supports positional params (or) placeholders.
+
+https://phpdelusions.net/mysqli
+https://websitebeaver.com/prepared-statements-in-php-mysqli-to-prevent-sql-injection
+
+
+//Procedural style query without variables
+$mysqli = mysqli_connect(host, username, password, dbname, port, socket);
+$mysqli = mysqli_connect($host,$username,$password,$dbname);
+$execute_query = mysqli_query($mysqli,$query);
+
+//Procedural MYSQLi Prepared Statement: (with positional placeholders (???));
+https://www.wdb24.com/php-mysqli-procedural-prepared-statements-beginners/
+
+-- mysqli_prepare($connection, $query) : Prepares the SQL query, and returns a statement handle to be used for further operations on the statement.
+						     It takes 2 parameters. $connection is a connection string and $query is a sql query.
+-- mysqli_stmt_bind_param($stmt,$types. $variable1) : Binds variables to a prepared statement as parameters.$stmt is a statement identifier. $types is a string that 
+									contain string type for corresponding bind variables. List of string type is given below. 
+									$variable1 is a number of variable and length of a string $types.
+   									variable types (sidb) -> (string,integer,double,blob).
+-- mysqli_stmt_execute($stmt) : 	Executes a prepared Query
+-- mysqli_stmt_bind_result($stmt,$variable1) : Binds variables to a prepared statement for result storage. $stmt is a statement identifier. $variable1 is a variable to be found.
+-- mysqli_stmt_get_result($stmt) : Gets a result set from a prepared statement. $stmt is a statement identifier
+-- mysqli_stmt_fetch($stmt) : Fetch results from a prepared statement into the bound variables.$stmt is a statement identifier
+Fetch all records :
+<?php
+$qry = 'select * from customers';
+$allUserStatement = mysqli_prepare($conn,$qry);
+mysqli_stmt_execute($allUserStatement);
+$getResult = mysqli_stmt_get_result($allUserStatement);
+while($rows = mysqli_fetch_assoc($getResult))
+{
+	print_r($rows);
+}
+?>
+
+
+Fetch Single record without bind_result:
+<?php
+$userName = "Conner";
+$qry = 'select id, first_name,last_name from customers where first_name = ?';
+$userStatement = mysqli_prepare($conn, $qry);
+mysqli_stmt_bind_param($userStatement, 's',$userName);
+mysqli_stmt_execute($userStatement);
+$result = mysqli_stmt_get_result($userStatement);
+$getData = mysqli_fetch_assoc($result);
+ 
+echo "id: ".$getData['id'];
+echo "<br>";
+echo "First name: ".$getData['first_name'];
+echo "<br>";
+echo "Last name: ".$getData['last_name'];
+echo "<br>";
+?>
+
+
+Fetch Single record with bind_result:
+<?php
+$userName = "Conner";
+$qry = 'select id, first_name,last_name from customers where first_name = ?';
+$userStatement = mysqli_prepare($conn, $qry);
+mysqli_stmt_bind_param($userStatement, 's',$userName);
+mysqli_stmt_execute($userStatement);
+mysqli_stmt_bind_result($userStatement, $id, $first_name, $last_name);
+mysqli_stmt_fetch($userStatement);
+ 
+echo "id: ".$id;
+echo "<br>";
+echo "First name: ".$first_name;
+echo "<br>";
+echo "Last name: ".$last_name;
+echo "<br>";
+?>
+
+Fetch Single record with multiple bind_param column:
+<?php
+$id = 93;
+$firstName = "Conner";
+$lastName = "Krajcik";
+$qry = 'select * from customers where id = ? and first_name = ? and last_name = ? ';
+$userStatement = mysqli_prepare($conn, $qry);
+mysqli_stmt_bind_param($userStatement, 'iss',$id,$firstName,$lastName);
+mysqli_stmt_execute($userStatement);
+$result = mysqli_stmt_get_result($userStatement);
+$getData = mysqli_fetch_assoc($result);
+print_r($getData);
+?>
+
+
+
+
+//Object oriented style without PHP variables
+// $mysqli = new mysqli(host, username, password, dbname, port, socket);
+$mysqli = new mysqli($host, $username, $password, $dbname);
+$result = $mysqli->query($query);
+
+When a query is entirely hardcoded, i.e. no PHP variables are used in it, one can use the query() function. 
+It already returns the mysqli_result object, so the code can be much simpler, like
+
+$menu = $db->query("SELECT * FROM menu")->fetch_all();
+$count = $db->query("SELECT count(*) FROM users")->fetch_row()[0];
+
+without variables
+$mysqli = new mysqli($host, $username, $password, $dbname);
+$query = "select * from posts";
+$result = $mysqli->query($query);
+print_r($result->fetch_all(MYSQLI_ASSOC));
+
+$query = "select * from posts where is_published = 1";
+$result = $mysqli->query($query);
+print_r($result->fetch_assoc());
+print_r($result->fetch_object());
+
+Number of rows affected by data modification queries
+$db->query("DELETE FROM users");
+echo $db->affected_rows();
+To get result rows count SELECT count(*) must be used instead of num_rows.
+
+
+
+
+### Executing queries with PHP variables. MYSQLI OBJECT PREPARED STATEMENTS
+1. Prepare -> Execute -> Get Result -> Fetch (OR)
+2. Prepare -> Bind -> Execute -> Get Result -> Fetch 
+
+we need to get the query result so it can be used to fetch the returned data
+$con = new mysqli($host, $username, $password, $dbname);
+$stmt = $con->prepare($query)
+$stmt->bind_param()
+$stmt->execute()
+$result = $stmt->get_result();
+echo $result->num_rows; // return result rows
+
+
+To fetch rows or data
+-- fetch_row() returns enumerated array, to fetch just a single row
+-- fetch_assoc() returns associative array, to fetch just a single row
+-- fetch_object() returns an object, to fetch just a single row
+-- fetch_all return all result 
+   $result->fetch_all(MYSQLI_ASSOC) : returns associative array data
+   $result->fetch_all(MYSQLI_BOTH) :  returns associative and enumerated array
+
+Get array of objects
+$result_object_array = [];
+while($row = $result->fetch_object()){
+	$result_object_array[] = $row;
+}
+print_r($result_object_array);
+
+
+Getting multiple rows in a loop
+$users = [];
+$sql = "SELECT * FROM users ORDER BY id DESC LIMIT 0, 10";
+$result = $db->query($sql);
+while ($row = $result->fetch_assoc()) {
+    $users[] = $row;
+}
+
+
+
+
+
+
+
+/***   MySql Queries Notes   ***/
+https://dev.mysql.com/doc/refman/8.0/en/tutorial.html
+https://www.educba.com/data-science/data-science-tutorials/mysql-tutorial/
+https://www.mysqltutorial.org/mysql-basics/
+
+--->>> MySQL is a free, open-source Relational Database Management System (RDBMS) that uses Structured Query Language (SQL) <<<---
+--->>> SQL is a standard language for accessing and manipulating databases <<<---
+
+What Can SQL do?
+SQL can execute queries against a database
+SQL can retrieve data from a database
+SQL can insert records in a database
+SQL can update records in a database
+SQL can delete records from a database
+SQL can create new databases
+SQL can create new tables in a database
+SQL can create stored procedures in a database
+SQL can create views in a database
+SQL can set permissions on tables, procedures, and views
+
+
+-- What is the best column type for a United States ZIP code?
+	1. valid US zip codes (12345-6789  or 12345).
+	2. use MEDIUMINT (5) UNSIGNED ZEROFILL  for 5 digit zip codes. This preserves any leading 0s and it only uses 3 bytes.
+	   The ZEROFILL option is necessary for zip codes with leading zeros.
+	3. VARCHAR data type because in some countries zip codes are used as alphanumeric and in other places as an integer.
+	   varchar(10).
+https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-united-states-zip-code#:~:text=Zip%20codes%20are%20always%205,CHAR%20datatype%2C%20rather%20than%20VARCHAR.
+
+-- What data type should I use to store U.S States inside MySQL databse?
+	1. valid US states consists of two characters (NM, AL, AK etc.,)
+	2. use CHAR(2)
+
+
+-- UNION Clause
+    query_block UNION [ALL | DISTINCT] query_block
+    [UNION [ALL | DISTINCT] query_block]
+    [...]
+	https://www.guru99.com/unions.html
+
+
+-- CONCAT(str1,str2,...) : Returns the string that results from concatenating the arguments. May have one or more arguments.
+   CONCAT() returns NULL if any argument is NULL.
+   SELECT CONCAT('My', 'S', 'QL');  -> 'MySQL'
+   SELECT CONCAT('My', NULL, 'QL'); -> NULL
+   SELECT CONCAT('My', '---', 'QL'); -> 
+-- CONCAT_WS(separator,str1,str2,...) : CONCAT_WS() stands for Concatenate With Separator and is a special form of CONCAT(). 
+   The first argument is the separator for the rest of the arguments. The separator is added between the strings to be concatenated.
+   If the separator is NULL, the result is NULL.
+
+
+-- unsigned-integer : A specific data type that uses all its bits to represent an integer value, consequently only 0 or a positive number.
+
+
+Select rows with even or odd values in SQL
+https://tableplus.com/blog/2019/09/select-rows-odd-even-value.html
+-- To find and return the records with the odd or even values, the most simple way is to check the remainder when we divide the column value by 2. 
+   When the remainder is 0, that’s an even number, otherwise, that’s an odd number.
+-- In PostgreSQL, My SQL, and Oracle, we use MOD function to check the remainder.
+-- To find rows where a specified column has even values:
+SELECT * FROM table_name WHERE mod(column_name,2) = 0;
+-- To find rows where a specified column has odd values:
+SELECT * FROM table_name WHERE mod(column_name,2) <> 0;
+
+
+Mysql replace() function ::
+-- REPLACE [INTO] table_name(column_list) VALUES(value_list);  
+-- REPLACE works exactly like INSERT, except that if an old row in the table has the same value as a new row for a PRIMARY KEY or a UNIQUE index, 
+the old row is deleted before the new row is inserted
+-- UPDATE c2m_core_config_data SET columnName = REPLACE(columnName, 'old value', 'new value') WHERE INSTR(columnName, 'old value') > 0;
+-- UPDATE c2m_core_config_data SET value = REPLACE(value, 'c2msrvr.i95-dev.com/sudh236', 'c2msrvr.i95-dev.com/naga236') WHERE INSTR(value, 'c2msrvr.i95-dev.com/naga236') > 0;
+
+$mysqli = new mysqli($host, $username, $password, $dbname);
+
+$query = "select * from employee";
+$query = "update employee set salary = replace(salary,'8000','9000')";
+$query = "update employee set salary = replace(salary,'3000','8000') where salary=3000";
+$query = "update employee set dept = replace(dept,'mec','mechanical') where dept like 'mec'";
+$result = $mysqli->query($query);
+
+
+
+
+### Mysql command types
+https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
+
+
+
+
+
+sample create table
+CREATE TABLE cart
+(
+    item_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL,
+    price DEC(4,2) NOT NULL,
+    sales_tax DEC(5,2) NOT NULL DEFAULT 0.1,
+    department_id int(11) not null,
+    CHECK(quantity > 0),
+    CHECK(sales_tax >= 0),
+    created_at datetime default current_timestamp,
+    updated_at datetime default current_timestamp on update current_timestamp,
+    FOREIGN KEY (department_id) REFERENCES departments (department_id)
+);
+
+CREATE TABLE IF NOT EXISTS checklists (
+    todo_id INT AUTO_INCREMENT,
+    task_id INT,
+    todo VARCHAR(255) NOT NULL,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (todo_id , task_id),
+    FOREIGN KEY (task_id)
+        REFERENCES tasks (task_id)
+        ON UPDATE RESTRICT ON DELETE CASCADE
+);
+
+
+
+
+
+
+### Add and Change schema column.
+
+-- ADD COLUMN
+ALTER [ONLINE | OFFLINE] [IGNORE] TABLE table_name alter_specifications... ADD [COLUMN] (col_name column_definition,...) 
+column_definition:  
+   data_type [NOT NULL | NULL] [DEFAULT default_value]
+   [AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY]  
+   [COMMENT 'string']  
+   [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}]  
+   [STORAGE {DISK|MEMORY|DEFAULT}]  
+   [reference_definition]  
+
+-- ADD MULTIPLE COLUMNS
+ALTER TABLE table_name
+    ADD new_column_name column_definition
+    [FIRST | AFTER column_name],
+    ADD new_column_name column_definition
+    [FIRST | AFTER column_name],
+    ...;
+
+
+
+Ex :
+ALTER TABLE testing_table ADD created_at datetime;
+alter table testing_table add column if not exists class_name text(255) not null;
+ALTER TABLE testing_table ADD COLUMN testing_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'studentid' FIRST;
+ALTER TABLE testing_table ADD COLUMN published CHAR(1) NULL DEFAULT('Y') FIRST;
+ALTER TABLE testing_table ADD student_name text(255) NOT NULL DEFAULT 'dummy-name' COMMENT 'studentcomment';
+ALTER TABLE testing_table ADD COLUMN age tinyint(3) NOT NULL DEFAULT 1 COMMENT 'studentage' AFTER `id`;
+ALTER TABLE testing.testing_table add column `STATUS` ENUM('A', 'D') default 'A' AFTER `H_TYPE`;
+
+ALTER TABLE testing.testing_table ADD COLUMN cart_item_id INT(11) NOT NULL; 
+ALTER TABLE testing.testing_table ADD CONSTRAINT fk_cart FOREIGN KEY (cart_item_id) REFERENCES cart_items(item_id);
+
+
+
+-- MODIFY COLUMN (Can change a column definition but not its name)
+https://stackoverflow.com/questions/14767174/modify-column-vs-change-column
+
+ALTER TABLE table_name
+MODIFY column_name column_definition
+[ FIRST | AFTER column_name];   
+
+
+ALTER TABLE table_name
+    MODIFY column_name column_definition
+    [ FIRST | AFTER column_name],
+    MODIFY column_name column_definition
+    [ FIRST | AFTER column_name],
+    ...;
+
+
+
+-- CHANGE COLUMN (Can change a column name or definition, or both)
+
+ALTER TABLE table_name
+    CHANGE COLUMN original_name new_name column_definition
+    [FIRST | AFTER column_name];
+
+
+
+
+
+
+
+-- DROP COLUMN
+ALTER TABLE testing_table DROP id;
+ALTER TABLE testing_table DROP COLUMN age, DROP COLUMN  STATUS;
+
+
+
+-- RENAME COLUMN (from MySQL 8.0)
+ALTER TABLE t1 RENAME COLUMN b TO a
+
+
+
+
+
+*** Sql Queries Examples :
+RENAME TABLE cartt TO cartt_updated;
+ALTER TABLE table_name RENAME TO new_table_name;
+check table testing_table;
+
+CREATE TABLE new_table_name LIKE pricerules; (Use LIKE to create an empty table based on the definition of another table).
+
+SELECT VERSION();
+SHOW INDEXES FROM parties;
+SHOW KEYS FROM recentcontacts WHERE Key_name = 'PRIMARY';
+SHOW VARIABLES LIKE 'sql_mode';
+
+ORDER BY
+            CASE
+                WHEN m.SRSent >= m.NSRSent
+                    THEN  m.SRSent
+                    ELSE  m.NSRSent
+            END
+            DESC;
+
+
+
+
+### Mysql database import and export
+https://www.thegeekstuff.com/2008/09/backup-and-restore-mysql-database-using-mysqldump/#more-184
+
+Export (Backup MySQL database) :  mysqldump -u root -p[root_password] [database_name] > dumpfilename.sql 
+Example : mysqldump -u root -p login_procedural > login_procedural.sql
+
+Import (Restore MySQL database) :  mysql -u root -p[root_password] [database_name] < dumpfilename.sql
+Example : mysql -u root -p login_procedural < /var/www/html/php-procedural-login/login_procedural.sql
+
+
+
+
+### Mysql storage engines and types
+-- Database engines are MySQL components that can handle SQL operations like create, read, update data from a database. There are two types of engines in 
+   MySQL:  transactional and non-transactional. `InnoDB` is the default engine for MySQL 5.5 and above versions
+
+
+https://www.geeksforgeeks.org/what-are-the-different-mysql-database-engines/
+
+
+
+
+### MariaDB vs Mysql
+https://www.guru99.com/mariadb-vs-mysql.html
+
+
+
+
+
+
+-- Types of mysql upgrade
+1. Inplace-Upgrade
+Over writing with latest sql version.
+2. Side By Side
+BACKUP(export) db from old sql server and RESTORE(import) in new sql server. And connect to new server
+
+
+
+
+

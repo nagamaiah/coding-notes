@@ -1,0 +1,125 @@
+
+
+1. Laravel is a php framework. It has many resources to learn and code.
+
+2. We have to install composer to develop a laravel app.
+
+3. You can create a new project by using the command.  >>  composer create-project laravel/laravel project_name.
+
+4. Use serve artisan command to run your app. >>  php artisan serve.
+
+5. All of the configuration files for the Laravel framework are stored in the config directory.
+
+6. The majority of your application is housed in the app directory.
+
+7. Think of the Console and Http directories as providing an API into the core of your application. 
+
+8. The Console directory contains all of your Artisan commands, while the Http directory contains your controllers, middleware, and forms requests.
+
+9. php artisan make:listener command generates a Listeners directory. The Listeners directory contains the classes that handle your events.
+
+10. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.
+
+11. Service providers are truly the key to bootstrapping a Laravel application. The application instance is created, the service providers are registered, 
+    and the request is handed to the bootstrapped application. It's really that simple!
+
+12. The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection.
+
+13. Class dependencies are "injected" into the class via the constructor or, in some cases, "setter" methods.
+
+14. Vendor directory where all composer dependencies are installed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Install & Setup
+
+1. Laravel is an open-source PHP framework for web development. It's robust and easy to develop & understand. Creator - Taylor Otwell
+   It follows the MVC architectural pattern and based on Symfony. Its architechtural patterns are majority based on Symfony.
+   The source code of laravel is hosted on github.	
+
+2. We need composer installed in our machine to install laravel. Composer is a PHP dependency manager or Package manager.
+   a. Installation via Composer
+	composer create-project laravel/laravel myApp
+	composer create-project laravel/laravel="5.7.*" myApp
+	cd myApp
+	php artisan serve
+   b. Via laravel installer -- you may install the laravel as a global composer dependency.
+	composer global require laravel/installer
+	laravel new myApp
+	cd myApp
+	php artisan serve.
+	
+3. Laravel latest verion is 9 (yr-2022). Laravel5.4 onwards application structure (App directory tree structure) diffenrent than 5.3 & below. 
+   Each folder is separated for MVC structure. 
+	app/Http/Controller => Contains controller for our App
+	app/Providers => Contains service providers.
+	config  => Contains configurations for different areas like application,database,filesystem,mail,session,view,services and auth etc,.
+	database => Contains Model related files. factories, migrations and seeds.
+	resources => Contains views,css and js files. resources/views contains blade.php files with are linked with route and controller.
+	routes => Contains route files for web and api. api.php and web.php
+	vendor/laravel/framework/src/Illuminate => Contains laravel core files.
+
+4. All of the configuration files for Laravel framework are stored in the `config` directory.
+
+5. Many important configuration values are defined using the .env file that exists at the root of your application.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Interesting features of Laravel framework
+
+1. MVC support
+2. Built in Authentication & Authorization
+3. Packaging System
+4. Multiple File System
+5. Artisan Console
+6. Eloquent ORM
+7. Templating Engine
+8. Task Scheduling
+9. WebSocket Programming
+10. Testing
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Packages
+
+As a PHP developer, we must be familiar with how to use frameworks. Frameworks make the process of development easier by simplifying common
+practices used in developing major web projects such as packages, modules, plugins, and even components. As of now, there are over 500 laravel
+packages on. 
+
+Most popular laravel packages:
+1. Cashier
+2. Socialite
+3. Horizon
+4. Passport
+5. Scout
+6. Spatie
+7. Entrust
+8. Laravel Debugbar
+9. Laravel User Verification
+10. Laravel Mix
+11. Laravel GraphQL
+12. No Captcha
+13. Laravel Backup
+14. Migration Generator
+15. Eloquent-Sluggable
+16. Laravel Admin Panel Generator
+17. Laravel Ecommerce Packages
+18. Laravel SEO Packages
+-----------------------------------------------------------------------------------------------------------------------------------------
+				Design Patterns in Laravel 
+
+1. Facade Design Pattern (Structural Design Pattern)
+-- Provides a simplified interface to a library, a framework or any other complex set of classes.
+-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

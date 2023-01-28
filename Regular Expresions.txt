@@ -1,0 +1,109 @@
+					Regular Expressions
+
+-- Regular Expressions are used to find pattern matching (or) string matching (sequence characters i.e string).
+-- Regular expressions are extremely useful in extracting information from text such as code, 
+   log files, spreadsheets, or even documents. 
+-- Used for email, password, US phone, US zip validations.
+-- Back slash is used to escape in-built characters i.e   \. \- \*
+
+
+-- [fgh] Character Set
+-- [^hkj] negate Character Set
+-- (word|curd) Grouping 
+-- (^word) negate Grouping
+
+
+Regex Metacharacters (short forms)
+.       - Any Character Except New Line
+\d      - Digit (0-9)  -> [0-9]
+\D      - Not a Digit (0-9) --> [^0-9]
+\w      - Word Character (a-z, A-Z, 0-9, _)  --> [a-zA-Z0-9_]
+\W      - Not a Word Character
+\s      - Whitespace (space, tab, newline)
+\S      - Not Whitespace (space, tab, newline)
+
+
+\b      - Word Boundary
+\B      - Not a Word Boundary
+^       - Beginning of a String
+$       - End of a String
+
+
+[]      - Matches Characters in brackets 
+[^ ]    - Matches Characters NOT in brackets
+|       - Either Or  "/(b|c|r)at/d" 
+( )     - Group
+
+
+Quantifiers: (perform repetitions)
+*       - 0 or More 
++       - 1 or More
+?       - 0 or One
+{3}     - Exact Number (or) no of digits i.e 3 times
+{3,4}   - Range of Numbers (Minimum, Maximum)
+{n,}	  - n or More
+
+
+{n} specify n no. of digits
+
+US phone format
+560-555-5153
+560.555.5153
+560*555*5153
+ 
+[0-9]{3}[-.*][0-9]{3}[.-*][0-9]{4}  (or)
+\d{3}[-.*]\d{3}[.-*]\d{4}
+
+Valid US zip codes (12345-6789  or 12345).  
+\d{5}(-\d{4})*
+
+
+		/***	PHP regex  ***/
+
+-- PCRE functions
+-- "Perl Compatible Regular Expressions" is a library written in C, which implements a regular expression engine, 
+   inspired by the capabilities of the Perl programming language.
+-- grep - Global Regular Expression Print
+-- Grep is a command line utility in Unix and Linux systems. It is used for finding a search patterns in the content of a given file
+
+1. preg_match(
+    string $pattern,
+    string $subject,
+    array &$matches = null,
+    int $flags = 0,
+    int $offset = 0
+): int|false
+
+Used to check single match. For all matches use preg_match_all.
+
+There is no modifier g for preg_match. Instead, you have to use the preg_match_all function.
+
+
+preg_filter — Perform a regular expression search and replace
+preg_grep — Return array entries that match the pattern
+preg_last_error_msg — Returns the error message of the last PCRE regex execution
+preg_last_error — Returns the error code of the last PCRE regex execution
+preg_match_all — Perform a global regular expression match
+preg_match — Perform a regular expression match
+preg_quote — Quote regular expression characters
+preg_replace_callback_array — Perform a regular expression search and replace using callbacks
+preg_replace_callback — Perform a regular expression search and replace using a callback
+preg_replace — Perform a regular expression search and replace
+preg_split — Split string by a regular expression
+
+
+
+			Javascript Regular Expressions
+
+
+
+
+
+
+
+
+
+
+
+
+

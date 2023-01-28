@@ -1,0 +1,50 @@
+Software Design Patterns ::
+1. Singleton Pattern
+2. Module Pattern
+6. Dependency Injection Pattern (Dependency Injection is implementation of IoC [Inversion of control] principle)
+7. Factory Pattern
+8. Proxy Pattern
+9. MVC Pattern
+10. MVVM Pattern (Model-View-ViewModel)
+11. Observer Pattern
+12. Adapter Pattern
+13. Facade
+
+
+Software Design Principles ::
+a. SOLID Principle
+b. IoC Design Principle
+
+OOPS concepts in PHP ::
+1. Abstraction
+2. Inheritance
+3. Encapsulation
+4. Polymorphism
+
+
+
+
+3. IoC Design Principle
+-- The IoC principle helps in designing loosely coupled classes which make them testable, maintainable and extensible.
+
+
+
+
+a. SOLID Principle in OOPS is used to write understandable, flexible and maintainable code.
+	S – Single Responsibility Principle (SRP)
+	O – Open-Close Principle (OCP)
+	L – Liskov Substitution Principle (LSP)
+	I – Interface Segregation Principle (ISP)
+	D – Dependency Inversion Principle (DIP)
+
+D – Dependency Inversion Principle (DIP)
+-- The dependency inversion principle, which concerns itself with decoupling dependencies between high-level and low-level layers through 
+   shared abstractions.
+
+
+
+Articles :
+https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
+https://www.baeldung.com/java-dependency-inversion-principle#:~:text=The%20Dependency%20Inversion%20Principle%20(DIP,decoupled%2C%20and%20reusable%20software%20components.
+https://www.tutorialsteacher.com/ioc/inversion-of-control
+https://www.pentalog.com/blog/it-development-technology/solid-principles-object-oriented-programming/

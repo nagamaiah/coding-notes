@@ -1,0 +1,46 @@
+
+apache2 server commands
+sudo service apache2 status
+sudo /etc/init.d/apache2 start
+sudo /etc/init.d/apache2 status (or) sudo systemctl status apache2
+sudo /etc/init.d/apache2 stop   
+sudo /etc/init.d/apache2 restart
+
+sudo service mysql status
+sudo systemctl status mysql
+
+
+Mysql server username/password
+root/MySql@123
+to change pass -> 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password123#@!';
+
+phpmyadmin pass : Phpmyadmin@123
+
+sudo mysqldump -u root -p --all-databases > /home/nagamaiah/Desktop/alldbs.sql
+sudo mysql -u root -p < /home/pradnyankur/Desktop/alldb.sql
+
+sudo chmod 777 /var/www/html -R
+
+sudo chown -R $USER:$USER /var/www
+it changes the owner to my user instead of root user.
+
+
+cd /etc/php/8.1/apache2
+php.ini change settings here...
+sudo vim php.ini
+insert 
+esc  and write and quite   :wq
+to change php.ini settings
+
+
+// ini_set('display_errors', 1); 
+// ini_set('display_startup_errors', 1); 
+// error_reporting(E_ALL);
+
+
+
+github token --> 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
+
+
+

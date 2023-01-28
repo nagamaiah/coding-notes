@@ -1,0 +1,41 @@
+
+PHP -- Hypertext Preprocessor
+	PHP originally stood for Personal Home Page, but it now stands for the recursive initialism PHP: Hypertext Preprocessor.
+	PHP is an open-source server-side scripting language that many devs use for web development.
+
+SSH -- Secure Shell
+	SSH or Secure Shell is a network communication protocol that enables two computers to 
+	communicate (c.f http or hypertext transfer protocol, which is the protocol used to transfer hypertext such as web pages) and share data.
+
+SSL -- Secure Sockets Layer
+	SSL Stands for secure sockets layer. Protocol for web browsers and servers that allows for the authentication, encryption and decryption of data sent over the Internet.
+
+TLS -- Transport Layer Security 
+	Transport Layer Security (TLS) encrypts data sent over the Internet to ensure that eavesdroppers and hackers are unable to see what you transmit which is particularly useful 
+	for private and sensitive information such as passwords, credit card numbers, and personal correspondence.
+
+HTTP -- Hypertext Transfer Protocol
+	HTTP, in full HyperText Transfer Protocol, standard application-level protocol used for exchanging files on the World Wide Web. 
+	HTTP runs on top of the TCP/IP protocol and (later) on the QUIC protocol.
+
+
+HTTPS -- Hyper Text Transfer Protocol Secure  (or) HTTP Secure
+
+DNS -- Domain Name System
+
+
+
+
+
+Linux Commands ::
+
+CP -- Copy
+
+SCP -- Secure Copy
+
+sudo -- SuperUser DO
+	"root" is the actual name of the administrator account. "sudo" is a command which allows ordinary users to perform administrative tasks
+	Sudo stands for SuperUser DO and is used to access restricted files and operations. By default, Linux restricts access to certain parts of 
+	the system preventing sensitive files from being compromised
+
+

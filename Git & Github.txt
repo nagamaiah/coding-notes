@@ -1,0 +1,114 @@
+
+
+github personal access token -> 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
+use this for username and password while pushing to remote repo.
+
+
+ssh-keygen -t ed25519 -C "nagamaiah63@gmail.com"
+generated ssh key is :
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINloP1oc9HsbVm0dQaB3haOq++WlDNE5zCjkLBJtx7m2 nagamaiah63@gmail.com
+
+
+If you're cloning GitHub repositories using HTTPS, we recommend you use GitHub CLI or 
+Git Credential Manager (GCM) to remember your credentials.
+
+to install github (gh) client 
+https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+
+gh --version
+gh version 2.22.0 (2023-01-25)
+https://github.com/cli/cli/releases/tag/v2.22.0
+
+gh auth login
+gh repo view
+
+gh cli url
+https://cli.github.com/manual/gh
+
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as nagamaiah
+
+
+
+
+VCS -> Version Control System
+SVN (subversion) -> SVN is a centralized version control system. 
+Git		 -> Git is a distributed version control system.
+
+Git (Free and Open source Version Control System).
+VCS -- 	To track code changes. We can able to revert changes.
+Github - A website to host your git repositories online
+Repository - Project (which contains folders & files)
+untraked files - newly created files
+add - Track your files and changes in git after adding untracked files to git
+commit - save your changes or files in git
+push - upload your commits to remote repo like github, bitbucket, gitlab etc.,
+pull - Download (latest) changes from a remote repo to your local machine
+
+
+git init
+echo "# MESSAGE" >> README.md
+git add README.md
+git commit -m "first commit"
+git config --global init.defaultBranch <name>
+git branch -m <name>
+
+
+### Git Common Workflow
+# Start a new feature
+git checkout -b new-feature main
+# Edit some files
+git add <file>
+git commit -m "Start a feature"
+# Edit some files
+git add <file>
+git commit -m "Finish a feature"
+# Merge in the new-feature branch
+git checkout main
+git merge new-feature
+git branch -d new-feature
+
+
+
+-- Show all branch locally
+   git branch
+   
+-- Show remote-tracking branches
+   git branch --remotes
+   git branch -r
+   
+-- Show all branch locally and remote
+   git branch -a
+   git branch -all
+   
+-- Create a new branch
+   git branch <branch-name>
+   
+-- Checkout(move to another branch) branch 
+   git checkout <branch-name>
+
+-- Create a branch and checkout to that branch
+   git checkout -b <branch-name>
+
+-- Deleting a local branch
+   git branch --delete <branch>
+   git branch -d <branch>	-> Shorter version
+   git branch -D <branch>	-> Force-delete un-merged branches
+    
+-- Deleting a remote branch
+   git push origin --delete <branch>  # Git version 1.7.0 or newer
+   git push origin -d <branch>        # Shorter version (Git 1.7.0 or newer)
+
+
+
+A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
+
+A fork is a copy of a repository that you manage. Forks let you make changes to a project without affecting the original repository. You can fetch updates from or submit changes to the original repository with pull requests.
+
+A fork creates a completely independent copy of Git repository. In contrast to a fork, a Git clone creates a linked copy that will continue to synchronize with the target repository.
+
+
+
+

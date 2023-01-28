@@ -1,0 +1,64 @@
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Apache Virtual Host
+
+1. Virtual Host refers to the practice of running more than one web site(company.example1.com, company.example2.com) on a single machine.
+	a. Name-based virtual hosts (More than one web site per IP address).
+	b. IP-based virtual hosts (An IP address for each web site).
+
+2. Name-based virtual hosting is usually simpler, since you need only configure your DNS server to map each hostname to the correct IP address
+   and then configure the Apache HTTP Server to recognize the different hostnames.
+
+3. If you want to maintain multiple domains/hostnames on your machine you can setup VirtualHosts containers for them. Most configurations use
+   only name-based virtual hosts so the server doesn't need to worry about IP addresses.
+
+3. Configuration directive
+	a. <VirtualHost>
+	b. ServerName
+	c. ServerAlias
+	d. ServerPath
+	e. ServerAdmin
+	f. ErrorLog
+	g. CustomLog
+
+4. To setup VH need to edit two files
+	a. C:/xampp/apache/conf/extra/httpd-vhosts.conf
+		<VirtualHost *:80>
+		  DocumentRoot "C:/xampp/htdocs"
+		  ServerName localhost
+		</VirtualHost>
+
+		<VirtualHost *:80>
+		  DocumentRoot "C:/xampp/htdocs/Laravel57/public"
+		  ServerName dev-lsapp.com
+		</VirtualHost>
+
+	b. Open notepad as administrator and open file  C:/Windows/System32/drivers/etc , view all files in the right corner -> find hosts file
+         127.0.0.1 localhost
+	   127.0.0.1 lsapp.dev (server name from httpd-vhosts.conf file).
+
+URL -> Uniform Resource Locator (Web Address or Web Site).
+href -> Hypertext Referece (used to create a link to another page and identify sections within a document) (HTML attribute of anchor <a> tag).
+HTTP -> Hypertext Transfer Protocol
+HTTPS -> HTTP Secure uses SSL (Secure Sockets Layer) certificate to encrypt the connection between the end user and the server.
+HTTPS is vital to prorecting sensitive information. such as passwords, CC numbers and identity data from unauthorized acess.
+HTTPS uses TCP/IP port numbers 443 by default, whereas HTTP uses 'port 80'.
+DNS -> Domain Name System
+Protocols include http, https, ftps, mailto and file.
+
+Parts of URL  -> https://www.techorg.com/post/search/query?name=cruce&age=30
+https -> the protocol
+www.techorg.com -> host name (or) domain name
+post/search/query -> path name
+?name=cruce&age=30 -> query
+name and age  -> parameters
+
+The URL mailto:president@whitehouse.gov initiates a new email addressed to the mailbox president in the domain whitehouse.gov
+The URL ftp://www.companyname.com/whitepapers/widgets.ps specifies the use of the FTP protocol to download a file.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
