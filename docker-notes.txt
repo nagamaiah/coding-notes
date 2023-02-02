@@ -1,0 +1,42 @@
+
+# install docker on linux (ubuntu)
+https://docs.docker.com/engine/install/ubuntu/
+
+##Install using the repository
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    
+    
+    
+
+-- After the installation is complete, start the Docker service and enable it to start automatically on boot
+	sudo systemctl start docker
+	sudo systemctl enable docker
+	
+	sudo systemctl status docker
+
+
+
+
+If you want to run docker as non-root user then you need to add it to the docker group.
+
+Create the docker group if it does not exist
+$ sudo groupadd docker
+Add your user to the docker group.
+$ sudo usermod -aG docker $USER
+Log in to the new docker group (to avoid having to log out / log in again; but if not enough, try to reboot):
+$ newgrp docker
+
+
+
+
+
+
+
+Docker hub
+uname : nagamaiah
+pw : Docker2468

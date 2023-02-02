@@ -4,6 +4,25 @@ php8.1  -> released on November 2021
 php8.2	-> released on December 2022
 
 
+php versions list
+php 5.0
+php 5.1
+php 5.2
+php 5.3
+php 5.4
+php 5.5
+php 5.6
+
+php 7.0
+php 7.1
+php 7.2
+php 7.3
+php 7.4
+
+php 8.0
+php 8.1
+php 8.2
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 							What's new in PHP 8 version
 1. Constructor Property Promotion

@@ -6,6 +6,7 @@ sudo /etc/init.d/apache2 status (or) sudo systemctl status apache2
 sudo /etc/init.d/apache2 stop   
 sudo /etc/init.d/apache2 restart
 
+
 sudo service mysql status
 sudo systemctl status mysql
 
@@ -15,15 +16,19 @@ root/MySql@123
 to change pass -> 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password123#@!';
 
-phpmyadmin pass : Phpmyadmin@123
 
 sudo mysqldump -u root -p --all-databases > /home/nagamaiah/Desktop/alldbs.sql
 sudo mysql -u root -p < /home/pradnyankur/Desktop/alldb.sql
 
 sudo chmod 777 /var/www/html -R
 
+# Give the web server user ownership of the Laravel files
+RUN chown -R www-data:www-data /var/www/html/
+
+
+change the ownership to my user instead of root user.
 sudo chown -R $USER:$USER /var/www
-it changes the owner to my user instead of root user.
+sudo chown -R nagamaiah:nagamaiah /var/www/html    (changes ownership from root user to nagamaiah user)
 
 
 cd /etc/php/8.1/apache2
@@ -39,8 +44,76 @@ to change php.ini settings
 // error_reporting(E_ALL);
 
 
-
 github token --> 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
+
+
+
+---------------------------------------------------------------------
+		Linux users and groups
+		
+# To show current user
+whoami
+
+# adduser new user
+sudo adduser <username>
+priyanshi/mani@1996
+
+# to list all users
+cat /etc/passwd
+
+# to list users hashed password
+sudo cat /etc/shadow
+
+# useradd  lazy command
+sudo useradd testuser
+
+# change permissions if required
+sudo chmod -R 755 priyanshi/
+
+# to switch user to root
+sudo su -
+root@nagamaiah
+
+# to switch uset back
+sudo su - nagamaiah
+nagamaiah@nagamaiah
+
+
+
+
+
+
+----------------------------------
+cp -- Copy
+
+scp -- Secure Copy
+
+mv -- move
+
+sudo -- SuperUser DO
+	"root" is the actual name of the administrator account. "sudo" is a command which allows ordinary users to perform administrative tasks
+	Sudo stands for SuperUser DO and is used to access restricted files and operations. By default, Linux restricts access to certain parts of 
+	the system preventing sensitive files from being compromised
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

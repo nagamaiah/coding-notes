@@ -24,8 +24,14 @@
 	f. ErrorLog
 	g. CustomLog
 
-4. To setup VH need to edit two files
-	a. C:/xampp/apache/conf/extra/httpd-vhosts.conf
+	
+----------------------------------------------------------------------------------------
+
+/*** Add the virutal hosts and domains  ***/ (Windows OS)
+
+	a. Add Virtual Hosts in apache server configuration file httpd-vhosts.conf
+	
+	   C:/xampp/apache/conf/extra/httpd-vhosts.conf  
 		<VirtualHost *:80>
 		  DocumentRoot "C:/xampp/htdocs"
 		  ServerName localhost
@@ -36,17 +42,46 @@
 		  ServerName dev-lsapp.com
 		</VirtualHost>
 
-	b. Open notepad as administrator and open file  C:/Windows/System32/drivers/etc , view all files in the right corner -> find hosts file
-         127.0.0.1 localhost
+	b. Add domain in your local system hosts file
+	   Open notepad as administrator and open file  C:/Windows/System32/drivers/etc , view all files in the right corner -> find hosts file
+           127.0.0.1 localhost
 	   127.0.0.1 lsapp.dev (server name from httpd-vhosts.conf file).
 
-URL -> Uniform Resource Locator (Web Address or Web Site).
-href -> Hypertext Referece (used to create a link to another page and identify sections within a document) (HTML attribute of anchor <a> tag).
-HTTP -> Hypertext Transfer Protocol
-HTTPS -> HTTP Secure uses SSL (Secure Sockets Layer) certificate to encrypt the connection between the end user and the server.
-HTTPS is vital to prorecting sensitive information. such as passwords, CC numbers and identity data from unauthorized acess.
-HTTPS uses TCP/IP port numbers 443 by default, whereas HTTP uses 'port 80'.
-DNS -> Domain Name System
+-------------------------------------------------------------------------------------
+
+/*** Add the virutal hosts and domains  ***/ (Linux(Ubuntu) OS)
+	
+	#Adding domains in your local system
+	sudo vim /etc/hosts	
+	127.0.0.1   dev.php-login.com
+	127.0.0.1   dev.laravel8.com
+	
+
+	#Adding virtual hosts
+	dev.php-login.com
+	/var/www/html/php-procedural-login
+	
+	cd /etc/apache2/sites-available/
+	sudo cp 000-default.conf phplogin.conf
+	sudo vim phplogin.conf
+	
+	ServerName dev.php-login.com
+	ServerAlias www.dev.php-login.com
+	DocumentRoot /var/www/html/php-procedural-login
+	Press esc & :wq (write and quit);
+	
+	Enable your virtual host (or) site (phplogin.conf)
+	sudo a2ensite phplogin.conf
+	To activate the new configuration, you need to run: sudo systemctl reload apache2
+	
+	Loaded successfully http://dev.php-login.com/
+	
+	
+	ServerName dev.laravel8.com
+	ServerAlias www.dev.laravel8.com
+	DocumentRoot /var/www/html/laravel8.8/public
+	--> http://dev.laravel8.com/
+--------------------------------------------------------------------------------------
 Protocols include http, https, ftps, mailto and file.
 
 Parts of URL  -> https://www.techorg.com/post/search/query?name=cruce&age=30

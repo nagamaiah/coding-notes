@@ -24,18 +24,15 @@ HTTPS -- Hyper Text Transfer Protocol Secure  (or) HTTP Secure
 DNS -- Domain Name System
 
 
+URL -> Uniform Resource Locator (Web Address or Web Site).
+href -> Hypertext Referece (used to create a link to another page and identify sections within a document) (HTML attribute of anchor <a> tag).
+HTTP -> Hypertext Transfer Protocol
+HTTPS -> HTTP Secure uses SSL (Secure Sockets Layer) certificate to encrypt the connection between the end user and the server.
+HTTPS is vital to prorecting sensitive information. such as passwords, CC numbers and identity data from unauthorized acess.
+HTTPS uses TCP/IP port numbers 443 by default, whereas HTTP uses 'port 80'.
+DNS -> Domain Name System
 
 
 
-Linux Commands ::
-
-CP -- Copy
-
-SCP -- Secure Copy
-
-sudo -- SuperUser DO
-	"root" is the actual name of the administrator account. "sudo" is a command which allows ordinary users to perform administrative tasks
-	Sudo stands for SuperUser DO and is used to access restricted files and operations. By default, Linux restricts access to certain parts of 
-	the system preventing sensitive files from being compromised
 
 
