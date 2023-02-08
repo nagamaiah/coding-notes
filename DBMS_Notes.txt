@@ -472,6 +472,14 @@ To fetch rows or data
    $result->fetch_all(MYSQLI_ASSOC) : returns associative array data
    $result->fetch_all(MYSQLI_BOTH) :  returns associative and enumerated array
 
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param('is', $ReleaseID, $initialType);
+$stmt->execute();
+$res = $stmt->get_result();
+$row = $res->fetch_all(MYSQLI_BOTH);
+return $row;
+
+
 Get array of objects
 $result_object_array = [];
 while($row = $result->fetch_object()){

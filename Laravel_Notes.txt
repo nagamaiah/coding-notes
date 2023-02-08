@@ -40,6 +40,7 @@
    a. Installation via Composer
 	composer create-project laravel/laravel myApp
 	composer create-project laravel/laravel="5.7.*" myApp
+	composer create-project laravel/laravel="9.*" laravel9.5
 	cd myApp
 	php artisan serve
    b. Via laravel installer -- you may install the laravel as a global composer dependency.
@@ -75,6 +76,91 @@
 8. Task Scheduling
 9. WebSocket Programming
 10. Testing
+11. Database Query Builder
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Mail Sending
+			
+-- Laravel provides a clean, simple email API powered by the popular SwiftMailer library.
+-- Laravel uses free feature-rich library SwiftMailer to send emails.
+-- The e-mail templates are loaded in the same way as views, which means you can use the Blade syntax and inject data into your templates.
+
+
+## Upto laravel5.2 version
+Mail::send(string|array $view, array $data, Closure|string $callback);
+
+//pass data into views
+$data  = ["to"=>"nag123@gmail.com",name"=>"nag","place"=>"Hyderabad"];
+
+//message builder instance $message
+try{
+    Mail::send('emails.welcome', $data, function($message) use ($data) {
+        $message->to($data['to'])->subject(ucfirst(app()->env) . ' Customer Reset Password');
+    });
+} catch(\Exception $e){
+    dd($e);
+}
+
+try {
+      $data = array('sender_name'=>"Nagamaiah");
+      $price = 999;
+      $palce = 'hyderabad';
+      Mail::send('mail', $data, function($message) use ($data,$price) {
+         $message->to('nagamaiah63@gmail.com', 'Tutorials Point')->subject
+            ($data['sender_name'].' Subject '.$price);
+         $message->from('xyz@gmail.com','nag');
+      });
+      return response("mail sent successfully");
+
+    } catch(\Exception $e) {
+        dd($e);
+    }
+
+
+                
+## From laravel5.3 onwards mailable classes introduced
+-- Mailable classes introduced in laravel5.3 version.
+	php artisan make:mail OrderShipped    App\Mail\OrderShipped.php
+
+-- Generating Markdown Mailables   // Generates a mailable class and a markdown template
+	php artisan make:mail OrderShipped --markdown=emails.orders.shipped	
+
+-- All of a mailable class configuration is done in the 'build' method. 
+   you may call various methods such as from, subject, view, and attach to configure the email's presentation and delivery.
+-- pass an instance of your mailable class to the send method:
+
+	Mail::to('nag123@gmail.com')->send(new OrderShipped($order));
+	
+	Mail::to($request->user())
+        ->cc($moreUsers)
+        ->bcc($evenMoreUsers)
+        ->send(new OrderShipped($order));
+        
+-- Sending Mail Via A Specific Mailer
+	Mail::mailer('postmark')
+        ->to($request->user())
+        ->send(new OrderShipped($order));
+        			
+			
+## From 'laravel9' onwards we are using 'symfony/mailer' package to send mails.
+-- Laravel provides a clean, simple email API powered by the popular Symfony Mailer component.
+	Mail::to('example123@gmail.com')->send(new OrderShipped($order));    //  Mail facade  --> Illuminate\Support\Facades\Mail
+	 
+	Mail::to($request->user())
+        ->cc($moreUsers)
+        ->bcc($evenMoreUsers)
+        ->send(new OrderShipped($order));	 		
+
+-- Mailable class configuration is done in several methods, including the envelope, content, and attachments methods.			
+	Illuminate\Mail\Mailables\Envelope
+	Illuminate\Mail\Mailables\Content
+	Illuminate\Mail\Mailables\Attachment
+	Illuminate\Mail\Mailables\Headers			
+			
+			
+			
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Packages
@@ -102,6 +188,7 @@ Most popular laravel packages:
 16. Laravel Admin Panel Generator
 17. Laravel Ecommerce Packages
 18. Laravel SEO Packages
+19. Laravel Sanctum
 -----------------------------------------------------------------------------------------------------------------------------------------
 				Design Patterns in Laravel 
 
