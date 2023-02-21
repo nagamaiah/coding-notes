@@ -159,7 +159,46 @@ try {
 	Illuminate\Mail\Mailables\Attachment
 	Illuminate\Mail\Mailables\Headers			
 			
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Http Client (guzzlehttp/guzzle package)  
 			
+-- Laravel provides Guzzle HTTP client, allowing you to quickly make outgoing HTTP requests to communicate with other web applications.
+-- Earlier we used cURL(client url) to make http requests in php. Now we have improved package guzzle http client.
+-- Laravel provides Http facade to make http requests using guzzlehttp/guzzle package.
+-- The get method returns an instance of Illuminate\Http\Client\Response, which provides a variety of methods that may be used to inspect the response.
+	static Response get(string $url, array|string|null $query = null)
+	static Response post(string $url, array $data = [])
+	
+	$client = new \GuzzleHttp\Client();
+	$request = $client->get('http://testmyapi.com');  (or)
+	
+	use Illuminate\Support\Facades\Http;
+	$response = Http::get('http://example.com');	
+	
+-- Response instance status code methods (Illuminate\Http\Client\Response)
+	$response->ok() : bool;                  // 200 OK
+	$response->created() : bool;             // 201 Created
+	$response->accepted() : bool;            // 202 Accepted
+	$response->noContent() : bool;           // 204 No Content
+	$response->movedPermanently() : bool;    // 301 Moved Permanently
+	$response->found() : bool;               // 302 Found
+	$response->badRequest() : bool;          // 400 Bad Request
+	$response->unauthorized() : bool;        // 401 Unauthorized
+	$response->paymentRequired() : bool;     // 402 Payment Required
+	$response->forbidden() : bool;           // 403 Forbidden
+	$response->notFound() : bool;            // 404 Not Found
+	$response->requestTimeout() : bool;      // 408 Request Timeout
+	$response->conflict() : bool;            // 409 Conflict
+	$response->unprocessableEntity() : bool; // 422 Unprocessable Entity
+	$response->tooManyRequests() : bool;     // 429 Too Many Requests
+	$response->serverError() : bool;         // 500 Internal Server Error
+			
+			
+			
+						
 			
 
 -----------------------------------------------------------------------------------------------------------------------------------------

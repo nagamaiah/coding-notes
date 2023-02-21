@@ -51,7 +51,7 @@
 
 /*** Add the virutal hosts and domains  ***/ (Linux(Ubuntu) OS)
 	
-	#Adding domains in your local system
+	#Adding domains in your local system hosts file
 	sudo vim /etc/hosts	
 	127.0.0.1   dev.php-login.com
 	127.0.0.1   dev.laravel8.com
@@ -81,6 +81,12 @@
 	ServerAlias www.dev.laravel8.com
 	DocumentRoot /var/www/html/laravel8.8/public
 	--> http://dev.laravel8.com/
+	
+	<Directory /var/www/html/laravel8.8/public>
+        Options +FollowSymlinks
+        AllowOverride All
+        Require all granted
+     </Directory>
 --------------------------------------------------------------------------------------
 Protocols include http, https, ftps, mailto and file.
 
