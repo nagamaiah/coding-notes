@@ -1,0 +1,22 @@
+
+React Interview Questions
+https://github.com/sudheerj/reactjs-interview-questions
+https://www.edureka.co/blog/interview-questions/react-interview-questions/
+
+
+
+
+
+
+HTML nodelist using js
+NodeList(3) [h3, h3, h3]
+In JavaScript a NodeList is an array-like list of objects. One thing to remember though is that array methods will not work on a nodelist because it’s not an array!
+In ES2015, we can use the Array.from method to convert a NodeList into an array.
+We could also potentially Spread into an array and then map over that.
+let myNodeList = document.querySelectorAll('h3')
+
+let nodeListArr = Array.from(myNodeList)
+let nodeListSpread = [...myNodeList]
+
+console.log(nodeListArr);
+console.log(nodeListSpread);

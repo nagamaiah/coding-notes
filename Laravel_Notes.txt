@@ -196,11 +196,48 @@ try {
 	$response->tooManyRequests() : bool;     // 429 Too Many Requests
 	$response->serverError() : bool;         // 500 Internal Server Error
 			
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Artisan CLI
+			
+## to make a model with controller and migration 
+	php artisan make:model Student -mc
+	php artisan make:model Student -mc --resource   --> with resouceful controller						
+	php artisan make:model Student -a
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel FileSystem and File Upload
+			
+
+			
+			
+			
+			
+			
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Authentication
+
+1. Before laravel6 version php artisan make:auth   cmd will create  a auth system
+2. For laravel6 and laravel7 we have laravel/ui  package for auth. 
+3. After laravel8 version we have free laravel packages Laravel Breeze, Laravel Jetstream, and Laravel Fortify.
+			
 			
 			
 						
-			
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Validation
+			
+			
+			
+			
+			
+			
+						
 -----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Packages
 
@@ -228,6 +265,7 @@ Most popular laravel packages:
 17. Laravel Ecommerce Packages
 18. Laravel SEO Packages
 19. Laravel Sanctum
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 				Design Patterns in Laravel 
 
