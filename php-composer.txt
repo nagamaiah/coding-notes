@@ -1,0 +1,133 @@
+
+							/** PHP Composer **/
+
+-- Composer is a tool that is used for dependencies management in your PHP Project. Composer is used to autoload files.
+-- Composer is not a package manager in the same sense as Yum or Apt are. Yes, it deals with "packages" or libraries, but it manages 
+       them on a per-project basis, installing them in a directory (e.g. vendor) inside your project.
+-- Composer lets you declare the libraries on which your PHP project depends and manage it for you. 
+   It installs and updates the libraries that you need for your project.
+--  Composer is strongly inspired by node's npm and ruby's bundler.
+-- Vendor directory where all composer dependencies are installed.
+This idea is not new and Composer is strongly inspired by node's npm and ruby's bundler.
+
+
+
+
+
+
+### Autoloading Files in PHP
+
+-- Using autoloader we can include required file only. Autoload saves memory space.
+-- Basically, when you use a class in your application, the autoloader checks if it’s already loaded, and if not, the autoloader 
+       loads the necessary class into memory. So the class is loaded on the fly where it’s needed—this is called autoloading.
+--  The spl_autoload_register() function allows you to register functions that will be put into a queue to be triggered 
+   sequentially when PHP tries to load classes that are not loaded yet.
+-- PHP will execute all the registered autoloader functions sequentially.
+-- spl_autoload_register('customLoaderFunction');
+   	function customLoaderFunction($class){
+		$path = 'Code/'.$class.'.php';
+		if(file_exists($path))
+		{
+			include $path;
+		}
+	}
+-- whenever we create or instantiate object using new keyword , autoloader will catch the class name and pass it to 
+   to customLoaderFunction. 
+-- When you’re using autoloading, you don’t need to include all the library files manually; you just need to include the autoloader file which contains 
+       the logic of autoloading, and the necessary classes will be included dynamically.
+-- The problem with the spl_autoload_register() function is that you have to implement the autoloader functions by yourself.
+
+-- Autoloading with Composer. (Composer Autoloading)
+-- Specifically, Composer provides four different methods for autoloading files:
+	1. file autoloading
+	2. classmap autoloading
+	3. PSR-0 autoloading
+	4. PSR-4 autoloading
+-- As per the official Composer documentation, `PSR-4` is the recommended way of autoloading
+-- the steps that you need to perform when you want to use Composer autoloading.
+	1. Define the composer.json file in the root of your project or library. It should contain  directives based on the type of autoloading.
+	2. Run the composer dump-autoload command to generate the necessary files that Composer will use for autoloading.
+	3. Include the require 'vendor/autoload.php' statement at the top of the file where you want to use autoloading.
+
+-- Autoloading: The  `files`  Directive (file autoloading)
+	{
+    		"autoload": {
+        			"files": ["lib/Foo.php", "lib/Bar.php"]
+    		}
+	}
+	1. File autoloading works similarly to include or require statements that allow you to load entire source files.
+	2. All the source files that are referenced with the files directive will be loaded every time your application runs. 
+	     This is useful for loading source files that do not use classes.
+	3. After you create the composer.json file in your project root with the above contents, you just need to run 
+	  the composer dump-autoload command to create the necessary autoloader files.
+	4. These will be created under the vendor directory. Finally, you need to include the require 'vendor/autoload.php' 
+	   statement at the top of the file where you want to autoload files with Composer
+
+
+-- Autoloading: The classmap Directive (classmap autoloading)
+	{
+    	"autoload": {
+        		"classmap": ["lib","app/models", "app/services"]
+    		}
+	}
+	1. Classmap autoloading is an improved version of file autoloading. You just need to provide a list of directories, 
+	      and Composer will scan all the files in those directories.
+	2. For each file, Composer will make a list of classes that are contained in that file, and whenever one of those 
+	       classes is needed, Composer will autoload the corresponding file.
+	3. Run the composer dump-autoload command, and Composer will read the files in the lib directory to create a map of classes that can be autoloaded.
+	4. From now,  whenever you have a new class in the  directory, you need to run the command composer dump-autoload again to regenerate the autoload.php file.
+
+-- Autoloading: PSR-0 
+	{
+    		"autoload": {
+        		"psr-0": {
+            		"Tutsplus\\Library": "src"
+        			}
+    		}
+	}
+	1. PSR-0 is a standard recommended by the PHP-FIG group for autoloading.
+	2. In the PSR-0 standard, you must use namespaces to define your libraries.
+	3. The fully qualified class name must reflect the \<Vendor Name>\(<Namespace>\)*<Class Name> structure.
+	4. In PSR-0 autoloading, you need to map namespaces to directories.
+	5. In the above example, we’re telling Composer that anything which starts with the Tutsplus\Library namespace 
+	   should be available in the src\Tutsplus\Library directory.
+	6. In PSR-0 autoloading, you must map namespaces to the directory structure. As we discussed in the previous section, 
+	      if you want to autoload the Tutsplus\Library\Foo class, it must be located at src\Tutsplus\Library\Foo.php. 
+	
+
+--  `PSR-4 Autoloading Works With Composer` :::
+
+	1. PSR-4 is similar to PSR-0 autoloading in that you need to use namespaces, but you don’t need to mimic the directory structure with namespaces.
+	2. In PSR-4 autoloading, you can shorten the directory structure, which results in a much simpler directory structure compared to PSR-0 autoloading.
+	4. composer dump-autoload
+		PATH vendor/composer/autoload_classmap.php
+		Composer dump-autoload won’t download a thing.
+		It just regenerates the list of all classes that need to be included in the project (autoload_classmap.php).
+		Ideal for when you have a new class inside your project.
+	5. composer dump-autoload -o   //https://getcomposer.org/doc/articles/autoloader-optimization.md
+		Autoloader optimization
+		Class map generation is faster than psr-0/psr-4. no filesystem check needed. the class map returns instantly the path
+		Used for only production env.
+		If you add a new class, you need run autoload optimize command again to load class loading. Not recommended in devlopment.
+
+	{
+		"autoload" : {
+		"psr-4" : {
+			"App\\" : "App/src"
+			}
+		},
+		"require": {
+		"ramsey/uuid": "^4.2",
+		"ramsey/uuid-doctrine": "^1.8",
+		"psr/log": "^1.1"
+			}
+	}		
+		
+	There are a few options to enable this:
+	Set "optimize-autoloader": true inside the config key of composer.json
+	Call install or update with -o / --optimize-autoloader
+	Call dump-autoload with -o / --optimize
+
+	6. Vendor directory where all composer dependencies are installed.
+
+

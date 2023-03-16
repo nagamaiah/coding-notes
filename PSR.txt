@@ -1,0 +1,116 @@
+
+			PSR - PHP Standard Recommendations
+
+-- The PHP Standard Recommendation is a PHP specification published by the PHP Framework Interoperability Group. (PHP-FIG))
+	PSR-1		:	Basic Coding Standard		-->	https://www.php-fig.org/psr/psr-1/
+	PSR-12		: 	Extended Coding Style		-->	https://www.php-fig.org/psr/psr-12/   (psr-12 replaces psr-2[deprecated])
+	PSR-3		: 	Logger Interface		-->	https://www.php-fig.org/psr/psr-3/
+	PSR-4		: 	Autoloader			-->	https://www.php-fig.org/psr/psr-4/  (psr-4 replaces psr-0[deprecated]).
+	PSR-6		: 	Caching Interface 		-->	https://www.php-fig.org/psr/psr-6/
+	PSR-7		: 	HTTP message interfaces		-->	https://www.php-fig.org/psr/psr-7/
+	PSR-11		:	Container interface		-->	https://www.php-fig.org/psr/psr-11/
+	
+
+
+### PSR-1: Basic Coding Standard
+-- php long tags <?php ?> (or) short-echo tags <?= ?>
+-- Files MUST use only UTF-8 without BOM encoding for PHP code.
+-- Namespaces and classes MUST follow an "autoloading" PSR: [PSR-0, PSR-4].
+-- This means each class is in a file by itself, and is in a namespace of at least one level: a top-level vendor name.
+-- The term "class" refers to all classes, interfaces, and traits.
+-- Class names MUST be declared in `StudlyCaps` or `PascalCase`. Ex : CustomerManagementController 
+-- Class constants MUST be declared in all upper case with underscore separators. Ex : CUSTOMER_APPROVED_DATE
+-- Method and Property names MUST be declared in camelCase. Ex : getProductDetailsArray, thisShouldBeCamelCase
+
+### PSR-12: Extended Coding Style
+-- All PHP files MUST end with a non-blank line, terminated with a single LF.
+-- The closing ?> tag MUST be omitted from files containing only PHP.
+-- The soft limit on line length MUST be 120 characters.
+-- There MUST NOT be trailing whitespace at the end of lines.
+-- There MUST NOT be more than one statement per line.
+-- Code MUST use an indent of `4 spaces` for each indent level, and MUST NOT use tabs for indenting. (indent of 4 spaces,  No Tabs)
+-- All PHP reserved keywords and types MUST be in lower case.
+-- Keywords
+	1. function,for,foreach,while,do_while,if,elseif,switch,case,default,break,continue,true,false,return etc,.
+	2. class,interface,abstract,use,namespace,extends,implements,public,private,protected,const,final,static,new etc,.
+-- types
+	1. int,bool,float,string,object,array,null etc,.
+
+-- Import statements MUST never begin with a leading backslash as they must always be fully qualified.
+-- When instantiating a new class, parentheses MUST always be present even when there are no arguments passed to the constructor.
+	new Foo();
+-- The extends and implements keywords MUST be declared on the same line as the class name.
+-- The use keyword used inside the classes to implement traits MUST be declared on the next line after the opening brace.
+	<?php
+	namespace Vendor\Package;
+	use Vendor\Package\FirstTrait;
+	class ClassName
+	{
+    	    use FirstTrait;
+	}	
+
+-- Visibility MUST be declared on all properties.
+-- Visibility MUST be declared on all constants if your project PHP minimum version supports constant visibilities (PHP 7.1 or later).
+-- The var keyword MUST NOT be used to declare a property.
+-- Method and function arguments with default values MUST go at the end of the argument list.
+   public function fooBarBaz(int $arg1, &$arg2, $arg3 = [], $arg4 = null)
+    {
+        // method body
+    }
+-- When present, the `abstract` and `final` declarations MUST precede the visibility declaration.
+-- the static declaration MUST come after the visibility declaration.
+	abstract class ClassName
+	{
+    	protected static $foo;
+
+    	abstract protected function zim();
+
+    	final public static function bar()
+    	{
+        	// method body
+    	}
+	}
+
+--::  Control Structures
+-- The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words.
+if ($expr1) {
+    // if body
+} elseif ($expr2) {
+    // elseif body
+} else {
+    // else body;
+}
+
+try {
+    // try body
+} catch (FirstThrowableType $e) {
+    // catch body
+} catch (OtherThrowableType | AnotherThrowableType $e) {
+    // catch body
+} finally {
+    // finally body
+}
+
+-- Type casting operators MUST NOT have any space within the parentheses:
+	$intValue = (int) $input;
+
+
+### PSR-3: Logger Interface
+-- 
+
+
+
+
+
+
+
+### PSR-4: Autoloader
+-- This PSR describes a specification for autoloading classes from file paths.
+-- This PSR also describes where to place files that will be autoloaded according to the specification.
+-- The term "class" refers to classes, interfaces, traits, and other similar structures.
+-- The fully qualified class name MUST have a top-level namespace name, also known as a "vendor namespace".
+	 \<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+-- The fully qualified class name MUST have a terminating class name.
+-- Autoloader implementations MUST NOT throw exceptions, MUST NOT raise errors of any level, and SHOULD NOT return a value.
+
+

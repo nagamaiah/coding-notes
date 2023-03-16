@@ -1,0 +1,98 @@
+
+							PHP Packages (all about php packages)
+
+--	https://packagist.org/    --> The PHP Package Repository or A repository for PHP packages.
+--	All php packages are stored under `vendor` directory.
+
+--	add a composer package
+	composer require vendor/package
+--	remove a composer package
+	composer remove vendor/package
+
+	1. ramsey/uuid 
+		A PHP library for generating and working with universally unique identifiers (UUIDs).
+		
+	2. mpdf/mpdf
+		PHP library generating PDF files from UTF-8 encoded HTML
+	
+	3. psr/log
+		Common interface for logging libraries
+		The main goal is to allow libraries to receive a Psr\Log\LoggerInterface object and write logs to it in a simple and universal way.
+
+	4. phpmailer/phpmailer
+		PHPMailer is a full-featured email creation and transfer class for PHP
+
+	5. symfony/routing
+		Maps an HTTP request to a set of configuration variables
+	
+	6. laravel/laravel
+		The Laravel PHP Framework.
+
+	7. symfony/symfony
+		The Symfony PHP framework
+	
+	8. aws/aws-sdk-php
+		AWS SDK for PHP - Use Amazon Web Services in your PHP project.
+		The AWS SDK is a modern, open-source `PHP library` that makes it easy to integrate your PHP application with
+		AWS services like `Amazon S3`, `Amazon Glacier`, and `Amazon DynamoDB`.
+
+	9. doctrine/instantiator
+		A small, lightweight utility to instantiate objects in PHP without invoking their constructors
+
+		The Doctrine Project is the home to several PHP libraries primarily focused on database storage 
+		and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+		Many other popular PHP projects use libraries from Doctrine. Some use the full ORM and others may only use one small library such as the Inflector
+		
+	
+	10. doctrine/inflector
+		PHP Doctrine Inflector is a small library that can perform string manipulations with regard to 
+		upper/lowercase and singular/plural forms of words.
+
+	11. guzzlehttp/guzzle
+		Guzzle is a PHP HTTP client library. guzzle/guzzle is deprecated.
+
+	12. twig/twig
+		Twig, the flexible, fast, and secure template language for PHP
+
+	13. slim/slim
+		Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
+		Slim framework plays well with good software practices including SOLID principles, design patterns, 
+		security principles and dependency injection. Slim's easier to learn than fullstack frameworks such Laravel or Symfony.
+		
+		(https://accesto.com/blog/solid-php-solid-principles-in-php/)
+		*SOLID Principles in PHP (https://medium.com/successivetech/s-o-l-i-d-the-first-5-principles-of-object-oriented-design-with-php-b6d2742c90d7)
+			Following are the five concepts that make up SOLID principles:
+			1. Single Responsibility principle
+			2. Open/Closed principle
+			3. Liskov Substitution principle
+			4. Interface Segregation principle
+			5. Dependency Inversion principle.
+		*Design Patterns
+		*Security Principles
+		*Design Patterns
+
+	14. php-di/php-di
+		The dependency injection container for humans
+
+	15. doctrine/orm
+		Object-Relational-Mapper for PHP
+
+	16. vlucas/phpdotenv
+		Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
+
+		1. You can then load .env in your application with:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+		$dotenv->load();
+
+		print_r($_ENV);
+		print_r($_SERVER);
+
+		2. To suppress the exception that is thrown when there is no .env file, you can:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+		$dotenv->safeLoad();
+
+		3. Optionally you can pass in a filename as the second parameter, if you would like to use something other than .env:
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'myconfig');
+		$dotenv->load();
+
+
