@@ -1,0 +1,21 @@
+
+The grep command can search for a string or pattern in groups of files.
+
+grep -> global regular expression print
+
+grep [OPTION...] PATTERNS [FILE...]
+grep [options] [word] [path(or)file]
+
+
+Ex : grep -rin employees /var/www/html/laravel8.8/
+     grep -rin  Host MyFiles/symfony3/ | less
+
+Options
+-i, --ignore-case: Ignores case distinctions in patterns and input data.
+-v, --invert-match: Selects the non-matching lines of the provided input pattern.
+-n, --line-number: Prefix each line of the matching output with the line number in the input file.
+-w: Find the exact matching word from the input file or string.
+-c: Count the number of occurrences of the provided pattern.
+-r: search in a path recursively
+-l, --files-with-matches: Prints the file name that contains the provided matching pattern.
+-L, --files-without-match: Prints the file name that does not contain the provided matching pattern.

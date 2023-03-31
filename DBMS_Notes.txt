@@ -589,7 +589,11 @@ $result = $mysqli->query($query);
 https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
 
 
-
+SELECT CURRENT_TIMESTAMP() (or) select NOW();  both same --> 2023-03-24 10:35:43 ;
+select UTC_TIMESTAMP(); 
+SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP) as GMT_TIME_DIFF;  --> 05:30:00
+select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
+SELECT @@system_time_zone;  --> IST
 
 
 sample create table
@@ -619,6 +623,39 @@ CREATE TABLE IF NOT EXISTS checklists (
         ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
+create table project (
+id int auto_increment primary key,
+title varchar(20) not null unique,
+description text(255),
+created_at timestamp not null default current_timestamp,
+updated_at timestamp not null default current_timestamp on update current_timestamp
+);
+
+create table issues(
+id int auto_increment primary key,
+title varchar(20) not null,
+project_id int not null,
+description text(255),
+created_at timestamp not null default current_timestamp,
+updated_at timestamp not null default current_timestamp on update current_timestamp,
+foreign key(project_id) references project(id)
+);
+
+insert into project (title,description) values 
+('docsmit','docsmit description'), 
+('tracksmit','tracksmit description'),
+('devdoc','devdoc description'),
+('localdoc','localdoc description');
+
+insert into issues (title,project_id,description ) values 
+('design issue',1,'design changes required'), 
+('mail setup',2,'mail setup issue'),
+('validation',4,'validation issue');
+
+select i.title,i.description,p.title from issues i join project p on p.id = i.project_id;
+
+select i.title as issue_title,i.description as issue_des,p.title as project_title from issues i 
+join project p on p.id = i.project_id where p.id = 3;
 
 
 
@@ -675,6 +712,8 @@ ALTER TABLE table_name
     [ FIRST | AFTER column_name],
     ...;
 
+alter table project modify column updated_at datetime not null default current_timestamp on update current_timestamp;
+
 
 
 -- CHANGE COLUMN (Can change a column name or definition, or both)
@@ -722,6 +761,13 @@ ORDER BY
             END
             DESC;
 
+
+
+### mysql host or server connect
+
+mysql -hlocalhost -uroot -p
+mysql -h127.0.0.1 -uroot -p
+mysql -u root -p
 
 
 

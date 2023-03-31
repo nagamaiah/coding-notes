@@ -41,6 +41,7 @@
 	composer create-project laravel/laravel myApp
 	composer create-project laravel/laravel="5.7.*" myApp
 	composer create-project laravel/laravel="9.*" laravel9.5
+	composer create-project laravel/laravel="8.5.*" laravel-miniblog  //laravel 8.83.27
 	cd myApp
 	php artisan serve
    b. Via laravel installer -- you may install the laravel as a global composer dependency.
@@ -234,9 +235,31 @@ try {
 			
 			
 			
+
+			
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Migrations
+			
+Migrations are like version control for your database, allowing your team to easily modify and share the application's database schema.			
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Controllers
+-- Laravel invokable controller -> Single Action Controller
+-- A controller for a single action, action may call another methods from same controller
+
+
 			
 			
 			
+			
+			
+
 						
 -----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Packages

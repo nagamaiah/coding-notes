@@ -1,3 +1,4 @@
+
 Software Design Patterns ::
 1. Singleton Pattern
 2. Module Pattern
@@ -48,3 +49,6 @@ https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-f
 https://www.baeldung.com/java-dependency-inversion-principle#:~:text=The%20Dependency%20Inversion%20Principle%20(DIP,decoupled%2C%20and%20reusable%20software%20components.
 https://www.tutorialsteacher.com/ioc/inversion-of-control
 https://www.pentalog.com/blog/it-development-technology/solid-principles-object-oriented-programming/
+
+
+

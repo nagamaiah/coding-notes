@@ -2,13 +2,50 @@
 							/** PHP Composer **/
 
 -- Composer is a tool that is used for dependencies management in your PHP Project. Composer is used to autoload files.
--- Composer is not a package manager in the same sense as Yum or Apt are. Yes, it deals with "packages" or libraries, but it manages 
-       them on a per-project basis, installing them in a directory (e.g. vendor) inside your project.
 -- Composer lets you declare the libraries on which your PHP project depends and manage it for you. 
    It installs and updates the libraries that you need for your project.
---  Composer is strongly inspired by node's npm and ruby's bundler.
+-- Composer is strongly inspired by node's npm and ruby's bundler.
 -- Vendor directory where all composer dependencies are installed.
-This idea is not new and Composer is strongly inspired by node's npm and ruby's bundler.
+
+
+-- To quickly install Composer in the current directory
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+
+with specific version use following
+
+php composer-setup.php --version=1.0.0-alpha8
+
+Select a specific version channel instead of the default latest stable
+php composer-setup.php --2.2
+
+
+-- Compser can be auto updated to latest stable version using following commands
+composer self-update
+composer self-update --2.2
+php composer.phar self-update --2
+sudo composer self-update --1
+sudo composer self-update --2
+
+composer self-update --rollback to return to old version
+
+https://stackoverflow.com/questions/24816364/composer-auto-self-update
+
+
+-- To install it manually with specified dir
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
+--filename can be any filename you wish (mycomposer, nagcomposer, composeTool)
+
+-- To uninstall composer via apt (Advanced Packaging Tool )
+sudo apt-get remove composer -y
+
+
+
 
 
 
@@ -37,9 +74,10 @@ This idea is not new and Composer is strongly inspired by node's npm and ruby's 
        the logic of autoloading, and the necessary classes will be included dynamically.
 -- The problem with the spl_autoload_register() function is that you have to implement the autoloader functions by yourself.
 
+
 -- Autoloading with Composer. (Composer Autoloading)
 -- Specifically, Composer provides four different methods for autoloading files:
-	1. file autoloading
+	1. files autoloading
 	2. classmap autoloading
 	3. PSR-0 autoloading
 	4. PSR-4 autoloading
@@ -93,6 +131,7 @@ This idea is not new and Composer is strongly inspired by node's npm and ruby's 
 	   should be available in the src\Tutsplus\Library directory.
 	6. In PSR-0 autoloading, you must map namespaces to the directory structure. As we discussed in the previous section, 
 	      if you want to autoload the Tutsplus\Library\Foo class, it must be located at src\Tutsplus\Library\Foo.php. 
+	7. https://stackoverflow.com/questions/24868586/what-are-the-differences-between-psr-0-and-psr-4  (psr-0 vs psr-4)
 	
 
 --  `PSR-4 Autoloading Works With Composer` :::
@@ -129,5 +168,19 @@ This idea is not new and Composer is strongly inspired by node's npm and ruby's 
 	Call dump-autoload with -o / --optimize
 
 	6. Vendor directory where all composer dependencies are installed.
+
+	7. https://stackoverflow.com/questions/24868586/what-are-the-differences-between-psr-0-and-psr-4  (psr-0 vs psr-4)
+
+
+
+
+### Manage PHP Project Dependencies with Composer
+
+
+
+
+
+
+
 
 

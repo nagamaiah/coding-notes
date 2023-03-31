@@ -55,6 +55,7 @@
 	sudo vim /etc/hosts	
 	127.0.0.1   dev.php-login.com
 	127.0.0.1   dev.laravel8.com
+	127.0.0.1   laravel-miniblog.com  http://laravel-miniblog.com
 	
 
 	#Adding virtual hosts
@@ -70,9 +71,22 @@
 	DocumentRoot /var/www/html/php-procedural-login
 	Press esc & :wq (write and quit);
 	
+	
+	<VirtualHost *:80>
+	        ServerName laravel-miniblog.com
+        	DocumentRoot /var/www/html/laravel-miniblog/public
+
+              <Directory /var/www/html/laravel-miniblog/public>
+        	 Options +FollowSymlinks
+        	 AllowOverride All
+        	 Require all granted
+             </Directory>
+	</VirtualHost>
+	
 	Enable your virtual host (or) site (phplogin.conf)
 	sudo a2ensite phplogin.conf
-	To activate the new configuration, you need to run: sudo systemctl reload apache2
+	To activate the new configuration, you need to run: 
+	sudo systemctl reload apache2  or sudo service apache2 restart
 	
 	Loaded successfully http://dev.php-login.com/
 	
@@ -80,13 +94,12 @@
 	ServerName dev.laravel8.com
 	ServerAlias www.dev.laravel8.com
 	DocumentRoot /var/www/html/laravel8.8/public
-	--> http://dev.laravel8.com/
 	
 	<Directory /var/www/html/laravel8.8/public>
         Options +FollowSymlinks
         AllowOverride All
         Require all granted
-     </Directory>
+        </Directory>
 --------------------------------------------------------------------------------------
 Protocols include http, https, ftps, mailto and file.
 

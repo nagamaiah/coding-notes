@@ -105,6 +105,13 @@ continue -- skip iteration or go to next iteration
 
 
 
+----------------------------------------------------------------------------------------------------------------------
+		PHP include, require, include_once and require_once
+		
+
+https://stackoverflow.com/questions/2418473/difference-between-require-include-require-once-and-include-once
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 						PHP Functions
@@ -497,7 +504,7 @@ https://www.php.net/manual/en/spl.exceptions.php
 	4.  __NAMESPACE__ is a string that contains the current namespace name
 	5. use --> Aliasing/Importing
 	6. To access built-in fuctions in local(current) namespace from global space use backslash(\).  (Ex : \Exception, new \DateTime(), \PDO )
-	7. SomeClass::class will return the fully qualified name of SomeClass including the namespace. (php magic constant ::class)
+	7. SomeClass::class will return the fully qualified name of SomeClass including the namespace. (php special magic constant ::class)
 	   This feature was implemented in PHP 5.5. It's very useful for 2 reasons. 
 	   You can use the use keyword to resolve your class and you don't need to write the full class name.
 	8. Fallback works for built-in functions and consts. Not for global php Classes.

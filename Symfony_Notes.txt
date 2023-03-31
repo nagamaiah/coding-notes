@@ -1,0 +1,29 @@
+
+Symfony -> Symfony is open source php framework. Its based on MVC design pattern
+
+
+-- Use the symfony binary provided by the Symfony CLI to create new applications:
+https://symfony.com/download
+
+-- setup symfony
+https://symfony.com/doc/5.4/setup.html
+
+
+If you are building a traditional web application:
+symfony new --webapp my_project
+symfony new my_project_directory --version=5.4 --webapp
+
+composer create-project symfony/skeleton:"^5.4" my_project_directory
+cd my_project_directory
+composer require webapp
+
+
+If you are building a microservice, console application or API:
+symfony new my_project
+composer create-project symfony/skeleton:"^5.4" my_project_directory
+
+
+
+
+php bin/console about
+symfony server:start

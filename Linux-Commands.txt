@@ -1,15 +1,4 @@
 
-apache2 server commands
-sudo service apache2 status
-sudo /etc/init.d/apache2 start
-sudo /etc/init.d/apache2 status (or) sudo systemctl status apache2
-sudo /etc/init.d/apache2 stop   
-sudo /etc/init.d/apache2 restart
-
-
-sudo service mysql status
-sudo systemctl status mysql
-
 
 Mysql server username/password
 root/MySql@123
@@ -20,7 +9,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password
 sudo mysqldump -u root -p --all-databases > /home/nagamaiah/Desktop/alldbs.sql
 sudo mysql -u root -p < /home/pradnyankur/Desktop/alldb.sql
 
-sudo chmod 777 /var/www/html -R
+sudo chmod -R 777 /var/www/html 
 
 # Give the web server user ownership of the Laravel files
 RUN chown -R www-data:www-data /var/www/html/
@@ -29,6 +18,51 @@ RUN chown -R www-data:www-data /var/www/html/
 change the ownership to my user instead of root user.
 sudo chown -R $USER:$USER /var/www
 sudo chown -R nagamaiah:nagamaiah /var/www/html    (changes ownership from root user to nagamaiah user)
+
+______________________________________________________________________________________________________________
+/*** To find a file & directory in linux ***/
+
+find /path/ -type f -name file-to-search
+The path can also be / or . which represent `root` and `current` directory, respectively.
+find . -type f -name *.html
+sudo find  /var/www/html -type f -name *.html (file name ends with)
+sudo find  /var/www/html -type f -name *e.blade.php (file name ends with e.blade.php)
+sudo find  /var/www/html -type f -name *.json (with .json extension files)
+sudo find /var/www/html -type f -name *.conf
+sudo find /etc  -type f -name *p.ini  (file ends with p.ini)
+sudo find  /var/www/html -type f -name docker*   (file name starts docker)
+sudo find /etc -type f -name php.ini
+sudo find /etc -type d -name apache* (directory name starts with apache)
+sudo find /etc -type d -name apache2
+sudo find /etc -type d -name php*  (directory name starts with php)
+
+To search for hidden files
+sudo find /etc -type f -name ".*"  (starts with period char)
+sudo find /etc -type f -name ".p*" (hidden file starts with p char)
+
+To search with file sizes
+sudo find /var/www/html -size +10M  (more than 10mb)
+sudo find /var/www/html -size -10M  (less than 10mb)
+sudo find /var/www/html  -type f -size +10M
+
+Gigabytes (GB)	 Megabytes (MB) decimal	 Megabytes (MB) binary
+1 GB	           1,000 MB	             1,024 MB
+
+The smallest unit of binary information, equal to a single 0 or 1
+1 byte = 8 bits
+ 
+G: GigaBytes.
+M: MegaBytes.
+K: KiloBytes
+B: bytes.
+b: bits
+
+Search files by modification time 
+find /path -name "*.txt" -mtime -10 
+-mtime +10 means you are looking for a file modified 10 days ago.
+-mtime -10 means less than 10 days.
+-mtime 10 If you skip + or – it means exactly 
+______________________________________________________________________________________________________________
 
 
 cd /etc/php/8.1/apache2
@@ -78,15 +112,21 @@ root@nagamaiah
 sudo su - nagamaiah
 nagamaiah@nagamaiah
 
+-------------------------------------------------------------------------
+		Symbolic Links in linux
+
+ln -s /path/to/file /path/to/symlink
+ln -s EXISTING_FILE_OR_DIRECTORY SYMLINK_NAME
+
+ln -s /home/nagamaiah/MyFiles/ /home/nagamaiah/Desktop/files
 
 
 
 
-
-----------------------------------
+-------------------------------------------------------------------------
 cp -- Copy
 
-scp -- Secure Copy
+scp -- Secure Copy	
 
 mv -- move
 
@@ -94,26 +134,45 @@ sudo -- SuperUser DO
 	"root" is the actual name of the administrator account. "sudo" is a command which allows ordinary users to perform administrative tasks
 	Sudo stands for SuperUser DO and is used to access restricted files and operations. By default, Linux restricts access to certain parts of 
 	the system preventing sensitive files from being compromised
+	
+	
+Rename Files with the mv Command
+mv [options] [current file name] [new file name]
+mv example1.txt example2.txt
+
+On many Linux distributions, the rename command is not available by default.
+For Ubuntu and Debian, use sudo apt install rename
 
 
 
+_______________________________________________________________________________________________________________________
 
+/*** service vs systemctl commands ***/
 
+1. SysVInit is the classic initialization process in Linux. The initialization process relies on the individual service to install 
+   relevant scripts on the /etc/init.d directory. The service command is used for running init scripts from the terminal.
+	service SCRIPT COMMAND
+	service mysql status
+	/etc/init.d/mysql status
+	service mysql stop
+	service mysql restart
+	/etc/init.d/mysql restart
+	service apache2 status
+	service nginx stop
+	service nginx restart
+	service docker status
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+2. SystemD, on the other hand, is a recent initialization system that aims to replace SysVInit. The systemctl command is the entry 
+   point for users to interact and configures the SystemD.
+	systemctl start nginx
+	systemctl stop nginx
+	systemctl restart nginx 
+	systemctl restart apache2
+	systemctl status  apache2
+	systemctl status docker
+	systemctl restart docker
+	systemctl status mysql
+	
 
 
 
