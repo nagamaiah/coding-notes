@@ -1,5 +1,10 @@
 
 Software Design Patterns ::
+A. Creational
+B. Structural
+D. Behavioral
+
+
 1. Singleton Pattern
 2. Module Pattern
 6. Dependency Injection Pattern (Dependency Injection is implementation of IoC [Inversion of control] principle)

@@ -1,6 +1,7 @@
 						/*** CRONTAB  ***/
 
-
+cronjob : cron is a Linux utility or feature that runs a command or script automatically at a specified time and date
+          A cron job means scheduled task. Cron jobs can be very useful to automate repetitive tasks.
 
 
 usage:  crontab [-u user] file
@@ -10,7 +11,6 @@ usage:  crontab [-u user] file
         -l      (list user's crontab)
         -r      (delete user's crontab)
         -i      (prompt before deleting user's crontab)
-
 
 
 Select an editor.  To change later, run 'select-editor'.
@@ -24,32 +24,90 @@ run as super user -- sudo crontab -e
 change editor -- sudo VISUAL=vi crontab -e
 open vi editor -- sudo VISUAL=vi crontab -e
 
+for specific user 
+sudo crontab -e -u nagamaiah
+sudo crontab -e -u root
+
+cron time settings
+
+m  h  dom mon dow
+*  *   *  *   *
+|  |   |  |   |________________________________________________(day of week (0-6) sun mon tue wed thu fri sat  (0 or 7 for sunday))
+|  |   |  |________________________________________________(month (1-12) or (jan, feb, mar, apr ....dec))
+|  |   |_________________________(day of month 1-31)
+|  |________________(hours 0-23)
+|
+|___________ (minitues 0-59)
+
+
+
+
+field allowed values
+-----          --------------
+minute         0-59
+hour           0-23
+day of month   1-31
+month          0-12 (or names, see below)
+day of week    0-7 (0 or 7 is Sun, or use names)
+                    
+                    
+*  any value
+,  value list separator
+-  range of values
+/  step values
 
 
 */10 * * * * /usr/bin/php /opt/lampp/htdocs/docsmith/utils/cronC2MFetchProduction.php
 */10 * * * * cp /opt/lampp/htdocs/ten.pdf  /opt/lampp/htdocs/docsmith-git
 
+*/1 * * * * echo "From cron file" >> /home/nagamaiah/Desktop/Test/Project/index.txt
+*/5 * * * * sh /home/nagamaiah/Desktop/Test/test.sh
 
 
 
 
+Examples ::
+
+* * * * *     ->  At every minute.
+0 * * * *     ->  At minute 0.  (12:00 pm, 13:00, 14:00.... 23:00pm 12:00am )
+*/59 * * * 0  ->  At every 59th minute on Sunday
+59 * * * 0    ->  At minute 59 on Sunday
+* * 1 1 *     ->  At every minute on day-of-month 1 in January.
+0 12 1 1 *    ->  At 12:00 (noon) on day-of-month 1 in January.
+0 7-18 * * *  ->  At minute 0 past every hour from 7 through 18
 
 
+run five minutes after midnight, every day
+5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out
+
+run at 2:15pm on the first of every month -- output mailed to paul
+15 14 1 * *     $HOME/bin/monthly
+
+run at 10 pm on weekdays, annoy Joe
+0 22 * * 1-5   mail -s "It's 10pm" joe%Joe,%%Where are your kids?%
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+             
 
 http://crontab.org/
 https://crontab.guru/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

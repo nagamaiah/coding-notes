@@ -224,8 +224,12 @@ try {
 
 1. Before laravel6 version php artisan make:auth   cmd will create  a auth system
 2. For laravel6 and laravel7 we have laravel/ui  package for auth. 
+	composer require laravel/ui
+	php artisan ui:auth
 3. After laravel8 version we have free laravel packages Laravel Breeze, Laravel Jetstream, and Laravel Fortify.
-			
+	composer require laravel/breeze
+	php artisan breeze:install
+	npm install && npm run dev
 			
 			
 						

@@ -7,7 +7,6 @@
 -- Composer is strongly inspired by node's npm and ruby's bundler.
 -- Vendor directory where all composer dependencies are installed.
 
-
 -- To quickly install Composer in the current directory
 
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -17,12 +16,10 @@ php -r "unlink('composer-setup.php');"
 
 
 with specific version use following
-
 php composer-setup.php --version=1.0.0-alpha8
 
 Select a specific version channel instead of the default latest stable
 php composer-setup.php --2.2
-
 
 -- Compser can be auto updated to latest stable version using following commands
 composer self-update
@@ -35,22 +32,49 @@ composer self-update --rollback to return to old version
 
 https://stackoverflow.com/questions/24816364/composer-auto-self-update
 
-
 -- To install it manually with specified dir
 sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
 --filename can be any filename you wish (mycomposer, nagcomposer, composeTool)
 
--- To uninstall composer via apt (Advanced Packaging Tool )
+-- To uninstall composer via apt (Advanced Packaging Tool)
 sudo apt-get remove composer -y
+________________________________________________________________________________________________________________________________________
 
+### Manage PHP Project Dependencies with Composer
 
+-- To install a package use composer require
+composer require phpunit/phpunit
+composer require phpunit/phpunit:^9.5 --dev  (v9.6.7 is installed)  ^9.5 means  >=9.5.0 and <10.0.0 (below next major version)
+composer require phpunit/phpunit:~9.5 --dev  (v9.6.7 is installed)  ~9.5 means  >=9.5.0 and <10.0.0 (last digit will go up)
+composer require phpunit/phpunit:~9.5.3 --dev (v9.5.28)  ~9.5.3 means >=9.5.3 and <9.6.0 (last digit will go up. will only update patch version)
+composer require phpunit/phpunit --dev ~9.5.3 
+composer require middlewares/whoops "^0.4"
+composer require psr/log
+composer require psr/log:2.3.*  [2.3.any patch (or) fix version that is available]
 
+-- To remove a package use composer remove
+composer remove phpunit/phpunit --dev   (development package)
+composer remove psr/log
 
+-- Composer install command
+Composer install command will install all the dependencies listed in the composer.lock file. 
+It will install the exact versions of all the dependencies that were previously installed 
+and recorded in the composer.lock file. If there is no composer.lock file present in the project, 
+composer install will create one and install the latest versions of all the dependencies.
 
+-- Composer update command
+Composer update command will update all the dependencies in the composer.json file to their latest versions 
+that match the specified version constraints. If there are no version constraints specified in composer.json, 
+it will update to the latest versions of all the dependencies. Additionally, it will also update the 
+composer.lock file, which records the exact versions of all the dependencies that were installed.
 
-
-
+### Composer version constrains
+-- you install with specific or exact version  2.3.6
+-- you install with wildcard entry  2.6.*  (2.6.any latest patch version that is available)
+-- you can use Tilde (~)  for patch version updates
+-- you can use Caret (^) for patch and minor version updates
+____________________________________________________________________________________________________________________________________________
 
 ### Autoloading Files in PHP
 
@@ -76,7 +100,7 @@ sudo apt-get remove composer -y
 
 
 -- Autoloading with Composer. (Composer Autoloading)
--- Specifically, Composer provides four different methods for autoloading files:
+-- Specifically, Composer provides four autoloading methods to help load classes and functions in your PHP project. 
 	1. files autoloading
 	2. classmap autoloading
 	3. PSR-0 autoloading
@@ -95,7 +119,7 @@ sudo apt-get remove composer -y
 	}
 	1. File autoloading works similarly to include or require statements that allow you to load entire source files.
 	2. All the source files that are referenced with the files directive will be loaded every time your application runs. 
-	     This is useful for loading source files that do not use classes.
+	     This is useful for loading source files that do not use classes. (useful for helper functions file, bootstrap file)
 	3. After you create the composer.json file in your project root with the above contents, you just need to run 
 	  the composer dump-autoload command to create the necessary autoloader files.
 	4. These will be created under the vendor directory. Finally, you need to include the require 'vendor/autoload.php' 
@@ -174,7 +198,6 @@ sudo apt-get remove composer -y
 
 
 
-### Manage PHP Project Dependencies with Composer
 
 
 
