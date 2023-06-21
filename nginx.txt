@@ -1,0 +1,13 @@
+
+
+Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache
+
+
+-- Proxy Server works as a gateway (or) an intermediary server between the end-user and the internet. 
+   It has its own IP address. It separates the client system and web server from the global network.
+-- Reverse proxy protects web servers from attacks and can provide performance and reliability benefits
+-- A reverse proxy acts on behalf of the server, while a proxy acts for the client. 
+
+-- The main difference between NGINX and Apache web servers is that NGINX has event-driven architecture 
+   handling multiple requests within a single thread, while Apache is process-driven creating a thread per 
+   each request. Thus, allowing NGINX to have generally better performance

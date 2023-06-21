@@ -542,6 +542,13 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
     [...]
 	https://www.guru99.com/unions.html
 
+### Mysql Functions
+1. String Functions
+2. Date Time Functions
+3. Aggregate Functions
+4. Math Functions
+5. Window Functions
+
 
 -- CONCAT(str1,str2,...) : Returns the string that results from concatenating the arguments. May have one or more arguments.
    CONCAT() returns NULL if any argument is NULL.
@@ -587,6 +594,11 @@ $result = $mysqli->query($query);
 
 ### Mysql command types
 https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
+DDL -> Data Definition Language (CREATE, DROP, ALTER, TRUNCATE, RENAME)
+DML -> Data Manipulation Language (INSERT, UPDATE, DELETE)
+DQL -> Data Query Language (SELECT)
+DCL -> Data Control Language (GRANT, REVOKE)
+TCL -> Transaction Control Language (COMMIT, ROLLBACK, SAVE POINT)
 
 
 SELECT CURRENT_TIMESTAMP() (or) select NOW();  both same --> 2023-03-24 10:35:43 ;
@@ -594,6 +606,29 @@ select UTC_TIMESTAMP();
 SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP) as GMT_TIME_DIFF;  --> 05:30:00
 select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
 SELECT @@system_time_zone;  --> IST
+
+
+sql complete select query order follows ::
+
+SELECT DISTINCT column, AGG_FUNC(column_or_expression), …
+FROM mytable
+    JOIN another_table
+    ON mytable.column = another_table.column
+    WHERE constraint_expression
+    GROUP BY column
+    HAVING constraint_expression
+    ORDER BY column ASC/DESC
+    LIMIT count OFFSET COUNT;
+
+
+SELECT column_name(s) or expression(s)
+FROM table_name
+JOIN(s) on condition
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s)
+LIMIT offset;
 
 
 sample create table
@@ -658,6 +693,13 @@ select i.title as issue_title,i.description as issue_des,p.title as project_titl
 join project p on p.id = i.project_id where p.id = 3;
 
 
+### Mysql built-in VARIABLES
+1. sql_mode
+2. foreign_key_checks  -- You can enable and disable foreign key checks (0:disable  1:enable) 
+SET foreign_key_checks = 0;
+SET foreign_key_checks = 1;
+
+
 
 
 
@@ -693,6 +735,9 @@ ALTER TABLE testing_table ADD COLUMN age tinyint(3) NOT NULL DEFAULT 1 COMMENT '
 ALTER TABLE testing.testing_table add column `STATUS` ENUM('A', 'D') default 'A' AFTER `H_TYPE`;
 
 ALTER TABLE testing.testing_table ADD COLUMN cart_item_id INT(11) NOT NULL; 
+
+alter table orders add foreign key (customer_id) references customers(id);
+alter table orders drop foreign key orders_ibfk_1;
 ALTER TABLE testing.testing_table ADD CONSTRAINT fk_cart FOREIGN KEY (cart_item_id) REFERENCES cart_items(item_id);
 
 
@@ -731,13 +776,13 @@ ALTER TABLE table_name
 -- DROP COLUMN
 ALTER TABLE testing_table DROP id;
 ALTER TABLE testing_table DROP COLUMN age, DROP COLUMN  STATUS;
+alter table orders drop foreign key orders_ibfk_1;
 
 
 
 -- RENAME COLUMN (from MySQL 8.0)
 ALTER TABLE t1 RENAME COLUMN b TO a
-
-
+alter table customers rename column customerid to customer_id
 
 
 
@@ -776,10 +821,20 @@ https://www.thegeekstuff.com/2008/09/backup-and-restore-mysql-database-using-mys
 
 Export (Backup MySQL database) :  mysqldump -u root -p[root_password] [database_name] > dumpfilename.sql 
 Example : mysqldump -u root -p login_procedural > login_procedural.sql
+	  mysqldump -u root -p college > /home/nagamaiah/db-backups/clz234.sql
+	  mysqldump -hlocalhost  -uroot -pMySql@123 clz > /home/nagamaiah/db-backups/clz888.sql
 
 Import (Restore MySQL database) :  mysql -u root -p[root_password] [database_name] < dumpfilename.sql
 Example : mysql -u root -p login_procedural < /var/www/html/php-procedural-login/login_procedural.sql
+	  mysql -u root -pMySql@123 clz < /home/nagamaiah/db-backups/clz234.sql
+	  mysql -hlocalhost  -uroot -pMySql@123 clz < /home/nagamaiah/db-backups/clz888.sql
+	  mysql -h127.0.0.1  -uroot -pMySql@123 college < /home/nagamaiah/db-backups/clz234.sql
 
+Using mysqladmin command
+mysqladmin -u [UserName] -p[Pasword] create [New_DB_Name]
+mysqladmin -u [Username] -p[Password] drop [DB_Name]
+mysqladmin -u root -p create  college
+mysqladmin -u root -pMySql@123 drop college;
 
 
 

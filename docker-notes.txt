@@ -1,6 +1,9 @@
-
 # install docker on linux (ubuntu)
 https://docs.docker.com/engine/install/ubuntu/
+
+
+https://semaphoreci.com/community/tutorials/dockerizing-a-php-application
+
 
 ##Install using the repository
 sudo apt-get update
@@ -11,15 +14,11 @@ sudo apt-get install \
     lsb-release
     
     
-    
-
 -- After the installation is complete, start the Docker service and enable it to start automatically on boot
 	sudo systemctl start docker
 	sudo systemctl enable docker
 	
 	sudo systemctl status docker
-
-
 
 
 If you want to run docker as non-root user then you need to add it to the docker group.
@@ -32,10 +31,67 @@ Log in to the new docker group (to avoid having to log out / log in again; but i
 $ newgrp docker
 
 
-
-
-
-
 Docker hub
 uname : nagamaiah
 pw : Docker2468
+
+
+https://docs.docker.com/engine/reference/builder/
+https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+
+# to check docker version 
+docker version
+ 
+# to pull a image from docker hub registery
+docker pull phpmyadmin/phpmyadmin
+
+# to run a image to create container
+docker run [image_name or image_id]
+
+# we create our own image using Dockerfile
+# Dockerfile is a text file which contains instructions to create or build a image
+docker build -t image_name .
+
+# docker-compose is a tool to build a image from Dockerfile which contains instructions
+docker-compose up --build
+
+# docker-compose in detach mode
+docker-compose up -d --build
+
+# docker-compose down 
+docker-compose down
+
+# docker-compose down with deleting volumes
+# docker volumes location -> /var/lib/docker/volumes
+docker-compose down -v
+
+# to remove all images and containers
+docker system prune -a
+
+# to show all images
+docker images -a
+
+# to show all containers (exited and up)
+docker ps -a
+
+# docker ps (currently running containers)
+docker ps 
+
+# to remove a container
+docker rm [container_id or container_name]
+
+# to remove a image
+docker rmi [image_id or image_name]
+
+# to inspect a docker running container
+docker inspect [container_id or container_name]
+
+
+
+
+
+
+
+
+
