@@ -114,9 +114,13 @@ nagamaiah@nagamaiah
 
 -------------------------------------------------------------------------
 		Symbolic Links in linux
+1. Symbolic links (also known as soft links) are a type of file in a file system that acts as a pointer to another file or directory.
+2. symbolic link contains a reference to a file or directory. 
 
 ln -s /path/to/file /path/to/symlink
 ln -s EXISTING_FILE_OR_DIRECTORY SYMLINK_NAME
+ln -s <target> <link_name>
+
 
 ln -s /home/nagamaiah/MyFiles/ /home/nagamaiah/Desktop/files
 
@@ -126,7 +130,12 @@ ln -s /home/nagamaiah/MyFiles/ /home/nagamaiah/Desktop/files
 -------------------------------------------------------------------------
 cp -- Copy
 
+cp 
+
 scp -- Secure Copy	
+
+scp files_to_copy username@server_ip:path_on_server
+scp -r ./build/* username@server_ip:/var/www/your_domain/html
 
 mv -- move
 

@@ -4,7 +4,7 @@ The grep command can search for a string or pattern in groups of files.
 grep -> global regular expression print
 
 grep [OPTION...] PATTERNS [FILE...]
-grep [options] [word] [path(or)file]
+grep [options] [word (or) pattern] [path(or)file]
 
 
 Ex : grep -rin employees /var/www/html/laravel8.8/

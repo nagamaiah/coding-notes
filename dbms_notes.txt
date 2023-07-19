@@ -608,8 +608,7 @@ select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
 SELECT @@system_time_zone;  --> IST
 
 
-sql complete select query order follows ::
-
+##sql complete select query order follows ::
 SELECT DISTINCT column, AGG_FUNC(column_or_expression), …
 FROM mytable
     JOIN another_table
@@ -619,7 +618,6 @@ FROM mytable
     HAVING constraint_expression
     ORDER BY column ASC/DESC
     LIMIT count OFFSET COUNT;
-
 
 SELECT column_name(s) or expression(s)
 FROM table_name
@@ -632,7 +630,7 @@ LIMIT offset;
 
 
 sample create table
-CREATE TABLE cart
+CREATE TABLE IF NOT EXISTS cart
 (
     item_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -653,9 +651,7 @@ CREATE TABLE IF NOT EXISTS checklists (
     todo VARCHAR(255) NOT NULL,
     is_completed BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (todo_id , task_id),
-    FOREIGN KEY (task_id)
-        REFERENCES tasks (task_id)
-        ON UPDATE RESTRICT ON DELETE CASCADE
+    FOREIGN KEY (task_id) REFERENCES tasks (task_id) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table project (

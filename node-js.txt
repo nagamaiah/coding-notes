@@ -1,0 +1,18 @@
+
+
+NodeJS : Nodejs provides a javascript runtime environment for js projects
+1. Node.js is an open-source, server-side runtime environment that allows you to run JavaScript code on the server.
+2. It uses the V8 JavaScript engine
+3. Node.js enables developers to build web applications using JavaScript both on the client-side and the server-side.
+4. Asynchronous and Non-blocking: Node.js is built on an event-driven, non-blocking I/O model.
+5. Node.js has a rich ecosystem of packages and libraries available through the npm (Node Package Manager) registry. 
+
+NPM : Node Package Manger
+NPX : Node Package Execute 
+
+
+// npm vs npx
+
+-- npm is used to download JavaScript packages from Node Package Manager, and npx is used to execute JavaScript packages downloaded this way.
+-- NPM is a package manager used to install, delete, and update Javascript packages on your machine.
+-- NPX is a package executer, and it is used to execute javascript packages directly, without installing them.

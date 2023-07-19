@@ -9,7 +9,7 @@ https://symfony.com/download
 https://symfony.com/doc/5.4/setup.html
 
 
-If you are building a traditional web application:
+## If you are building a traditional web application:
 symfony new --webapp my_project
 symfony new my_project_directory --version=5.4 --webapp
 
@@ -18,7 +18,7 @@ cd my_project_directory
 composer require webapp
 
 
-If you are building a microservice, console application or API:
+## If you are building a microservice, console application or API:
 symfony new my_project
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 

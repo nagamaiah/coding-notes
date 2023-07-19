@@ -11,3 +11,66 @@ Nginx is a web server that can also be used as a reverse proxy, load balancer, m
 -- The main difference between NGINX and Apache web servers is that NGINX has event-driven architecture 
    handling multiple requests within a single thread, while Apache is process-driven creating a thread per 
    each request. Thus, allowing NGINX to have generally better performance
+   
+   
+## virtual host config 
+
+-- We need to create a file called myproject.conf in the Nginx configuration directory (/etc/nginx/conf.d/ or /etc/nginx/sites-available/ 
+    depending on your setup).  /etc/nginx/conf.d/myproject.conf
+-- After that we need to enable host config file. If you placed your virtual host configuration file in the /etc/nginx/conf.d/ directory, 
+   it should already be enabled. If you placed it in /etc/nginx/sites-available/, you'll need to create a symbolic link to enable it.
+-- sudo ln -s /etc/nginx/sites-available/myproject.conf /etc/nginx/sites-enabled/
+-- To test configuration and check for any syntax errors
+   sudo nginx -t
+
+-- Restart nginx
+   sudo service nginx restart
+-- Add entry in hosts file
+   /etc/hosts
+
+
+
+
+   server {
+	listen 8080;
+	listen [::]:8080;
+	root /var/www/nginx/php-project;
+	index index.php index.html index.htm index.nginx-debian.html;
+	server_name php-project.local;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+	# pass PHP scripts to FastCGI server
+	
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		
+		fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+	}
+   }
+   
+   
+   server {
+    listen 80;
+    server_name myproject.local;
+    root /var/www/myproject;
+
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock; # Adjust the PHP-FPM socket path if needed
+    	}
+   }
+
+
+
+

@@ -1,0 +1,24 @@
+
+
+
+
+HTML vs JSX
+
+https://www.freecodecamp.org/news/html-vs-jsx-whats-the-difference/
+
+
+Component : A component is a reusable piece of code that describes the UI (User Interface) and behavior of a specific part of web application
+
+
+
+functional components : Functional components are JavaScript functions that return JSX (JavaScript XML) to define the component's UI
+
+
+class components : Class components are JavaScript classes that extend the React.Component class. They have a render method that returns JSX.
+
+
+
+props : Props (properties) are arguments or data that passed to a react component. Props are immutable
+
+
+state : 

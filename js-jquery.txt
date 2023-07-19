@@ -20,3 +20,68 @@ let nodeListSpread = [...myNodeList]
 
 console.log(nodeListArr);
 console.log(nodeListSpread);
+
+
+## Hoisting ::
+1. Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope 
+   (to the top of the current script or the current function).
+2. Hoisting in Javascript is a mechanism in which the variables and function declarations (not initializations) are moved to the top of their scope before 
+   the execution of the code. The function expressions and arrow functions cannot be hoisted. 
+3. Hoisting allows you to use functions and variables before they're declared.
+4. We can stop hoisting using the "use strict" directive at top; JavaScript strict mode does not allow (hoisting) undeclared variables.  
+
+
+
+
+
+// break vs continue
+// break - jump out of loop (or) terminate loop
+// continue - skip the current iteration and continue with next iteration.
+
+
+// prime number - A number which is divisible by itself and 1 is called prime nubmer
+let result = [];
+for(let i=1;i<=100;i++){
+    let count = 0;
+    if(i<2){
+        continue;
+    }
+    for(let j=1;j<=i;j++)
+    {
+        if(i%j == 0){
+            count++
+        }
+    }
+    if(count == 2){
+        result.push(i);
+    }
+}
+console.log(result);
+
+// palidrome number - A number remains the same when its digits are reversed vise versa is called palidrome number.
+// use string reverse and compare.
+
+// armstrong number -  An Armstrong number is a number that is equal to the sum of its own digits raised to the power of the number of digits. 
+// 153 = 1^3+5^3+3^3   //153, 370, 371, 407 
+// 9474 = 9^4+4^4+7^4+4^4
+
+
+
+// event bubbling and event capturing
+
+
+// e.target  vs e.currentTarget
+
+Events are actions that are perfomed by client on DOM elements
+DOM events pass an Event object as an argument to the event handler functions.
+
+
+
+// e.preventDefault vs e.stopPropagation
+
+
+
+
+
+
+

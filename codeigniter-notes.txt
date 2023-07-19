@@ -1,0 +1,31 @@
+
+
+CI - It's a open source PHP framework.
+
+Install using composer 
+
+composer create-project codeigniter4/appstarter project-root
+composer create-project codeigniter4/appstarter:4.3.4 .
+
+
+Directory Structure
+app
+ Config
+ Controllers
+ Database
+ Filters
+ Helpers
+ Language
+ Libraries
+ Models
+ ThirdParty
+ Views
+public
+tests
+writable
+vendor
+
+
+
+laravel vs codeigniter
+https://www.guru99.com/laravel-vs-codeigniter.html

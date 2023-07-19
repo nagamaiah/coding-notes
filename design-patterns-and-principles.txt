@@ -21,31 +21,15 @@ Software Design Principles ::
 a. SOLID Principle
 b. IoC Design Principle
 
-OOPS concepts in PHP ::
-1. Abstraction
-2. Inheritance
-3. Encapsulation
-4. Polymorphism
 
 
-
-
-3. IoC Design Principle
+### IoC Design Principle
 -- The IoC principle helps in designing loosely coupled classes which make them testable, maintainable and extensible.
 
 
 
 
-a. SOLID Principle in OOPS is used to write understandable, flexible and maintainable code.
-	S – Single Responsibility Principle (SRP)
-	O – Open-Close Principle (OCP)
-	L – Liskov Substitution Principle (LSP)
-	I – Interface Segregation Principle (ISP)
-	D – Dependency Inversion Principle (DIP)
 
-D – Dependency Inversion Principle (DIP)
--- The dependency inversion principle, which concerns itself with decoupling dependencies between high-level and low-level layers through 
-   shared abstractions.
 
 
 
@@ -54,6 +38,100 @@ https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-f
 https://www.baeldung.com/java-dependency-inversion-principle#:~:text=The%20Dependency%20Inversion%20Principle%20(DIP,decoupled%2C%20and%20reusable%20software%20components.
 https://www.tutorialsteacher.com/ioc/inversion-of-control
 https://www.pentalog.com/blog/it-development-technology/solid-principles-object-oriented-programming/
+https://stackify.com/solid-design-liskov-substitution-principle/
+---------------------------------------------------------------------------------------------------------
+	--->	SOLID PRINCIPLES    <---
+
+Definition : Solid principles are set of rules (or) standards in OOPS programming that we need follow while writing code or desiging a software.
+Uses : Solid principles makes the code more Understandable or readable, maintainable, testable and extensible.
+
+
+SOLID Principle in OOPS is used to write understandable, flexible and maintainable code.
+	S – Single Responsibility Principle (SRP)
+	O – Open-Closed Principle (OCP)
+	L – Liskov Substitution Principle (LSP)
+	I – Interface Segregation Principle (ISP)
+	D – Dependency Inversion Principle (DIP)
+
+
+### S – Single Responsibility Principle (SRP)
+-- A class or module should have only one responsibility/purpose and only one reason to change.
+-- In laravel form requests, services classes, Model classes.
+
+
+### O – Open-Closed Principle (OCP)
+-- Open-Closed principle states that, Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification
+-- We should not directly modify existing class, we can extend class and define our extra own methods and properties.
+-- OCP is achieved by using inheritance concept. Where extend a class without modifying existing methods and properties.
+
+
+### L – Liskov Substitution Principle (LSP)
+-- The principle defines that objects of a superclass shall be replaceable with objects of its subclasses without breaking the application. 
+   That requires the objects of your subclasses to behave in the same way as the objects of your superclass.
+-- An overridden method of a subclass needs to accept the same input parameter values and return same value as the method of the superclass.
+-- If S is a subtype of T, then objects of T may be replaced with objects of type S without altering any of the desirable
+   properties of the program 
+
+
+### I – Interface Segregation Principle (ISP)
+-- Clients should not be forced to depend upon interfaces that they do not use.
+-- The interface segregation principle states that the interface of a program should be split in a way that the user/client would only 
+   have access to the necessary methods related to their needs.
+
+### D – Dependency Inversion Principle (DIP)
+-- The dependency inversion principle, which concerns itself with decoupling dependencies between high-level and low-level layers through 
+   shared abstractions.
+-- 1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+-- 2. Abstractions should not depend on details. Details should depend on abstractions.
+   
+
+
+   
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+		-->	OOPS concepts in PHP	<--
+		
+-- OOP is programmed in such a way that the users can focus on the object while developing the program and code, but not the procedure. 
+   OOP also focuses on drawing programming close to real life.
+   
+-- CLASS : A class is blueprint or template for creating objects
+
+-- OBJECT : A object is an instance of a class which contains properties and methods. Objects can be related to the entities in real life.
+
+-- Data Members or Member Variables : Variables that are define inside a class which hold data. Once an object is created, member variables are 
+   also referred to as the attributes (or) properties of that object. 
+   
+-- MEMBER FUNCTIONS : Member functions refer to the functions that are defined inside a class and used to access object data. Once an object is created,
+   member functions are also referred to as methods.
+
+-- Abstraction : Abstraction refers to the process of hiding the internal details and complexity of a class and exposing only the essential features. 
+   It allows you to create abstract classes and interfaces. An abstract class cannot be instantiated and serves as a base for derived classes.
+   Interfaces define a contract that classes must implement, specifying the methods they should have.
+   
+-- Encapsulation : Encapsulation refers to the grouping (or) wrapping of related properties and methods within a single class. It allows you to control 
+   the access to the properties and methods of a class by defining their visibility (public, private, or protected). Public properties/methods 
+   can be accessed from anywhere, private properties/methods can only be accessed within the class itself, and protected properties/methods can 
+   be accessed within the class itself and its subclasses.
+
+-- Inheritance : Inheritance is a mechanism that allows you to create a new class (child class) based on an existing class (parent class). 
+   The child class inherits the properties and methods of the parent class, and it can also add new properties and methods or override the 
+   inherited ones. Inheritance promotes code reuse and supports the relationship between classes.
+
+-- Polymorphism : Polymorphism means the ability of an object to take on multiple forms. In PHP, polymorphism is achieved through method overriding 
+   and method overloading. Method overriding allows a subclass to provide a different implementation of a method that is already defined in its 
+   parent class. Method overloading is the ability to define multiple methods with the same name but different parameters in a class.
+   
+
+
+
+
+
 
 
 

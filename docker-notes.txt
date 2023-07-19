@@ -31,9 +31,7 @@ Log in to the new docker group (to avoid having to log out / log in again; but i
 $ newgrp docker
 
 
-Docker hub
-uname : nagamaiah
-pw : Docker2468
+
 
 
 https://docs.docker.com/engine/reference/builder/
