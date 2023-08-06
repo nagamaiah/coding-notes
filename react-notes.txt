@@ -1,4 +1,202 @@
 
+#React : React is js frontend library to build user interfaces. Used for both web and mobile apps. Used for SPA.
+
+#SPA : Single Page Application
+A single page application is a website or web application that dynamically rewrites a current web page with new data 
+from the web server, instead of the default method of a web browser loading entire new pages.
+
+#Component : Component in react is a reusable piece of code that represents a specific part of a web page.
+A component is a reusable piece of code that describes the UI (User Interface) and behavior of a specific part of web application
+
+#Two types of components :
+1. Class components : Class components are JavaScript classes that extend the React.Component class. They have a render method that returns JSX.
+2. Functional Components : Functional components are JavaScript functions that return JSX (JavaScript XML) to define the component's UI
+
+#props : Props (properties) are arguments or data that passed to a react component. Props are immutable
+
+#propTypes : (Define expected types for props and validate props)
+-- propTypes is a feature in React that allows you to define the expected types for the props passed to a component.
+-- It helps in documenting and validating the props to ensure that the component is used correctly and to provide helpful 
+   error messages during development if the props are not of the expected type.
+   
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    isShowContent: PropTypes.bool,
+    content: PropTypes.string
+}
+
+#defaultProps : default props that are provided to component if user doesn't give props to components
+Header.defaultProps = {
+    title: 'Task Tracker',
+    isShowContent: false,
+    content: 'Header content goes here...'
+}
+
+
+#state : State represents the mutable data that belongs to a component. It is managed within the component itself and can be 
+updated using the setState function. When the state changes, React re-renders the component, reflecting the updated state
+
+#context : Context provides a way to pass data through the component tree without having to pass props down manually at every level. 
+React context allows us to pass down and use (consume) data in whatever component we need in our React app without using props.
+
+#ref : ref is a attribute which makes it possible to store a reference to particular DOM nodes or React elements.
+
+
+#JSX : JavaScript XML (or) JavaScript Syntax Extension
+JSX allows developers to write HTML and JavaScript together. We create react components using JSX.
+It helps in creating reusable components, handling events, and managing component state.
+1. We need to return a single parent element in JSX ( <div></div> (or) react fragment : <></>)
+2. We can write JavaScript expression inside jsx using `curly braces` {}
+3. JSX tags can be self-closed in some cases.
+4. In html we use class and for attributes. In JSX we use className and htmlFor
+5. Write all HTML Attributes in camelCase in JSX. Ex : onMouseOVer, onChange, onInput
+6. To define inline styles for JSX, you write it as an object, with the properties in camelCase, 
+   the values in quotes, and then you pass it inline to the JSX.
+
+#Conditional Rendering : 
+1. Ternary Operator (?)
+2. if else 
+3. Element variable
+4. Short Circuit Operator
+
+
+
+
+
+Components in React can be stateful or stateless.
+1. A stateful component declares and manages local state in it.
+2. A stateless component is a pure function that doesn't have a local state and side-effects to manage.
+   A pure function is a function without any side-effects. This means that a function always returns 
+   the same output for the same input.
+
+
+React Hooks : Hooks are JavaScript functions (or) react built-in functions that manage the state's behaviour and side effects by isolating them from a component. With React Hooks, we can isolate stateful logic and side-effects from a functional component. 
+
+React Hooks are introduced in 16.8 version
+#React Hooks Rules
+1. Hooks can only be called inside React function components.
+2. Hooks can only be called at the top level of a component.
+3. Hooks cannot be conditional
+
+
+1. useState : React useState() hook allows us to manage or track state in fuctional component
+-- We initialize our state by calling useState in our function component.
+-- useState accepts an initial state and returns two values:
+      a. The current state.
+      b. A function that updates the state.
+-- Updating Objects and Arrays in State`
+      a. When state is updated, the entire state gets overwritten.
+      b. What if we want to update few properties of objects or few values in arrays not all values ?
+      c. We can use the JavaScript spread operator to help us.
+-- In class components state will be merged with old state
+-- In functional components state will be replaced with current state. You can use spread operator to overcome this.
+
+
+2. useEffect : The useEffect Hook allows you to perform side effects in functional components.
+-- Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+-- useEffect accepts two arguments. The second argument is optional. useEffect(<function>, <dependency>)
+-- It serves same purpose as componentDidMount, componentDidUpdate and componentWillUnmount in React classes, but
+   unified into a single API
+-- By default, React runs the effects after every render - including the first render
+-- No dependency passed:
+   useEffect(() => {
+      //Runs on every render
+   });
+-- An empty array:
+   useEffect(() => {
+      //Runs only on the first render
+   }, []);
+-- Props or state values:
+   useEffect(() => {
+      //Runs on the first render
+      //And any time any dependency value changes
+   }, [prop, state]);
+-- We perform useEffect cleanup by including a return function at the end of the useEffect Hook.
+
+
+
+
+3. useContext : React Context is a way to manage state globally.
+-- https://www.linkedin.com/pulse/what-prop-drilling-how-different-than-context-api-sarala-phuyal
+-- Prop drilling : Passing same data through several nested child components. Because of prop drilling its hard to debug code and 
+   passing data to unnecessary components.
+-- Three ways to avoid prop drilling in React: using useContext, component composition, and the Zustand library for advanced state management.
+-- useContext hook can be used together with the useState Hook to share state between deeply nested components more easily than with 
+   useState alone.
+-- 
+
+
+
+4. useRef
+-- The useRef is a hook that allows to directly create a reference to the DOM element in the functional component.
+-- The useRef returns a mutable ref object.
+-- useRef in react returns a mutable reference object that doesn't trigger re-rendering of the component when they 
+   change and persist throughout their lifetimes
+-- It is commonly used to access or modify the properties of DOM elements, like the value of an input or the scroll position of a container
+-- useRef is used to create a reference object, while ref is used to access and assign DOM nodes or react components 
+   inside the render method to a reference object
+-- 
+
+
+5. useMemo
+
+
+6. useNavigate
+
+7. useReducer
+
+8. useCallback
+
+
+9. useLayoutEffect
+
+
+
+
+# React Routing
+
+-- React route-params(useParams() hook) and query-params(useLocation() hook)
+-- Route params
+   const {id,name} = useParams(); 
+
+
+-- Query Params
+ In basic javascript
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('myParam');
+ In React
+  let location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const page_no = queryParams.get('page_no');
+  
+  
+
+## React Components Life Cycle Methods (Stages)
+1. Mounting
+2. Updating
+3. UnMounting
+-- Component lifecycle methods are methods that get called at different stages of a class component's life cycle.
+-- These life cycle methods are related to only class components
+-- In functional components we hooks instead of life cycle methods
+-- https://www.youtube.com/watch?v=zdrv9XXXDrs
+
+1. Mounting Phase
+-- When a component renders first time then mounting lifecycle methods are called as below
+	a. constructor()
+	b. getDerivedStateFromProps()
+	c. render()
+	d. componentDidMount()
+2. Updating Phase
+-- When a component re-renders then updating lifecycle methods called as below 
+	a. getDerivedStateFromProps()
+	b. shouldComponentUpdate()
+	c. render()
+	d. getSnapshotBeforeUpdat()
+	e. componentDidUpdate()
+3. Unmounting Phase
+-- When a component removed from DOM then unmounting lifecycle methods called
+	a. componentWillUnmount()
+
 
 
 
@@ -7,18 +205,17 @@ HTML vs JSX
 https://www.freecodecamp.org/news/html-vs-jsx-whats-the-difference/
 
 
-Component : A component is a reusable piece of code that describes the UI (User Interface) and behavior of a specific part of web application
+React Hooks
+https://www.freecodecamp.org/news/react-hooks-fundamentals
+https://dev.to/abhisheknaiidu/10-react-hooks-explained-3ino
+
+
+Conditional rendering
+https://www.digitalocean.com/community/tutorials/7-ways-to-implement-conditional-rendering-in-react-applications
 
 
 
-functional components : Functional components are JavaScript functions that return JSX (JavaScript XML) to define the component's UI
+React Interview Questions
+https://github.com/sudheerj/reactjs-interview-questions
 
 
-class components : Class components are JavaScript classes that extend the React.Component class. They have a render method that returns JSX.
-
-
-
-props : Props (properties) are arguments or data that passed to a react component. Props are immutable
-
-
-state : 

@@ -544,10 +544,43 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
 
 ### Mysql Functions
 1. String Functions
+-- CONCAT() - Concatenate two or more strings into a single string
+-- INSTR() - Return the position of the first occurrence of a substring in a string
+-- LENGTH() - Get the length of a string in bytes and in characters
+-- LOWER() - Convert a string to lowercase
+-- UPPER() - Convert a string to uppercase
+-- LTRIM() - Remove all leading spaces from a string
+-- RTRIM() - Remove all trailing spaces from a string
+-- REPLACE() - Search and replace a substring in a string
+
+
 2. Date Time Functions
+-- NOW()
+-- CURRENT_DATE() - Returns the current date
+-- CURRENT_TIME() - Returns the current time
+-- CURRENT_TIMESTAMP - Returns the current date and time
+-- DATEDIFF() - Returns the number of days between two date values
+-- TIMEDIFF() - Returns the difference between two time/datetime expressions
+-- UTC_TIMESTAMP() - Returns the current UTC date and time
+
 3. Aggregate Functions
+-- AVG() - Return the average of non-NULL values.
+-- COUNT() - Return the number of rows in a group, including rows with NULL values.
+-- MIN() - Return the lowest value (minimum) in a set of non-NULL values.
+-- MAX() - Return the highest value (maximum) in a set of non-NULL values.
+-- SUM() - Return the summation of all non-NULL values a set.
+
 4. Math Functions
+-- ABS() - Returns the absolute value of a number
+-- CEIL() - Returns the smallest integer value greater than or equal to the input number (n).
+-- FLOOR() - Returns the largest integer value not greater than the argument
+-- MOD() - Returns the remainder of a number divided by another
+-- ROUND() - Rounds a number to a specified number of decimal places.
+-- TRUNCATE() - Truncates a number to a specified number of decimal places
+
 5. Window Functions
+-- 
+
 
 
 -- CONCAT(str1,str2,...) : Returns the string that results from concatenating the arguments. May have one or more arguments.
@@ -635,7 +668,7 @@ CREATE TABLE IF NOT EXISTS cart
     item_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
-    price DEC(4,2) NOT NULL,
+    price DEC(4,2) NOT NULL,  42.34  45.645
     sales_tax DEC(5,2) NOT NULL DEFAULT 0.1,
     department_id int(11) not null,
     CHECK(quantity > 0),
@@ -645,11 +678,13 @@ CREATE TABLE IF NOT EXISTS cart
     FOREIGN KEY (department_id) REFERENCES departments (department_id)
 );
 
+amount DECIMAL(6,2); -> 9999.99 to -9999.99
+
 CREATE TABLE IF NOT EXISTS checklists (
     todo_id INT AUTO_INCREMENT,
     task_id INT,
     todo VARCHAR(255) NOT NULL,
-    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    is_completed boolean NOT NULL DEFAULT FALSE,
     PRIMARY KEY (todo_id , task_id),
     FOREIGN KEY (task_id) REFERENCES tasks (task_id) ON UPDATE RESTRICT ON DELETE CASCADE
 );
@@ -767,8 +802,6 @@ ALTER TABLE table_name
 
 
 
-
-
 -- DROP COLUMN
 ALTER TABLE testing_table DROP id;
 ALTER TABLE testing_table DROP COLUMN age, DROP COLUMN  STATUS;
@@ -831,6 +864,28 @@ mysqladmin -u [UserName] -p[Pasword] create [New_DB_Name]
 mysqladmin -u [Username] -p[Password] drop [DB_Name]
 mysqladmin -u root -p create  college
 mysqladmin -u root -pMySql@123 drop college;
+
+
+
+### Mysql joins and types
+-- https://www.devart.com/white-papers-landing/types-of-joins-in-mysql.html
+-- A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+-- Types of joins
+	1. Inner Join (or) Join
+	2. Outer Joins
+	   a. left outer join (or) left join
+	   b. right outer join (or) right join
+	3. Full outer join (Inner Joins + remaining from left + remaining right)
+	4. Cross Join
+	5. Self Join
+	6. Natural Join
+
+
+-- In MySQL, there is no direct support for a full outer join. We achieve using left join, right join with UNION clause.
+
+movies (id, name, release_date, budget, language, rating, genre)
+directors (id, name, remuniration )
+actors (id, name, gender, age, remuniration, pan_india_star)
 
 
 

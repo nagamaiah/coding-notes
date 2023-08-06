@@ -56,6 +56,24 @@ git config --global init.defaultBranch <name>
 git branch -m <name>
 
 
+## create a new repository on the command line
+echo "# javascript-coding" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/nagamaiah/javascript-coding.git
+git push -u origin master
+
+
+## push an existing repository from the command line
+git remote add origin https://github.com/nagamaiah/javascript-coding.git
+git branch -M master
+git push -u origin master
+
+
+
+
 ### Git Common Workflow
 # Start a new feature
 git checkout -b new-feature main

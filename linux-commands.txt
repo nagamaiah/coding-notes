@@ -116,6 +116,7 @@ nagamaiah@nagamaiah
 		Symbolic Links in linux
 1. Symbolic links (also known as soft links) are a type of file in a file system that acts as a pointer to another file or directory.
 2. symbolic link contains a reference to a file or directory. 
+3. target and link path are absolute paths.
 
 ln -s /path/to/file /path/to/symlink
 ln -s EXISTING_FILE_OR_DIRECTORY SYMLINK_NAME

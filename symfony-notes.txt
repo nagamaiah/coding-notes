@@ -10,20 +10,235 @@ https://symfony.com/doc/5.4/setup.html
 
 
 ## If you are building a traditional web application:
-symfony new --webapp my_project
+symfony new --webapp my_project  or symfony new --full my_project
 symfony new my_project_directory --version=5.4 --webapp
 
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 cd my_project_directory
-composer require webapp
+composer require webapp	1
+
+(or)
+composer req maker --dev  (or) composer require symfony/maker-bundle --dev
+composer req orm          (or) composer require symfony/orm-pack
+composer req twig	  (or) composer require symfony/twig-bundle
+composer req annotations  (or) composer require doctrine/annotations and composer require sensio/framework-extra-bundle
+composer req form validator (or) composer require symfony/form and composer require symfony/validator
 
 
 ## If you are building a microservice, console application or API:
 symfony new my_project
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 
+symfony console   command will give you all command list
 
-
-
+symfony check:requirements
+php bin/console --version
 php bin/console about
+
 symfony server:start
+symfony open:local
+symfony server:stop
+
+all commands list and details 
+symfony console help
+php bin/console help list
+
+
+php bin/console make:controller TestController
+symfony console make:controller TestController
+
+
+For route config - annotations use
+composer require annotations
+
+If you to use make command, we need MakerBunder 
+composer require symfony/maker-bundle --dev
+composer req maker --dev
+
+
+
+### Template Files in symfony (Twig Template Syntax)  ->  test.html.twig
+Templates in Symfony are created with Twig: a flexible, fast, and secure template engine.
+{{ ... }}, used to display the content of a variable or the result of evaluating an expression;
+{% ... %}, used to run some logic, such as a conditional or a loop;
+{# ... #}, used to add comments
+You can't directly run PHP code inside Twig templates.
+Twig is fast in the prod environment because templates are compiled into PHP and cached automatically
+
+In symfony we can render templates using -> controller, service class, mail, routes
+ -- In controller using AbstractController  $this=->render() method
+ -- In service page injecting Twig\Environment class $this->twig->render()
+ -- We can render static templates directly from a route using special controller  TemplateController
+ Rendering a Template Directly from a Route (config/routes.yml)
+ contactpage: 
+    path: /contact
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: 'pages/contact.html.twig'
+        
+        
+if you we want use $this->render() in controller we need TwigBundle 
+composer require symfony/twig-bundle
+composer req twig
+
+Twig comes with a long list of tags, filters and functions that are available by default.
+Use snake_case for template file name ex: admin/default_theme/blog/index.html.twig
+Use the path() Twig function to link to these pages and pass the route name as the first argument and the route parameters as the optional second argument
+
+link page in twig use path() gives relative path or url() give absolute path functions
+-- {{ path('user_page') }} or  {{ path('blog_post', {slug: post.slug}) }}
+-- {{ url('blog_index') }}
+<li><a href="{{path('test_page')}}">Test Page Relative path</a></li> ->  /test_page
+<li><a href="{{url('test_page')}}">Test Page Absolute Path</a></li>    http://localhost/test_page
+
+If we want asset() function , we need to install symfony/asset package
+asset() function will give relative path. For absolute path use  {{absolute_url(asset('images/leaf.jpg'))}}
+composer require symfony/asset
+<img src="{{asset('images/leaf.jpg')}}" width="280px" height="150px"/>
+
+Symfony's Webpack Encore -> To minify JS and CSS assets
+Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX
+
+The App Global Variable (app variable instance of AppVariable available in every twig template by default )
+app.debug, app.environment, app.session, app.flashes, app.user, app.request
+
+dump data in twig template
+{% dump articles %} or {{ dump(article) }}
+
+loop through array - for...in loop
+{% for article in articles %}
+    <a href="/article/{{ article.slug }}">
+        {{ article.title }}
+    </a>
+{% endfor %}
+
+
+-- Include a Template
+{{ include('layouts/header.html.twig') }}
+{{ include('blog/_user_profile.html.twig') }}
+
+-- Extend a template
+{% extends 'layouts/base.html.twig' %}
+
+
+
+// Symfony Routes
+-- Routes can be configured in YAML, XML, PHP or using attributes or annotations.
+-- To show all routes in apps
+	php bin/console debug:router
+
+
+set multiple route methods (HTTP methods)
+/**
+ * @Route(
+ *     "/index",
+ *     name="index_default",
+ *     methods="GET|POST"
+ * )
+ * /
+ 
+ /**
+ * @Route(
+ *     "/index/{id}",
+ *     name="index",
+ *     requirements={
+ *          "id": "\d+"
+ *     },
+ *     defaults={"id" = null}
+ * )
+ *
+ * @Method({"GET", "POST"})
+ *
+ * @return Response
+ */
+
+
+// Symfony Controller
+// returning response   new Response('string|bool|html|int');
+// returning json respone $this->json(['name'=>'suraj',"age"=>30])
+// generate a URL with no route arguments
+   $signUpPage = $this->generateUrl('sign_up');
+// generate a URL with route arguments
+	$userProfilePage = $this->generateUrl('user_profile', [
+	    'username' => $user->getUserIdentifier(),
+	]);
+
+
+// Symfony request object
+// Symfony\Component\HttpFoundation\Request;
+
+$request->getMethod();    // e.g. GET, POST, PUT, DELETE or HEAD
+
+$request->query->get('id');
+$request->request->get('category', 'default category');
+
+// retrieves $_SERVER variables
+$request->server->get('HTTP_HOST');
+
+// retrieves an instance of UploadedFile identified by "attachment"
+$request->files->get('attachment');
+
+// retrieves a $_COOKIE value
+$request->cookies->get('PHPSESSID');
+
+// retrieves an HTTP request header, with normalized, lowercase keys
+$request->headers->get('host');
+$request->headers->get('content-type');
+
+
+
+
+
+
+// Symfony Flex
+-- Symfony Flex, a tool to simplify the installation/removal of packages in Symfony applications. 
+-- Technically speaking, Symfony Flex is a composer plugin that is installed by default when creating a new Symfony application
+-- Symfony Flex modifies the behavior of the require, update, and remove Composer commands to provide advanced features.
+-- Symfony packages/bundles define "recipes", which are a set of automated instructions to install and enable packages into Symfony applications. 
+   Flex keeps track of the recipes it installed in a symfony.lock file
+-- Examples
+	composer req orm (or) composer require symfony/orm-pack
+	composer req annotations  (or) composer require doctrine/annotations and composer require sensio/framework-extra-bundle
+	composer req form validator (or) composer require symfony/form and composer require symfony/validator
+	
+
+
+
+// Doctrine 
+-- The Doctrine is a set of PHP libraries primarily focused on providing persistence services and related functionality
+-- In symfony, Doctrine is the set of libraries that works with or manages databases.
+-- 
+
+
+
+// create database using doctrine
+symfony console doctrine:database:create
+if doctine not found run ->   composer require symfony/orm-pack  or composer req orm
+
+// to show all symfony commands
+symfony console list doctrine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
