@@ -49,6 +49,10 @@
 
 -------------------------------------------------------------------------------------
 
+-- To check apache2 installed version
+    sudo apache2ctl -v
+    systemctl is-enabled apache2
+
 /*** Add the virutal hosts and domains  ***/ (Linux(Ubuntu) OS)
 	
 	#Adding domains in your local system hosts file

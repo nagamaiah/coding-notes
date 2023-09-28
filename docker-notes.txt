@@ -30,12 +30,88 @@ $ sudo usermod -aG docker $USER
 Log in to the new docker group (to avoid having to log out / log in again; but if not enough, try to reboot):
 $ newgrp docker
 
-
-
-
-
 https://docs.docker.com/engine/reference/builder/
 https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+----------------------------------------------------------------------------------------------------------------------------
+				Docker Concepts
+
+## Virtualization
+-- Virtualization means to run multiple os on single physical system or computer
+-- We can achieve virtualization using software like vmware and virtual box.
+-- VMware Fusion, Parallels Desktop, Oracle VM Virtual Box and VMware Workstation are the top four software that is really good for virtualization
+-- We can run multiple VM's on single computer or hardware using HYPERVISOR (vmware or virtual box etc)
+-- Every vm is INDEPENDENT in virtualization. Each vm has different ip and credentials
+-- We can run multiple applications(mysql, php, redis etc.,) on a single VM 	
+-- In virtualization concept space is wasted and vm's are very slow
+-- VM's takes time to boot and restart
+	
+	COMPUTER  --> HARDWARE  -->  System HOST OS  -->  HYPERVISOR  -->  MULTIPLE VM'S(GUEST OS)  --> APPS
+
+## Docker
+-- To overcome virtualization concept we have containerazation system.
+-- Docker is a container management system. Container management is a thin virtualization
+-- Docker is an open source platform that enables developers to build, deploy, run, update and manage containers
+-- Container has only one application. It contains only lib and binary files.  It will take the required files from host OS. 
+   Container has no OS. It will use kernel of host os.
+-- In dockerization space is not wasted because contaners take only required files and container are very fast. Fast performing.
+-- Container has a layered architecture. Docker Container is build up of docker images.
+-- We can run only one application in a container
+-- Containers take very less time to boot and restart
+
+	COMPUTER --> HARDWARE --> System HOST OS --> DOCKER ENGINE  --> CONTAINERS --> APPS 
+
+-- Docker container is built using docker images
+-- Docker image is a source of container. We can build docker image using Dockerfile or we can download from dockerhub repository
+-- Docker is a tool that is used to automate the deployment of applications in lightweight containers so that applications can work 
+   efficiently in different environments in isolation
+-- All the dependencies for an application are bundled in the container. This means they can be easily moved between development, 
+   test, and production environments.
+   
+
+## Docker Engine
+-- The software that hosts the containers is called Docker Engine.
+-- 
+
+
+
+
+## Docker Compose
+-- Docker Compose is a tool for defining and running multi-container Docker applications. It uses YAML files to configure 
+   the application's services and performs the creation and start-up process of all the containers with a single command.
+-- The docker-compose CLI utility allows users to run commands on multiple containers at once, examples building images, 
+   scaling containers, running containers that were stopped, and more.
+-- The docker-compose.yml file is used to define an application's services and includes various configuration options. 
+
+
+## Docker Volume
+-- Docker Volume facilitates the independent persistence of data, allowing data to remain even after the container is deleted or re-created
+
+
+
+
+## Docker Swarm
+-- Docker Swarm provides native clustering functionality for Docker containers, which turns a group of Docker engines into a single virtual Docker engine
+
+
+
+
+
+## Volume Mapping (or) Bind Mounts
+
+
+
+
+
+
+## Port Forwarding (or) Port Mapping
+
+
+
+
+
+
+
 
 
 # to check docker version 
@@ -44,12 +120,15 @@ docker version
 # to pull a image from docker hub registery
 docker pull phpmyadmin/phpmyadmin
 
-# to run a image to create container
-docker run [image_name or image_id]
-
 # we create our own image using Dockerfile
 # Dockerfile is a text file which contains instructions to create or build a image
 docker build -t image_name .
+
+# to run a image to create container
+docker run [image_name or image_id]	
+
+# To run a image in deamon with port forwarding
+docker run -v -d -p 80:8080 your_image_name
 
 # docker-compose is a tool to build a image from Dockerfile which contains instructions
 docker-compose up --build
@@ -84,6 +163,19 @@ docker rmi [image_id or image_name]
 
 # to inspect a docker running container
 docker inspect [container_id or container_name]
+
+# to login to docker container
+docker exec -it (container_id) /bin/bash
+
+
+# To dump a sql file from db docker container 
+docker exec -it db  mysqldump -ularavel5 --password=secret laravel5 > laravel5.sql
+
+
+
+
+
+
 
 
 

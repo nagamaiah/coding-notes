@@ -7,6 +7,15 @@ Install using composer
 composer create-project codeigniter4/appstarter project-root
 composer create-project codeigniter4/appstarter:4.3.4 .
 
+CodeIgniter 4 requires PHP version 7.4 or higher.
+
+php extensions need to be enabled
+extension=intl.dll
+extension=mbstring.dll
+
+start local server
+php spark serve
+
 
 Directory Structure
 app
@@ -25,7 +34,43 @@ tests
 writable
 vendor
 
+base_url()  -> http://localhost:8080/
+site_url()  -> http://localhost:8080/index.php
+
+
+php spark make:model Product
+php spark make:controller ProductController
+
+
+php spark db:create ci4_project
+	
+php spark make:migration Product
+php spark make:migration create_products_table
+
+php spark migrate
+
+
+https://larachamp.com/how-to-create-migrations-in-codeigniter4/
+
+https://programmingfields.com/how-to-upload-image-and-file-in-codeigniter-4-with-validation/
+
+
+
+Sales tax applies before discounts. Discounts do not apply to sales tax.
+
+https://stackoverflow.com/questions/34525670/how-to-make-purely-client-side-shopping-cart-calculation-in-jquery
+
+https://www.codeproject.com/Questions/5359550/Calculating-total-and-discount-in-shopping-cart
+
+https://codereview.stackexchange.com/questions/171651/jquery-code-to-total-the-items-in-a-shopping-cart
 
 
 laravel vs codeigniter
 https://www.guru99.com/laravel-vs-codeigniter.html
+
+https://github.com/nagamaiah/ci4-project.git
+
+
+
+------------------------
+

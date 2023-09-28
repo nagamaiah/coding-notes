@@ -15,7 +15,7 @@ symfony new my_project_directory --version=5.4 --webapp
 
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 cd my_project_directory
-composer require webapp	1
+composer require webapp
 
 (or)
 composer req maker --dev  (or) composer require symfony/maker-bundle --dev
@@ -51,16 +51,18 @@ symfony console make:controller TestController
 For route config - annotations use
 composer require annotations
 
-If you to use make command, we need MakerBunder 
+If you want to use make command, we need MakerBunder 
 composer require symfony/maker-bundle --dev
 composer req maker --dev
 
 
-
+----------------------------------------------------------------------------------------------------------------
+				Symfony Templates (Twig Files)		
+		
 ### Template Files in symfony (Twig Template Syntax)  ->  test.html.twig
 Templates in Symfony are created with Twig: a flexible, fast, and secure template engine.
 {{ ... }}, used to display the content of a variable or the result of evaluating an expression;
-{% ... %}, used to run some logic, such as a conditional or a loop;
+{% ... %}, used to run some logic, such as a conditional or a loop or set variables;
 {# ... #}, used to add comments
 You can't directly run PHP code inside Twig templates.
 Twig is fast in the prod environment because templates are compiled into PHP and cached automatically
@@ -84,6 +86,10 @@ composer req twig
 Twig comes with a long list of tags, filters and functions that are available by default.
 Use snake_case for template file name ex: admin/default_theme/blog/index.html.twig
 Use the path() Twig function to link to these pages and pass the route name as the first argument and the route parameters as the optional second argument
+tags : block, endblock , for, if, endif, set , extends, include   (https://twig.symfony.com/doc/3.x/tags/index.html)
+filters : date, filter, format, length, lower, upper, trim, round, json_encode, striptags   (https://twig.symfony.com/doc/3.x/filters/index.html)
+functions : block, date, dump, include, parent, min, max    (https://twig.symfony.com/doc/3.x/functions/index.html)
+
 
 link page in twig use path() gives relative path or url() give absolute path functions
 -- {{ path('user_page') }} or  {{ path('blog_post', {slug: post.slug}) }}
@@ -99,8 +105,16 @@ composer require symfony/asset
 Symfony's Webpack Encore -> To minify JS and CSS assets
 Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX
 
+
+
 The App Global Variable (app variable instance of AppVariable available in every twig template by default )
-app.debug, app.environment, app.session, app.flashes, app.user, app.request
+app.debug
+app.environment
+app.session
+app.flashes
+app.user
+app.request
+
 
 dump data in twig template
 {% dump articles %} or {{ dump(article) }}
@@ -112,6 +126,17 @@ loop through array - for...in loop
     </a>
 {% endfor %}
 
+{% set env = app.environment %}
+{% set user = app.user %}
+{% set username = app.session.get('username') %}
+
+{% set nubmers = [2,4,5,6,7,8,9] %}
+
+{% for ket, value in numbers %}
+    {{ key }} -- {{ value }}
+{% endfor %}
+
+
 
 -- Include a Template
 {{ include('layouts/header.html.twig') }}
@@ -120,6 +145,9 @@ loop through array - for...in loop
 -- Extend a template
 {% extends 'layouts/base.html.twig' %}
 
+
+----------------------------------------------------------------------------------------------------------------
+				Symfony Routes	
 
 
 // Symfony Routes
@@ -153,6 +181,13 @@ set multiple route methods (HTTP methods)
  */
 
 
+
+
+
+----------------------------------------------------------------------------------------------------------------
+				Symfony Controllers	
+				
+				
 // Symfony Controller
 // returning response   new Response('string|bool|html|int');
 // returning json respone $this->json(['name'=>'suraj',"age"=>30])
@@ -187,6 +222,18 @@ $request->headers->get('content-type');
 
 
 
+----------------------------------------------------------------------------------------------------------------
+				Symfony Entity
+				
+				
+				
+				
+				
+				
+
+
+----------------------------------------------------------------------------------------------------------------
+				Symfony Flex
 
 
 
@@ -203,6 +250,8 @@ $request->headers->get('content-type');
 	
 
 
+----------------------------------------------------------------------------------------------------------------
+				Symfony Doctrine
 
 // Doctrine 
 -- The Doctrine is a set of PHP libraries primarily focused on providing persistence services and related functionality

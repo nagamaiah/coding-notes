@@ -82,6 +82,46 @@
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Service Container
+			
+Binding Interface - you can bind specific interface and it's implementation into container and resolve it as interface. This is useful for test-friendly code and flexibility - cause you can easily change implementation in one place without changing interface. (For example use some Countable interface everywhere as a target to resolve from container but receive it's implementation instead.)
+Dependency Injection - if you will bind class/interface and ask it as a dependecy in some method/constructor - Laravel will automatically insert it from container for you.
+Conditional Binding - you can bind interface but depending on the situation resolve different implementations.
+Singleton - you can bind some shared instance of an object.
+Resolving Event - each time container resolves smth - it raises an event you can subscribe in other places of your project.
+	
+			
+			
+			
+			
+			
+			
+			
+			
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel View Blade Files
+
+## Laravel View Components
+-- to make a view component 
+	php artisan make:component Base
+-- Created file path
+	app/View/Components/Base.php and resources/views/components/base.blade.php
+   php artisan make:component Js/Library/Files
+   app/View/Component/Js/Library/Files.php  and resources/views/components/js/library/files.blade.php
+
+-- php artisan make:controller UserController --invokable
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Mail Sending
 			
 -- Laravel provides a clean, simple email API powered by the popular SwiftMailer library.
@@ -220,7 +260,7 @@ try {
 			
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-			Laravel Authentication
+			#Laravel Web Authentication
 
 1. Before laravel6 version php artisan make:auth   cmd will create  a auth system
 2. For laravel6 and laravel7 we have laravel/ui  package for auth. 
@@ -232,13 +272,216 @@ try {
 	npm install && npm run dev
 			
 			
+			#Laravel Authentication Methods
+-- We have Auth facade -> Illuminate\Support\Facades\Auth;
+-- Login attempt or authenticate user
+	Auth::attempt([$request->only(['email', 'password'])]);
+	auth()->attempt(request()->only(['email', 'password'])]);
+	if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
+	    return redirect('/dashboard');
+	}
+				
+-- Retrieving The Authenticated User
+	Auth::user()  or  auth()->user()
+	Auth::id()    or  auth()->id()
+	Auth::user()->id or auth()->user()->id
+	Auth::user()->email or auth()->user()->email
+  Alternatively, once a user is authenticated, you may access the authenticated user via an Illuminate\Http\Request instance.
+  	$user = $request->user();
+  	$user = request()->user();
+  	
+-- Determining If The Current User Is Authenticated
+	if (Auth::check()) {
+	    // The user is logged in...
+	}
+	if(auth->check())
+	{
+	    // code goes here...
+	}
+-- Logout methods
+	Auth::logout()  or auth()->logout();
+
+
+-- Protecting routes with guards ->  auth, auth:api, auth:admin, auth:sanctum
+	Route::get('/flights', function () {
+	    // Only authenticated users may access this route...
+	})->middleware('auth:api');
+	Route::get('/flights', function () {
+	    // Only authenticated users may access this route...
+	})->middleware('auth:admin');
+	Route::middleware(['auth', 'auth:admin'])->group(function(){
+		// Routes goes here...
+	});
+   In controller __consturct() method we can check auth middleware
+   	public function __construct()
+   	{
+   	   $this->middleware('auth);
+   	}
+
+
+			
+			
+			#Laravel Api Auth with laravel/passport
+
+-- composer require laravel/passport
+-- php artisan migrate
+-- php artisan passport:install
+-- In your User model (usually located at app/User.php), you should implement the Laravel\Passport\HasApiTokens trait
+-- In your config/auth.php configuration file, set the api guard's driver to passport
+-- In your routes/api.php file, define the routes that you want to protect with Passport's authentication:
+	Route::middleware('auth:api')->group(function () {
+	    // Your API routes go here
+	});
+-- Generate a user token
+	$user = User::find(4)  or $user = User::create(['username'=>'tester234', 'password'=>'Test1234'])
+	$token = $user->createToken('passport-api-auth-token')->accessToken;
+--  middleware check
+	->middleware('auth:api')
+-- testing with postman
+   url  ->  http://local.laravel58.com:8181/api/user
+   headers ->  Accept :  application/json
+   	       Authorization : Bearer --Token here--
+-- We need to update package lcobucci/jwt  for token server error
+    composer require lcobucci/jwt:3.3.3
+    composer update --with-all-dependencies
+    
+--  docker exec -it db  mysqldump -ularavel5 --password=secret laravel5 > laravel5.sql
+   	
+	Personal access client created successfully.
+	Client ID: 3
+	Client secret: hzqoWkaSPuDUy9VPL3qy357qpGyPAuDDZkfQoqe4
+	Password grant client created successfully.
+	Client ID: 4
+	Client secret: q1uzEqc3YBGbEnVOX38NaCLfkcKjQyjZXpaomiNo
+			
+			
+			
+			
+			#Laravel Api Auth with laravel/sanctum
+			
+			
+-- Generate a user token
+	$user = User::find(4)  or $user = User::create(['username'=>'tester234', 'password'=>'Test1234'])
+	$token = $user->createToken('sanctum-api-auth-token')->plainTextToken;			
+--  middleware check
+	->middleware('auth:sanctum')			
+-- Revoking Tokens using Laravel\Sanctum\HasApiTokens trait
+	// Revoke all tokens...
+	$user->tokens()->delete();
+ 
+	// Revoke the token that was used to authenticate the current request...
+	$request->user()->currentAccessToken()->delete();
+	 
+	// Revoke a specific token...
+	$user->tokens()->where('id', $tokenId)->delete();
+
+			
 						
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Validation
 			
+
+	dd($request->only(['email','password','name']));
+	dd($request->except(['id','token']));
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|min:4'
+        ]);
+        
+        validator(request()->all(), [
+           'email' => ['required', 'email'],
+           'password' => ['required']
+        ])->validate();
+
+	// Using Validator facade
+	Validator::make($request->all(), [
+	    'title' => 'required|unique:posts|max:255',
+	    'body' => 'required',
+	])->validate();
+
+	
+	// Using form request class
+	php artisan make:request StorePostRequest
+	placed in the app/Http/Requests  and container  authorize() and rules() method
+	public function rules(): array
+	{
+	    return [
+		'title' => 'required|unique:posts|max:255',
+		'body' => 'required',
+	    ];
+	}
+	public function store(StorePostRequest $request): RedirectResponse
+	{
+	    // Retrieve the validated input data...
+	    $validated = $request->validated();
+	 
+	    // Retrieve a portion of the validated input data...
+	    $validated = $request->safe()->only(['name', 'email']);
+	    $validated = $request->safe()->except(['name', 'email']);
+	 
+	    // Store the blog post...
+	 
+	    return redirect('/posts');
+	}
+	
+	// Customizing The Error Messages
+	public function messages(): array
+	{
+	    return [
+		'title.required' => 'A title is required',
+		'body.required' => 'A message is required',
+	    ];
+	}
+	
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        
+        		
+-----------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Routes
+
+# Route Model binding
+-- Laravel route model binding provides a convenient way to automatically inject the model instances directly into your routes
+-- you can inject the entire User model instance that matches the given ID
+	// Route definition...
+	Route::get('/users/{user}', [UserController::class, 'show']);
+	 
+	// Controller method definition...
+	public function show(User $user)
+	{
+	    return view('user.profile', ['user' => $user]);
+	}	
+-- {user} URI segment matches the $user variable in the controller which contains an App\Models\User type-hint
+
+# Route Fallback
+-- If a page not found in your laravel project then we can set a fallback route with a custom page
+	Route::fallback(FallBackController::class);
+	
+	class FallBackController extends Controller {
+		public function __invoke()
+		{
+		   return view('your_custom_404_page');
+		}
+	}
 			
 			
+# Reverse Routing --  https://www.devstringx.com/reverse-routing-in-laravel
+-- In Laravel, reverse routing refers to the process of generating URLs based on named routes defined in the application. 
+-- This can be useful when you want to generate URLs dynamically in your views or controllers, rather than hardcoding them.			
+
+
+
+
+
+
+
+			
+						
 
 			
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -254,15 +497,42 @@ Migrations are like version control for your database, allowing your team to eas
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 			Laravel Controllers
+			
 -- Laravel invokable controller -> Single Action Controller
 -- A controller for a single action, action may call another methods from same controller
+-- FallBackController also used __invoke() magic method
 
 
+-- The __invoke() magic method is automatically called when an object called as a function.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Contracts
+-- Laravel's Contracts are a set of interfaces that define the core services provided by the framework. Which will be implemented by
+   laravel core service and respository classes
+-- https://www.developer.com/design/the-repository-pattern-in-php/			
 			
 			
 			
 			
 			
+			
+						
+			
+-------------------------------------------------------------------------------------------------------------------------------------------
+			Laravel Docker && Laravel Sail
+
+
+docker exec -it laravel-app composer create-project --prefer-dist laravel/laravel:5.* .
+docker exec -it laravel-app ls -la
+docker exec -it laravel-app chmod -R 777 .
+docker exec -it laravel-app php artisan --version
+docker exec -it laravel-app composer update --with-all-dependencies
+docker exec -it laravel-app php artisan optimize	
+docker exec -it laravel-app php artisan migrate:rollback		
+docker exec -it db  mysqldump -ularavel5 --password=secret laravel5 > laravel5.sql
+
+
 
 						
 -----------------------------------------------------------------------------------------------------------------------------------------

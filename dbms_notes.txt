@@ -4,15 +4,8 @@ https://www.mysqltutorial.org/mysql-basics/
 
 
 https://www.scaler.com/topics/dbms/
-https://www.geeksforgeeks.org/relational-model-in-dbms/
-https://www.scaler.com/topics/dbms/relational-model-in-dbms/
 https://www.scaler.com/topics/dbms/joins-in-dbms/ -- joins in dbms
 https://www.scaler.com/topics/sql/cascade-in-sql/  -- on delete/update cascade
-https://vertabelo.com/blog/database-index-types/
-https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
-
-https://www.educba.com/data-science/data-science-tutorials/mysql-tutorial/
-https://www.mysqltutorial.org/mysql-basics/
 https://stackoverflow.com/questions/409286/should-i-use-the-datetime-or-timestamp-data-type-in-mysql
 
 -- Data -> Information or any fact that can be recorded.
@@ -136,12 +129,6 @@ Types of SQL Constraints
 		  This way, if there is no value inserted for that column explicitly, the database engine 
 		  can always refer to the default value specified and insert that in the column.
 7. INDEX --  It is used to create index which helps to retrieve data from the database quickly.
-
-
-
-
-
-
 
 
 
@@ -623,12 +610,17 @@ $query = "update employee set dept = replace(dept,'mec','mechanical') where dept
 $result = $mysqli->query($query);
 
 
+timestamp vs datetime
+timestamp -- Timestamps in MySQL are generally used to track changes to records, and are often updated every time the record is changed
+datetime -- If you want to store a specific (custom) value you should use a datetime field.
+DATETIME does not support timezone information, while TIMESTAMP can store timezone information. This means that if you need to store date and time values with timezone information, TIMESTAMP would be the better choice.
+In terms of performance, TIMESTAMP is generally faster than DATETIME.  timestamp takes less bytes;
 
 
 ### Mysql command types
 https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
 DDL -> Data Definition Language (CREATE, DROP, ALTER, TRUNCATE, RENAME)
-DML -> Data Manipulation Language (INSERT, UPDATE, DELETE)
+DML -> Data Manipulation Language (INSERT, UPDATE, DELETE) 
 DQL -> Data Query Language (SELECT)
 DCL -> Data Control Language (GRANT, REVOKE)
 TCL -> Transaction Control Language (COMMIT, ROLLBACK, SAVE POINT)
@@ -640,6 +632,8 @@ SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP) as GMT_TIME_DIFF;  --> 05:30:00
 select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
 SELECT @@system_time_zone;  --> IST
 
+dec(p,d) -> https://www.mysqltutorial.org/mysql-decimal/
+ALTER TABLE materials MODIFY cost DECIMAL(19,4) zerofill;
 
 ##sql complete select query order follows ::
 SELECT DISTINCT column, AGG_FUNC(column_or_expression), …
@@ -668,8 +662,8 @@ CREATE TABLE IF NOT EXISTS cart
     item_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
-    price DEC(4,2) NOT NULL,  42.34  45.645
-    sales_tax DEC(5,2) NOT NULL DEFAULT 0.1,
+    price DEC(4,2) NOT NULL,  42.34  45.64
+    sales_tax DEC(5,2) NOT NULL DEFAULT 0.1,   345.20
     department_id int(11) not null,
     CHECK(quantity > 0),
     CHECK(sales_tax >= 0),
@@ -729,9 +723,6 @@ join project p on p.id = i.project_id where p.id = 3;
 2. foreign_key_checks  -- You can enable and disable foreign key checks (0:disable  1:enable) 
 SET foreign_key_checks = 0;
 SET foreign_key_checks = 1;
-
-
-
 
 
 ### Add and Change schema column.
@@ -866,6 +857,48 @@ mysqladmin -u root -p create  college
 mysqladmin -u root -pMySql@123 drop college;
 
 
+-----------------------------------------------------------------------------------
+
+
+### Mysql users and authentication
+-- As of MySQL 8.0.34, the mysql_native_password authentication plugin is deprecated and subject to removal in a future version of MySQL.
+-- In MySQL 8.0, `caching_sha2_password` is the default authentication plugin rather than mysql_native_password.
+-- The server-side caching_sha2_password plugin is built into the server and it does not need to be loaded explicitly.
+
+-- The default authentication plugin is defined by the default_authentication_plugin system variable. 
+   We can use the SHOW VARIABLES statement to determine which authentication plugin is default.
+       SHOW VARIABLES LIKE 'default_authentication_plugin';
+
+-- The default authentication plugin can be changed in MySQL configuration file. After that, MySQL server must be restarted.
+    default_authentication_plugin=mysql_native_password
+    
+-- The authentication plugin which will be used to authenticate the user is stored in the mysql.user system table.
+     SELECT user, host, plugin, authentication_string FROM mysql.user;
+ 
+-- create and update users & password
+	CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'pwd123';
+	CREATE USER 'myuser'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'pwd123';
+	ALTER USER 'myuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'psw123';
+	create user 'MySql'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'MySql@123';
+ 
+ 
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_secure_password';
+
+CREATE USER 'magento2'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON *.* TO 'magento2'@'localhost' WITH GRANT OPTION;
+
+
+-- To reload the grant tables in MySQL
+	FLUSH PRIVILEGES;
+
+-- 
+
+https://lindevs.com/change-default-authentication-plugin-in-mysql
+
+----------------------------------------------------------------------------------------
+
 
 ### Mysql joins and types
 -- https://www.devart.com/white-papers-landing/types-of-joins-in-mysql.html
@@ -887,15 +920,27 @@ movies (id, name, release_date, budget, language, rating, genre)
 directors (id, name, remuniration )
 actors (id, name, gender, age, remuniration, pan_india_star)
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 ### Mysql storage engines and types
 -- Database engines are MySQL components that can handle SQL operations like create, read, update data from a database. There are two types of engines in 
    MySQL:  transactional and non-transactional. `InnoDB` is the default engine for MySQL 5.5 and above versions
+   
+-- MyISAM : 
+	 It is the default engine for MySQL DBMS versions prior to 5.5. MyISAM is a high-speed storage and retrieval storage engine. 
+	 It doesn’t support transactions.
+-- InnoDB : 
+	InnoDB is a storage engine for DBMS MySQL and MariaDB.It is the default storage engine for MySQL versions 5.5 and higher. 
+	It replaced MyISAM as the default engine.
+-- MEMEORY : 
+	It is considered to be the fastest engine used to usually create temporary tables in memory (also known as HEAP). 
+	Thus data is lost when the database is restarted.
+-- CSV :
+	It is used to store CSV format in a text file. It is always compiled into the MySQL server. 
+	It is lightweight and can be easily imported into spreadsheet programs.
 
 
 https://www.geeksforgeeks.org/what-are-the-different-mysql-database-engines/
-
 
 
 
@@ -904,14 +949,86 @@ https://www.guru99.com/mariadb-vs-mysql.html
 
 
 
-
-
-
 -- Types of mysql upgrade
 1. Inplace-Upgrade
 Over writing with latest sql version.
 2. Side By Side
 BACKUP(export) db from old sql server and RESTORE(import) in new sql server. And connect to new server
+
+
+Crack Concepts ::
+
+https://www.youtube.com/watch?v=RZc4QSRRk98
+
+https://www.youtube.com/watch?v=s1QkS4PfiFg
+
+
+create table table_two (
+    id int not null auto_increment primary key,
+    name varchar(22) not null,
+    phone_number varchar(10) not null,
+    created_at timestamp default current_timestamp
+);
+
+select distinct name from (select * from table_one union all select * from table_two) as sub;
+
+
+create table employee (
+    emp_id int not null auto_increment primary key,
+    emp_name varchar(22) not null,
+    salary int(6) not null,
+    created_at timestamp not null default current_timestamp,
+    updated_at timestamp not null default current_timestamp on update current_timestamp
+);
+
+insert into employee (emp_name, salary) value ('raju', 3000), ('sanju', 6000), ('maju', 4000), ('kaju', 1000), ('haiud', 2000);
+
+select * from employee;
+
+select salary from (select salary from employee order by salary asc limit 4) as custom order by salary desc limit 1;
+
+-----------------------------------------------------------------------------------------------
+### 	Mysql Indexes [ PRIMARY KEY, UNIQUE, INDEX, FULLTEXT ]
+
+-- Indexes are used to find rows with specific column values quickly.
+-- Without an index, MySQL must begin with the first row and then read through the entire table to find the relevant rows. 
+   The larger the table, the more this costs.
+-- In SQL, an index key refers to one or more columns in a table that are used to create an index.
+-- An index is a data structure that provides a quick lookup of rows in a table based on the values in the indexed columns.
+-- It helps improve the performance of SELECT queries, as it allows the database to locate and retrieve specific rows more efficiently.
+
+-- Indexes allow a new access method to the same data. Indices are stored on disk, not memory. 
+-- MySQL indexes (PRIMARY KEY, UNIQUE, INDEX, and FULLTEXT) are stored in B-trees. 
+
+-- Input/Output(I/O) cost is reduced by indexing.
+
+-- An index is usually maintained as a B+ Tree on disk & in-memory, and any index is stored in blocks on disk. 
+   These blocks are called index blocks. The entries in the index block are always sorted on the index/search key. 
+   The leaf index block of the index contains a row locator
+
+-- Cardinality : Cardinality refers to the uniqueness of data values in a column or set of columns within a table.
+   It represents the number of distinct values in a column compared to the total number of rows in the table.
+   3 Types : High Cardinality, Medium Cardinality, Low Cardinality
+
+
+
+
+
+https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd
+
+duplicate names
+Jason Beatty
+Hilda Mills
+Mabelle Bayer
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 

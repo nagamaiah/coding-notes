@@ -1,0 +1,126 @@
+						Redis (Remote Dictionary Server)
+						
+						
+# Caching Services (also known as in-memory databases) like Redis and Memcached are being heavily used in today’s web applications. 
+  These in-memory databases are faster than traditional databases like MySQL, Oracle, MongoDB, CouchDB, etc. for one important reason 
+  that this data is stored in RAM rather than on Harddisks. Both Redis and Memcached are accessible via their REST APIs.
+  
+-- Both Memcached and Redis belong to the NoSQL family of databases, and both are based on a key-value data model. Structure of information 
+   stored in these databases can be matched to the JSON documents.  
+   
+-- Referring to the features, Redis is more feature rich database than Memcached.
+
+
+## Redis (Remote Dictionary Server) is a fast open-source, in-memory database that you can use as a key-value store for a highly scalable 
+   and performance-oriented system. 
+   												
+-- It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, and sorted sets.
+
+-- Some of Redis’ use cases include: caching, high-speed transactions, real-time analytics, live notifications, machine learning, searching, 
+   and queue/job processing.
+
+-- Since Redis is an in-memory key-value store, its performance makes it suitable for caching data in your application.
+
+-- Caching is storing data temporarily in a high-speed storage layer (for example, in a computer RAM) to serve data faster when clients make 
+   the same future requests. This enhances the re-use of previously computed data instead of fetching it each time from the disk.
+   
+-- 
+												
+# Install redis
+sudo apt install redis-server
+redis-server -v
+
+sudo vim /etc/redis/redis.conf
+supervised systemd
+bing 127.0.0.1 ::1
+requirepass Redis@123
+
+sudo systemctl status redis-server
+sudo systemctl restart redis-server
+ss -an | grep 6379
+default redis port 6379
+
+# To go to redis cli use `redis-cli` command on localhost
+127.0.0.1:6379> 
+auth Redis@123
+ping
+exit
+config get requirepass
+
+# Run Commands on the Remote Server
+redis-cli -h host -p port -a password
+redis-cli -h 127.0.0.1 -p 6379 -a "Redis@123" (or)
+
+redis-cli -h 127.0.0.1 -p 6379
+>auth Redis@123
+>ping
+
+
+# selecting a redis database
+-- A Redis server has 16 databases by default. The databases are zero-indexed, with the first database being 0.
+-- You can check the actual number by running
+	redis-cli config get databases
+	redis-cli -h 127.0.0.1 -p 6379 -a "Redis@123" config get databases
+	result : 1) "databases" 2) "16"
+-- full command 
+	$ redis-cli -u redis://<username>:<password>@<host>:<port>/<database-number>
+	$ redis-cli -u redis://<password>@<host>:<port>/<database-number>
+
+-- for info 
+	redis-cli -h 127.0.0.1 -p 6379 -a "Redis@123" info
+
+
+-- ttl -> Time To Live
+
+
+## connecting to redis server
+-- we use `predis/predis` php extension to use redis in php
+-- redis connection url  -> 'tcp://127.0.0.1:6379?database=0',
+-- TCP and IP are two separate computer network protocols. IP is the part that obtains the address to which data is sent. 
+   TCP is responsible for data delivery once that IP address has been found.
+   TCP - Transmission Control Protocol
+   IP  - Internet Protocol
+
+
+
+
+
+
+
+
+
+# Cluster computing 
+-- Cluster computing defines several computers linked on a network and implemented like an individual entity. Each computer that is linked 
+   to the network is known as a node. Cluster computing provides solutions to solve difficult problems by providing faster computational 
+   speed, and enhanced data integrity.
+-- Cluster computing is a collection of tightly or loosely connected computers that work together so that they act as a single entity.
+-- The connected computers execute operations all together thus creating the idea of a single system. The clusters are generally connected 
+   through fast local area networks (LANs)
+
+
+# Redis Cluster
+-- The basic building block of ElastiCache for Redis is the cluster. A cluster is a collection of one or more cache nodes, all of which run 
+   an instance of the Redis cache engine software. When you create a cluster, you specify the engine and version for all of the nodes to use.
+   
+-- Redis Cluster is a distributed implementation of the Redis data store that allows data to be sharded across multiple Redis nodes. In a Redis 
+   Cluster, data is partitioned across multiple Redis nodes, so that each node only holds a portion of the total data set
+   
+-- Redis is an open-source, in-memory data structure store that is used to build caches and key-value NoSQL databases. Redis Cluster is a 
+   special version of Redis that helps improve the scalability and availability of your Redis database.  
+   
+--     
+   
+   
+   
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-22-04
+https://www.fosstechnix.com/how-to-install-redis-on-ubuntu-22-04-lts/
+
+https://blog.eduonix.com/web-programming-tutorials/learn-use-php-redis-aws-elasticache/
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-redis-as-a-cache-for-mysql-with-php-on-ubuntu-20-04
+
+
+
+
+

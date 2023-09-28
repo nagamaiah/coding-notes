@@ -1,0 +1,53 @@
+
+				AWS - Amazon Web Services (Cloud Service Provider or Secuer Cloud Service Platform)
+
+
+# Cloud Computing includes
+- Storing data/apps on remote servers
+- Processing data/apps from servers
+- Accessing data/apps via internet
+
+# Cloud Service Providers (CSP)
+1. AWS
+2. GCS
+3. AZURE
+4. ORACLE
+
+# Types of cloud computing service models
+-- Iaas : Infrastructure-as-a-service
+-- Paas : Platform-as-a-service
+-- Saas : Software-as-a-service
+
+# AWS advantages
+1. Flexibility
+2. Cost Effective (uses Pay-as-you-go model)
+3. Scalability
+4. Security
+
+
+## AWS SDK for PHP (https://docs.aws.amazon.com/sdk-for-php/)
+-- The AWS SDK for PHP allows developers to interact with various Amazon Web Services (AWS) using PHP. It provides a comprehensive 
+   set of classes and methods to interact with services like S3, DynamoDB, EC2, and many more.
+-- To use the AWS SDK for PHP, you must be using PHP version 5.5.0 or later with the SimpleXML PHP extension enabled. 
+   If you need to sign private Amazon CloudFront URLs, you also need the OpenSSL PHP extension
+-- The SDK is available via Packagist under the aws/aws-sdk-php package. 
+      composer require aws/aws-sdk-php
+-- Aws PHP Classes
+	Aws\S3\S3Client
+	Aws\DynamoDb\DynamoDbClient
+	Aws\Ec2\Ec2Client
+	Aws\Sns\SnsClient
+	Aws\Rds\RdsClient
+	Aws\Sqs\SqsClient
+	Aws\Lambda\LambdaClient
+	Aws\CloudWatch\CloudWatchClient
+	
+	
+		
+	
+
+
+
+
+
+

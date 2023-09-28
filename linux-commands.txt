@@ -18,7 +18,7 @@ RUN chown -R www-data:www-data /var/www/html/
 change the ownership to my user instead of root user.
 sudo chown -R $USER:$USER /var/www
 sudo chown -R nagamaiah:nagamaiah /var/www/html    (changes ownership from root user to nagamaiah user)
-
+sudo chown -R owner:group
 ______________________________________________________________________________________________________________
 /*** To find a file & directory in linux ***/
 
