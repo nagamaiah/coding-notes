@@ -9,7 +9,11 @@ grep [options] [word (or) pattern] [path(or)file]
 
 Ex : grep -rin employees /var/www/html/laravel8.8/
      grep -rin  Host MyFiles/symfony3/ | less
-
+     grep -r --include=*.php  "chaining" ./
+     grep -r --include \*.php  "chaining" ./
+     grep -r --include=<file-pattern> <string> <directory>
+     
+     
 Options
 -i, --ignore-case: Ignores case distinctions in patterns and input data.
 -v, --invert-match: Selects the non-matching lines of the provided input pattern.

@@ -1,6 +1,6 @@
 						Redis (Remote Dictionary Server)
 						
-						
+ 						
 # Caching Services (also known as in-memory databases) like Redis and Memcached are being heavily used in today’s web applications. 
   These in-memory databases are faster than traditional databases like MySQL, Oracle, MongoDB, CouchDB, etc. for one important reason 
   that this data is stored in RAM rather than on Harddisks. Both Redis and Memcached are accessible via their REST APIs.
@@ -14,7 +14,7 @@
 ## Redis (Remote Dictionary Server) is a fast open-source, in-memory database that you can use as a key-value store for a highly scalable 
    and performance-oriented system. 
    												
--- It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, and sorted sets.
+-- It is often referred to as a DATA STRUCTURE SERVER since keys can contain `STRINGS`, `HASHES`, `LISTS`, `LISTS`, and `SORTED SETS`.
 
 -- Some of Redis’ use cases include: caching, high-speed transactions, real-time analytics, live notifications, machine learning, searching, 
    and queue/job processing.
@@ -24,7 +24,6 @@
 -- Caching is storing data temporarily in a high-speed storage layer (for example, in a computer RAM) to serve data faster when clients make 
    the same future requests. This enhances the re-use of previously computed data instead of fetching it each time from the disk.
    
--- 
 												
 # Install redis
 sudo apt install redis-server
@@ -71,17 +70,64 @@ redis-cli -h 127.0.0.1 -p 6379
 
 
 -- ttl -> Time To Live
+   ttl <key>
 
 
 ## connecting to redis server
 -- we use `predis/predis` php extension to use redis in php
 -- redis connection url  -> 'tcp://127.0.0.1:6379?database=0',
+-- // Parameters passed using a named array:
+	$redis = new Predis\Client([
+	    'scheme' => 'tcp',
+	    'host'   => 'localhost',
+	    'port'   => 6379,
+	    'password' => 'Redis@123'
+	]);
+
+	// Same set of parameters, passed using an URI string:
+	$client = new Predis\Client('tcp://10.0.0.1:6379');
 -- TCP and IP are two separate computer network protocols. IP is the part that obtains the address to which data is sent. 
    TCP is responsible for data delivery once that IP address has been found.
    TCP - Transmission Control Protocol
    IP  - Internet Protocol
 
 
+
+### DATA STRUCTURE SERVER keys can contain 
+	`STRINGS`, 
+	`HASHES`, 
+	`LISTS`, 
+	`SETS`
+	`SORTED SETS`.
+
+1. STRINGS
+-- Strings are the simplest data type in Redis. They can store text, numbers, or binary data up to 512MB in size.
+-- Redis strings are often used for caching, counters, and storing serialized data structures.
+	set name "john"
+	set age 25
+	get name
+	get age
+	del name
+
+
+-- To get keys
+   keys <pattern>
+   keys *
+
+
+
+
+
+
+
+
+-- Get redis stored values
+>type <key>
+for "string": get <key>
+for "hash": hgetall <key>
+for "list": lrange <key> 0 -1
+for "set": smembers <key>
+for "zset": zrange <key> 0 -1 withscores
 
 
 
@@ -119,6 +165,7 @@ https://www.fosstechnix.com/how-to-install-redis-on-ubuntu-22-04-lts/
 https://blog.eduonix.com/web-programming-tutorials/learn-use-php-redis-aws-elasticache/
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-redis-as-a-cache-for-mysql-with-php-on-ubuntu-20-04
+https://www.digitalocean.com/community/tutorials?q=%5Bredis%5D&hits_per_page=12
 
 
 

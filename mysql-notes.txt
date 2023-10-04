@@ -889,6 +889,9 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_sec
 CREATE USER 'magento2'@'localhost' IDENTIFIED BY 'your_secure_password';
 GRANT ALL PRIVILEGES ON *.* TO 'magento2'@'localhost' WITH GRANT OPTION;
 
+CREATE USER jazz_user WITH PASSWORD 'your_password';
+GRANT ALL PRIVILEGES ON DATABASE jazz_music TO jazz_user;
+
 
 -- To reload the grant tables in MySQL
 	FLUSH PRIVILEGES;
@@ -1010,8 +1013,19 @@ select salary from (select salary from employee order by salary asc limit 4) as 
    It represents the number of distinct values in a column compared to the total number of rows in the table.
    3 Types : High Cardinality, Medium Cardinality, Low Cardinality
 
+-- Full-text indexes are created on text-based columns (CHAR, VARCHAR, or TEXT columns) to speed up queries and DML operations on data 
+   contained within those columns.
+-- A full-text index is defined as part of a CREATE TABLE statement or added to an existing table using ALTER TABLE or CREATE INDEX.
+
+-- Spatial Index
 
 
+
+-- Index Commands
+	show index from project.users;
+	create index email_index on project.users(email);
+	drop index email_index on project.users;
+	
 
 
 https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd

@@ -1,0 +1,41 @@
+
+
+-- Postgresql is an open-source Object-Relational Database Management System (ORDBMS). This means that, similar to Object-Oriented 
+   programming languages, objects, classes, and inheritance are supported by PostgreSQL
+-- PostgreSQL is preferred when a high level of security is required and the number of transactions or queries is large.
+-- MySQL is a purely relational database. PostgreSQL, on the other hand, is an object-relational database. This means that in 
+   PostgreSQL, you can store data as objects with properties.
+-- Object identifiers (OIDs) are used internally by PostgreSQL as primary keys for various system tables.
+-- By default, the Postgresql database listens on port 5432
+
+
+-- Install on ubuntu
+	sudo apt-get install postgresql
+	sudo apt-get install php-pgsql
+	php -m | grep pgsql  -> pdo_pgsql and pgsql
+	
+	pg_config  -> show pgsql details
+	pg_config --version  -> PostgreSQL 14.9 (Ubuntu 14.9-0ubuntu0.22.04.1)
+	
+	
+-- sudo service postgresql status && sudo service postgresql restart	
+
+
+
+# PostgreSQL Command Line Tool
+sudo -u postgres psql
+create pass  -> \password postgres
+connect to created database -> \c project;
+
+
+
+https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04
+https://vegibit.com/how-to-use-postgresql-with-php/
+https://www.postgresqltutorial.com/postgresql-php/
+https://www.postgresqltutorial.com/postgresql-getting-started/
+   		
+	
+	
+	
+	
+
