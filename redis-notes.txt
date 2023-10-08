@@ -5,19 +5,27 @@
   These in-memory databases are faster than traditional databases like MySQL, Oracle, MongoDB, CouchDB, etc. for one important reason 
   that this data is stored in RAM rather than on Harddisks. Both Redis and Memcached are accessible via their REST APIs.
   
+-- An in-memory database (IMDB; also main memory database system or MMDB) is stored in a computer's main memory (RAM), and is managed 
+   by an in-memory database management system. Traditional databases are stored on disk drives.  
+  
 -- Both Memcached and Redis belong to the NoSQL family of databases, and both are based on a key-value data model. Structure of information 
    stored in these databases can be matched to the JSON documents.  
    
 -- Referring to the features, Redis is more feature rich database than Memcached.
 
-
 ## Redis (Remote Dictionary Server) is a fast open-source, in-memory database that you can use as a key-value store for a highly scalable 
    and performance-oriented system. 
    												
--- It is often referred to as a DATA STRUCTURE SERVER since keys can contain `STRINGS`, `HASHES`, `LISTS`, `LISTS`, and `SORTED SETS`.
+-- It is often referred to as a DATA STRUCTURE SERVER since keys can contain `STRINGS`, `HASHES`, `LISTS`, `SETS`, and `SORTED SETS`.
 
--- Some of Redis’ use cases include: caching, high-speed transactions, real-time analytics, live notifications, machine learning, searching, 
-   and queue/job processing.
+-- Redis Use Cases
+   1. Caching
+   2. High-Speed Transactions
+   3. Real-Time Analytics
+   4. Live Notifications
+   5. Machine Learning
+   6. Searching
+   7. Queue/Job Processing 
 
 -- Since Redis is an in-memory key-value store, its performance makes it suitable for caching data in your application.
 
@@ -117,10 +125,6 @@ redis-cli -h 127.0.0.1 -p 6379
 
 
 
-
-
-
-
 -- Get redis stored values
 >type <key>
 for "string": get <key>
@@ -128,10 +132,6 @@ for "hash": hgetall <key>
 for "list": lrange <key> 0 -1
 for "set": smembers <key>
 for "zset": zrange <key> 0 -1 withscores
-
-
-
-
 
 
 
@@ -153,8 +153,7 @@ for "zset": zrange <key> 0 -1 withscores
    
 -- Redis is an open-source, in-memory data structure store that is used to build caches and key-value NoSQL databases. Redis Cluster is a 
    special version of Redis that helps improve the scalability and availability of your Redis database.  
-   
---     
+ 
    
    
    

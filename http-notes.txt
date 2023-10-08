@@ -1,0 +1,19 @@
+				
+				Http
+
+-- HTTP messages are how data is exchanged between a server and a client. There are two types of messages: Requests sent by the client to trigger 
+   an action on the server, and Responses, the answer from the server.	
+
+-- HTTP requests are messages sent by the client to initiate an action on the server.
+	
+-- Two types of HTTP protocol versions
+	1. HTTP/1.1
+	2. HTTP/2
+	
+-- HTTP request/response contains
+	1. Start-line/Status-line
+	2. HTTP Header
+	3. Empty Line
+	4. Http Body
+	 	   
+	 	   

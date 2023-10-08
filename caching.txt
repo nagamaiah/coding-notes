@@ -1,0 +1,6 @@
+
+					Caching
+					
+-- Caching is a common technique in modern computing to enhance system performance and reduce RESPONSE time.
+
+					

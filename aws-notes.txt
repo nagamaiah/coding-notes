@@ -30,9 +30,11 @@
    set of classes and methods to interact with services like S3, DynamoDB, EC2, and many more.
 -- To use the AWS SDK for PHP, you must be using PHP version 5.5.0 or later with the SimpleXML PHP extension enabled. 
    If you need to sign private Amazon CloudFront URLs, you also need the OpenSSL PHP extension
+   
 -- The SDK is available via Packagist under the aws/aws-sdk-php package. 
       composer require aws/aws-sdk-php
--- Aws PHP Classes
+      
+-- Aws Sdk PHP Classes
 	Aws\S3\S3Client
 	Aws\DynamoDb\DynamoDbClient
 	Aws\Ec2\Ec2Client
