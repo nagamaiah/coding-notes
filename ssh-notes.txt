@@ -1,0 +1,19 @@
+					SSH (Secure Shell or Secure Socket Shell)
+					
+-- SSH, also known as Secure Shell or Secure Socket Shell, is a network protocol that gives users, particularly system administrators, 
+   a secure way to access a computer over an unsecured network.					
+
+-- Secure Shell provides strong password authentication and public key authentication, as well as encrypted data communications between 
+   two computers connecting over an open network, such as the internet.
+   
+-- An SSH server, by default, listens on the standard Transmission Control Protocol (TCP) port 22.
+
+-- Install openssh-server on ubuntu
+	sudo apt-get update
+	sudo apt-get install openssh-server      
+	
+	check running status
+	sudo systemctl status ssh (or) sudo service ssh status
+	
+	
+				

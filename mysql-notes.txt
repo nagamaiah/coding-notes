@@ -1,4 +1,4 @@
-/*** DBMS (Database Management System) ***/
+	/*** DBMS (Database Management System) ***/
 
 https://www.mysqltutorial.org/mysql-basics/
 
@@ -483,11 +483,7 @@ while ($row = $result->fetch_assoc()) {
     $users[] = $row;
 }
 
-
-
-
-
-
+--------------------------------------------------------------------------------------------------------------------------------
 
 /***   MySql Queries Notes   ***/
 https://dev.mysql.com/doc/refman/8.0/en/tutorial.html
@@ -521,7 +517,8 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
 -- What data type should I use to store U.S States inside MySQL databse?
 	1. valid US states consists of two characters (NM, AL, AK etc.,)
 	2. use CHAR(2)
-
+	
+-- To get data from multiple tables we joins or unions
 
 -- UNION Clause
     query_block UNION [ALL | DISTINCT] query_block
@@ -529,16 +526,26 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
     [...]
 	https://www.guru99.com/unions.html
 
+--------------------------------------------------------------------------------------------------------------------------------------
+
 ### Mysql Functions
 1. String Functions
+-- ASCII() - The ASCII() function returns the ASCII value for the specific character.
+-- BIN() - Returns a binary for a integer
+-- BIT_LENGTH(str) - Returns the length of the string str in bits. Returns NULL if str is NULL.
+	1 byte = 8 bits
+	1 char = 1 byte (8 bits)
+-- LENGTH() - Returns the length of the string measured in bytes.
+-- CHAR_LENGTH() - Returns the length of the string measured in characters.	
 -- CONCAT() - Concatenate two or more strings into a single string
 -- INSTR() - Return the position of the first occurrence of a substring in a string
 -- LENGTH() - Get the length of a string in bytes and in characters
--- LOWER() - Convert a string to lowercase
--- UPPER() - Convert a string to uppercase
+-- LOWER() or LCASE() - Convert a string to lowercase
+-- UPPER() or UCASE() - Convert a string to uppercase
 -- LTRIM() - Remove all leading spaces from a string
 -- RTRIM() - Remove all trailing spaces from a string
 -- REPLACE() - Search and replace a substring in a string
+-- TRIM() - Remove spaces from leading and trailing spaces
 
 
 2. Date Time Functions
@@ -548,7 +555,18 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
 -- CURRENT_TIMESTAMP - Returns the current date and time
 -- DATEDIFF() - Returns the number of days between two date values
 -- TIMEDIFF() - Returns the difference between two time/datetime expressions
+-- UTC_DATE() - Return the current UTC date
+-- UTC_TIME() - Return the current UTC time
 -- UTC_TIMESTAMP() - Returns the current UTC date and time
+-- ADDDATE() or DATE_ADD() - Add time values (intervals) to a date value
+-- SUBDATE() or DATE_SUB() - Subtract a time value (interval) from a date
+-- DAY() or DAYOFMONTH()
+-- MONTH() and MONTHNAME()
+-- YEAR()
+-- HOUR()
+-- MINUTE()
+
+
 
 3. Aggregate Functions
 -- AVG() - Return the average of non-NULL values.
@@ -570,14 +588,19 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
 
 
 
+
 -- CONCAT(str1,str2,...) : Returns the string that results from concatenating the arguments. May have one or more arguments.
    CONCAT() returns NULL if any argument is NULL.
    SELECT CONCAT('My', 'S', 'QL');  -> 'MySQL'
    SELECT CONCAT('My', NULL, 'QL'); -> NULL
    SELECT CONCAT('My', '---', 'QL'); -> 
+   select 'a' 'b' 'c' as name; -> 'abc';
+   
 -- CONCAT_WS(separator,str1,str2,...) : CONCAT_WS() stands for Concatenate With Separator and is a special form of CONCAT(). 
    The first argument is the separator for the rest of the arguments. The separator is added between the strings to be concatenated.
    If the separator is NULL, the result is NULL.
+   select concat_ws(', ', 518124,'Kurnool','AP') as AddressLine;
+   CONCAT_WS() does not skip empty strings. However, it does skip any NULL values after the separator argument.
 
 
 -- unsigned-integer : A specific data type that uses all its bits to represent an integer value, consequently only 0 or a positive number.
@@ -609,6 +632,12 @@ $query = "update employee set salary = replace(salary,'3000','8000') where salar
 $query = "update employee set dept = replace(dept,'mec','mechanical') where dept like 'mec'";
 $result = $mysqli->query($query);
 
+SELECT CURRENT_TIMESTAMP() (or) select NOW();  both same --> 2023-03-24 10:35:43 ;
+select UTC_TIMESTAMP(); 
+SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP) as GMT_TIME_DIFF;  --> 05:30:00
+select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
+SELECT @@system_time_zone;  --> IST
+
 
 timestamp vs datetime
 timestamp -- Timestamps in MySQL are generally used to track changes to records, and are often updated every time the record is changed
@@ -616,7 +645,7 @@ datetime -- If you want to store a specific (custom) value you should use a date
 DATETIME does not support timezone information, while TIMESTAMP can store timezone information. This means that if you need to store date and time values with timezone information, TIMESTAMP would be the better choice.
 In terms of performance, TIMESTAMP is generally faster than DATETIME.  timestamp takes less bytes;
 
-
+---------------------------------------------------------------------------------------------------------------------------------------
 ### Mysql command types
 https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/
 DDL -> Data Definition Language (CREATE, DROP, ALTER, TRUNCATE, RENAME)
@@ -625,12 +654,6 @@ DQL -> Data Query Language (SELECT)
 DCL -> Data Control Language (GRANT, REVOKE)
 TCL -> Transaction Control Language (COMMIT, ROLLBACK, SAVE POINT)
 
-
-SELECT CURRENT_TIMESTAMP() (or) select NOW();  both same --> 2023-03-24 10:35:43 ;
-select UTC_TIMESTAMP(); 
-SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP) as GMT_TIME_DIFF;  --> 05:30:00
-select VERSION(); --> 8.0.32-0ubuntu0.22.04.2
-SELECT @@system_time_zone;  --> IST
 
 dec(p,d) -> https://www.mysqltutorial.org/mysql-decimal/
 ALTER TABLE materials MODIFY cost DECIMAL(19,4) zerofill;
@@ -818,15 +841,69 @@ SHOW INDEXES FROM parties;
 SHOW KEYS FROM recentcontacts WHERE Key_name = 'PRIMARY';
 SHOW VARIABLES LIKE 'sql_mode';
 
+
+
+-- MySQL CASE expression is a control flow structure that allows you to add if-else logic to a query.
+-- We can use CASE with SELECT, WHERE and ORDER BY clauses.
+-- The CASE expression has two forms: simple CASE and searched CASE
+
+-- Simple CASE expression:
+	CASE value
+	   WHEN value1 THEN result1
+	   WHEN value2 THEN result2
+	   …
+	   [ELSE else_result]
+	END
+	
+-- Searched CASE expression	
+	CASE
+	   WHEN expression1 THEN result1
+	   WHEN expression2 THEN result2
+	   …
+	   [ELSE else_result]
+	END
+
+
+select name, case gender
+	when 'M' then 'Male'
+    when 'F' then 'Female'
+    else 'Other'
+    end as gender
+from users;
+
 ORDER BY
-            CASE
-                WHEN m.SRSent >= m.NSRSent
-                    THEN  m.SRSent
-                    ELSE  m.NSRSent
-            END
-            DESC;
+    CASE
+        WHEN m.SRSent >= m.NSRSent
+            THEN  m.SRSent
+            ELSE  m.NSRSent
+    END
+    DESC;
+
+select name, case 
+    when gender = 'M' then 'Male'
+    when gender = 'F' then 'Female'
+    else 'Other'
+    end as gender
+from users;   
+
+SELECT OrderID, Quantity,
+CASE WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+WHEN Quantity = 30 THEN 'The quantity is 30'
+ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;      
+
+---------------------------------------------------------------------------------------------------------------------------------
+				MySql Variables
+				
+1. User-defined variables (prefixed with @)
+2. Local Variables (no prefix) (using DECLARE statement)				
+3. Server System Variables (prefixed with @@)
 
 
+ https://stackoverflow.com/questions/11754781/how-to-declare-a-variable-in-mysql   
+
+------------------------------------------------------------------------------------------------------------------------------
 
 ### mysql host or server connect
 
@@ -855,7 +932,6 @@ mysqladmin -u [UserName] -p[Pasword] create [New_DB_Name]
 mysqladmin -u [Username] -p[Password] drop [DB_Name]
 mysqladmin -u root -p create  college
 mysqladmin -u root -pMySql@123 drop college;
-
 
 -----------------------------------------------------------------------------------
 
@@ -895,8 +971,6 @@ GRANT ALL PRIVILEGES ON DATABASE jazz_music TO jazz_user;
 
 -- To reload the grant tables in MySQL
 	FLUSH PRIVILEGES;
-
--- 
 
 https://lindevs.com/change-default-authentication-plugin-in-mysql
 
@@ -1036,9 +1110,17 @@ Hilda Mills
 Mabelle Bayer
 
 ----------------------------------------------------------------------------------------------------------------------------
+				MySql Views
+-- A database view is a virtual table or logical table which is defined as a SQL SELECT query with joins.
+-- When the data of the table changes, the view reflects that changes as well.
 
-
-
+# Advantages of database view :
+  1. A database view allows you to simplify complex queries.
+  2. A database view helps limit data access to specific users.
+  3. A database view provides extra security layer.
+  4. A database view enables computed columns.
+  5. Database view enables backward compatibility
+ 
 
 
 

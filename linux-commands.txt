@@ -126,7 +126,19 @@ ln -s <target> <link_name>
 ln -s /home/nagamaiah/MyFiles/ /home/nagamaiah/Desktop/files
 
 
+-----------------------------------------------------------------------------
+		zip and unzip
 
+sudo apt-get install zip 
+sudo apt-get install unzip
+
+zip -r test.zip /var/www/test
+unzip test.zip /var/www/test	
+
+zip -r /home/nagamaiah/Desktop/nag.zip  /var/www/html/php-projects/php-redis/	
+
+
+cat names | awk '{printf "'\''%s'\'', ", $0}' | paste -sd ","
 
 -------------------------------------------------------------------------
 cp -- Copy

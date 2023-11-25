@@ -12,7 +12,7 @@ https://symfony.com/doc/5.4/setup.html
 ## If you are building a traditional web application:
 symfony new --webapp my_project  or symfony new --full my_project
 symfony new my_project_directory --version=5.4 --webapp
-
+	
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 cd my_project_directory
 composer require webapp
@@ -57,6 +57,29 @@ composer req maker --dev
 
 
 ----------------------------------------------------------------------------------------------------------------
+				Symfony Configuration Files
+
+-- get env in twig file
+	{{app.environment}}
+-- get env in controller
+	$this->getParameter('kernel.environment')  kernel.project_dir, kernel.logs_dir, kernel.cache_dir, kernel.debug 
+	(or )
+	inject  private Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface $params,
+	$this->params->get('google_details')
+	$this->params->get('mailer_sender')
+-- Symfony loads the configuration files in this order
+	1. The files in config/packages/*.<extension>;
+	2. the files in config/packages/<environment-name>/*.<extension>;
+	3. config/services.<extension>;
+	4. config/services_<environment-name>.<extension>	
+				
+				
+				
+				
+				
+https://symfony.com/doc/4.1/configuration/environments.html
+https://symfonycasts.com/screencast/symfony-fundamentals/parameters
+----------------------------------------------------------------------------------------------------------------
 				Symfony Templates (Twig Files)		
 		
 ### Template Files in symfony (Twig Template Syntax)  ->  test.html.twig
@@ -68,7 +91,7 @@ You can't directly run PHP code inside Twig templates.
 Twig is fast in the prod environment because templates are compiled into PHP and cached automatically
 
 In symfony we can render templates using -> controller, service class, mail, routes
- -- In controller using AbstractController  $this=->render() method
+ -- In controller using AbstractController  $this->render() method
  -- In service page injecting Twig\Environment class $this->twig->render()
  -- We can render static templates directly from a route using special controller  TemplateController
  Rendering a Template Directly from a Route (config/routes.yml)

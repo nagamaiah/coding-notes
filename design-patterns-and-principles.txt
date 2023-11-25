@@ -113,7 +113,7 @@ SOLID Principle in OOPS is used to write understandable, flexible and maintainab
 -- Abstraction : Abstraction refers to the process of hiding the internal details and complexity of a class and exposing only the essential features. 
    It allows you to create abstract classes and interfaces. An abstract class cannot be instantiated and serves as a base for derived classes.
    Interfaces define a contract that classes must implement, specifying the methods they should have.
-   
+
 -- Encapsulation : Encapsulation refers to the grouping (or) wrapping of related properties and methods within a single class. It allows you to control 
    the access to the properties and methods of a class by defining their visibility (public, private, or protected). Public properties/methods 
    can be accessed from anywhere, private properties/methods can only be accessed within the class itself, and protected properties/methods can 

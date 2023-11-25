@@ -90,6 +90,10 @@ git branch -d new-feature
 
 
 
+-- To make untracked file 
+   git rm <filename>	
+   git rm --cached <filename>   (remove staging area)
+   
 -- Show all branch locally
    git branch
    
