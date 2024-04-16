@@ -24,11 +24,21 @@ run as super user -- sudo crontab -e
 change editor -- sudo VISUAL=vi crontab -e
 open vi editor -- sudo VISUAL=vi crontab -e
 
-for specific user 
+## For specific user 
+-- Edit crontab cmd
 sudo crontab -e -u nagamaiah
 sudo crontab -e -u root
 
-cron time settings
+-- List crontabs command
+sudo crontab -l -u nagamaiah
+sudo crontab -l -u root
+
+-- Remove crontabs cmd
+sudo crontab -l -u nagamaiah
+sudo crontab -l -u root
+
+
+## cron time settings
 
 m  h  dom mon dow
 *  *   *  *   *
@@ -64,8 +74,6 @@ day of week    0-7 (0 or 7 is Sun, or use names)
 */5 * * * * sh /home/nagamaiah/Desktop/Test/test.sh
 
 
-
-
 Examples ::
 
 * * * * *     ->  At every minute.
@@ -91,23 +99,6 @@ run at 10 pm on weekdays, annoy Joe
 
 http://crontab.org/
 https://crontab.guru/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -32,7 +32,8 @@
 -- Caching is storing data temporarily in a high-speed storage layer (for example, in a computer RAM) to serve data faster when clients make 
    the same future requests. This enhances the re-use of previously computed data instead of fetching it each time from the disk.
    
-												
+
+   												
 # Install redis
 sudo apt install redis-server
 redis-server -v
@@ -53,6 +54,7 @@ auth Redis@123
 ping
 exit
 config get requirepass
+config get supervised
 
 # Run Commands on the Remote Server
 redis-cli -h host -p port -a password
@@ -63,11 +65,20 @@ redis-cli -h 127.0.0.1 -p 6379
 >ping
 
 
+# Uninstall redis-server
+sudo systemctl stop redis – Stops the Redis service.
+sudo apt-get purge –auto-remove redis-server – Uninstalls the Redis server.
+sudo rm -r /etc/redis/ – Removes Redis configuration files.
+sudo rm -r /var/lib/redis/ – Removes Redis data files.
+sudo deluser redis – Deletes the Redis user.
+sudo delgroup redis – Deletes the Redis group.
+sudo apt-get update – Updates the package database.
+
 # selecting a redis database
 -- A Redis server has 16 databases by default. The databases are zero-indexed, with the first database being 0.
 -- You can check the actual number by running
 	redis-cli config get databases
-	redis-cli -h 127.0.0.1 -p 6379 -a "Redis@123" config get databases
+	redis-cli -h 127.0.0.1 -p 6379 -a "Redis@1234" config get databases
 	result : 1) "databases" 2) "16"
 -- full command 
 	$ redis-cli -u redis://<username>:<password>@<host>:<port>/<database-number>
@@ -89,7 +100,7 @@ redis-cli -h 127.0.0.1 -p 6379
 	    'scheme' => 'tcp',
 	    'host'   => 'localhost',
 	    'port'   => 6379,
-	    'password' => 'Redis@123'
+	    'password' => 'Redis@1234'
 	]);
 
 	// Same set of parameters, passed using an URI string:

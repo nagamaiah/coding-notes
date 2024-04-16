@@ -3,4 +3,35 @@
 					
 -- Caching is a common technique in modern computing to enhance system performance and reduce RESPONSE time.
 
-					
+
+# Full Page Cache
+-- `Full page cache` means that the entire HTML output for the page will be cached. Subsequent requests for the page will return the cached
+   HTML instead of trying to process and re-build the page, thus returning a response to the browser much faster.
+-- Magento 2 full page cache is the free built-in Magento 2 caching solution that allows you to reduce the server load time and improves 
+   the response time due to the fast loading of CMS, product, and catalog pages.
+-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://magefan.com/blog/magento-2-full-page-cache
+
+
+https://www.udemy.com/course/magento-2-development-fundamentals/learn/lecture/28663654#overview
+https://www.udemy.com/course/simplified-magento-2-video-course-from-beginner-to-expert/learn/lecture/13787830#overview   
