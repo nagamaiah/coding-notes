@@ -1,7 +1,39 @@
 
 					Caching
-					
+
+-- Types of memory in computer
+	1. Primary Memory or Main Memory (RAM) -- Random Access Memory -- Volatile -- data cleared when turned off		
+	2. Seconday Memory or Permanent Storage (ROM) -- Read Only Memory -- Non-Volatile -- data not cleared even turned off
 -- Caching is a common technique in modern computing to enhance system performance and reduce RESPONSE time.
+-- Caching is a technique where we store the frequently accessed data in temporary memory or space to make it readily available and reduce the 
+   workload for our application, server, or database.
+
+-- Cache Hit : If the requested data found in cache
+-- Cache Miss : If the requested data not found in cache
+-- Eviction Policy : We clear all cache data using TTL (time to live) to overcome cache overflow(full) issue.
+
+# Types of caching mechanisms
+1. Browser Caching
+
+2. Web Server Caching
+
+3. CDN Caching
+-- Improve the delivery speed to static content like images, web pages, video
+-- CDNs improve web page load times by bringing service near to the user
+-- CDNs offer scalability and availability
+-- Reduce latency by skipping the original server and serving from CDN
+-- A content delivery network or content distribution network (CDN) is a geographically distributed network of proxy servers and their data centers. 
+   The goal is to provide high availability and performance by distributing the service spatially relative to end users.
+-- Types of CDN : 
+	Pull based (Good for small size data.)
+	Push based (Good for larger files. Manual intervention is required)
+-- Available CDN platforms in the market : Akamai, Amazon Cloud Front, Cloudflare
+
+
+4. Distributed Caching 
+-- Traditional caching memory is limited to one machine, in distributed caching memory can be scale out to linking multiple machine. 
+
+
 
 
 # Full Page Cache

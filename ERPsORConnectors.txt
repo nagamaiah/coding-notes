@@ -1,0 +1,21 @@
+				ERP's (Enterprise Resource Planning) or Connectors
+				
+				
+-- ERP is a software system that helps you run your entire business, supporting automation and processes in finance,  
+   human resources,  manufacturing, supply chain, services, procurement, and more.
+-- Major types of ERP's
+The three most common types of ERP are on-premises, cloud-based, and hybrid ERP. An on-premises ERP system is run on-location on a company's servers, while cloud-based ERP operates on a third-party, remote server.
+
+-- ERP's Service Providers
+GP
+NAV
+MS Dynamics 365 or BC
+AX
+
+
+-- Five components of ERP
+finance
+human resource
+logistics and manufacturing
+supply chain management
+customer relationship management

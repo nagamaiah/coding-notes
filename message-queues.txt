@@ -1,0 +1,24 @@
+				Message Queue (or) Message Broker
+
+-- A message queue is a form of asynchronous service-to-service communication used in serverless and microservices architectures. 
+-- 
+
+
+
+
+
+-- Message Queue Service Providers are
+	1. Apache Kafka
+	2. RabbitMQ
+	3. LavinMQ
+	4. AWS SQS (Simple Queue Service)
+
+
+
+
+
+
+
+https://www.geeksforgeeks.org/message-queues-system-design/
+https://www.freecodecamp.org/news/message-queues-in-distributed-systesms
+	

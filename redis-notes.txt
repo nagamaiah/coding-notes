@@ -26,7 +26,10 @@
    5. Machine Learning
    6. Searching
    7. Queue/Job Processing 
-
+   8. Session Storage
+   9. Rate Limiter
+   10. Counter
+   
 -- Since Redis is an in-memory key-value store, its performance makes it suitable for caching data in your application.
 
 -- Caching is storing data temporarily in a high-speed storage layer (for example, in a computer RAM) to serve data faster when clients make 
@@ -74,6 +77,15 @@ sudo deluser redis – Deletes the Redis user.
 sudo delgroup redis – Deletes the Redis group.
 sudo apt-get update – Updates the package database.
 
+# install redis usig docker and cli in ubuntu
+1. Need to redis image from docker hub repository
+   docker pull redis:latest
+2. Run or Create a redis container using run command with redis pulled image
+   docker run --name nags-redis -p 6379:6379 -d redis
+3. Access or Execute redis container   
+   docker exec -it nags-redis redis-cli
+   
+
 # selecting a redis database
 -- A Redis server has 16 databases by default. The databases are zero-indexed, with the first database being 0.
 -- You can check the actual number by running
@@ -91,9 +103,18 @@ sudo apt-get update – Updates the package database.
 -- ttl -> Time To Live
    ttl <key>
 
+-- Use `redis-cli monitor` command to inspect redis-server read-write-delete operations
 
-## connecting to redis server
--- we use `predis/predis` php extension to use redis in php
+## (PHP - REDIS) Connecting to redis server using php redis extension (or) php composer package
+-- php redis extension
+	In php.ini enable extension = redis.so
+-- Or we can also use php redis module/extension using docker
+       RUN pecl install redis \
+          && docker-php-ext-enable redis;
+       $redis = new Redis(); 
+       $redis->connect('127.0.0.1', 6379);	  
+	  
+-- we use `predis/predis` php package to use redis in php	  
 -- redis connection url  -> 'tcp://127.0.0.1:6379?database=0',
 -- // Parameters passed using a named array:
 	$redis = new Predis\Client([
@@ -109,40 +130,115 @@ sudo apt-get update – Updates the package database.
    TCP is responsible for data delivery once that IP address has been found.
    TCP - Transmission Control Protocol
    IP  - Internet Protocol
+   
+## redis flushall vs flushdb   
+-- FLUSHDB : Deletes all keys from the connection's current database.
+-- FLUSHALL : Deletes all keys from all databases on current host.
 
+
+## Get redis stored values
+datatype <key>
+for "string": get <key>
+for "hash": hgetall <key>
+for "list": lrange <key> 0 -1
+for "set": smembers <key>
+for "zset": zrange <key> 0 -1 withscores
 
 
 ### DATA STRUCTURE SERVER keys can contain 
 	`STRINGS`, 
 	`HASHES`, 
 	`LISTS`, 
-	`SETS`
-	`SORTED SETS`.
+	`SETS`,
+	`SORTED SETS`,
+	`Streams`,
+	`Geospatial indexes`,
+	`Bitmaps`,
+	`Bitfields`,
+	`HyperLogLog`
 
 1. STRINGS
--- Strings are the simplest data type in Redis. They can store text, numbers, or binary data up to 512MB in size.
--- Redis strings are often used for caching, counters, and storing serialized data structures.
+-- Strings are the fundamental data type in Redis. They can store text, numerical values, serialized JSON or binary data up to 512MB in size.
+-- Redis strings are often used for caching, session storage, counters, and storing serialized data structures.
+	set user:5051:time-zone America/New_York
 	set name "john"
 	set age 25
 	get name
-	get age
-	del name
-
-
+	exists user:3092:visit-count
+-- Commonly used for caching when combined with EXPIRE  (set users '{"name":"raj","age":35}' EX 3600)	
+-- We can store and manipulate numerical values (use incr and decr commands to play with numbers)
+-- All commands used with redis strings
+   set, get, mset, mget, del, incr, incrby, decr, decrby, exists
+-- We can set expire time (ttl)
+   MSET name king range bongu EX 5
+   mget name range 
 -- To get keys
    keys <pattern>
    keys *
+-- To get datatype of redis data 
+   TYPE <key_name>
+
+2. HASHES
+-- Hashes are a type of data structure that stores a mapping of keys to values. Collections of field-value pairs.
+-- Hashes can store values that can be incremented or decremented if they can be interpreted as numbers
+-- Hashes are mutable, meaning we can add, change, increment, or remove field-value pairs at any time
+-- They store field values as strings, which means they are flat, and there are no nested arrays or objects. 
+-- While Redis hashes are schemeless, we can still think of them as lightweight objects or rows in a relational database table.
+-- Redis Hashes all commands
+   HSET, HMGET, HGET, HGETALL, HINCRBY, HKEYS, HVALS, HDEL
+-- Set and get data
+   hset bike:9920 cc 125 model bs6 name "Honda CB Shine"
+   hget bike:9920 name
+   hmget bike:9920 name cc
+   hgetall bike:9920
+   type bike:9920  -- hash
+   hkeys bike:9920
+   hvals bike:9920
+   hincrby bike:9920 cc 100
+   HINCRBY bike:1 price -100
+   
+https://redis.io/glossary/redis-hashes/
+https://redis.io/docs/latest/develop/data-types/hashes/
+
+
+3. SETS
+-- A Redis set is an unordered collection of unique strings (members). No duplicate values.
+-- Commands
+   SADD - adds a new member to a set.
+   SMEMBERS - Gets all members present in set.
+   SREM - removes the specified member from the set.
+   SISMEMBER - tests a string for set membership. Checks if a member is in a Set
+   SINTER - returns the set of members that two or more sets have in common (i.e., the intersection). Gives intersection of one or more sets
+   SCARD - returns the size (a.k.a. cardinality) of a set. Gives how many members present in a set. 
+-- Set and get data
+   sadd user:3091:tracking-number 33 44 55 66 77
+   smembers user:3091:tracking-number
+   SCARD user:3091:tracking-number  -- 5
+   
+
+https://redis.io/docs/latest/develop/data-types/sets/
+https://www.youtube.com/watch?v=PKdCppSNTGQ&list=PL83Wfqi-zYZEnzA9nguVbC-USbBIlRG0y&index=5
 
 
 
+4. SORTED SETS
+-- 
 
--- Get redis stored values
->type <key>
-for "string": get <key>
-for "hash": hgetall <key>
-for "list": lrange <key> 0 -1
-for "set": smembers <key>
-for "zset": zrange <key> 0 -1 withscores
+https://redis.io/glossary/redis-sorted-sets/
+https://redis.io/docs/latest/develop/data-types/sorted-sets/
+
+5. LISTS
+-- Redis Lists are simply lists of strings, sorted by insertion order. You can add elements in Redis lists in the head or the tail of the list.
+-- Redis lists are linked lists of string values.
+-- Commands
+   LPUSH - 
+   RPUSH - 
+   LPOP - 
+   RPOP - 
+   LRANGE -  
+   LLEN - 
+   
+   
 
 
 
@@ -176,6 +272,12 @@ https://blog.eduonix.com/web-programming-tutorials/learn-use-php-redis-aws-elast
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-redis-as-a-cache-for-mysql-with-php-on-ubuntu-20-04
 https://www.digitalocean.com/community/tutorials?q=%5Bredis%5D&hits_per_page=12
+
+#redis-data types
+https://redis.io/docs/latest/develop/data-types/
+
+# redis magento 2
+https://experienceleague.adobe.com/en/docs/commerce-operations/configuration-guide/cache/redis/redis-pg-cache
 
 
 
