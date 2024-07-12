@@ -1,0 +1,61 @@
+				Slim4 PHP Framework
+
+
+-- Slim is a dispatcher that receives an HTTP request, invokes an appropriate callback routine, and returns an HTTP response.
+-- Slim app route MUST return a PSR-7 Response object.
+-- Slim4 requires PHP 7.4 or newer
+-- Install slim using composer (php package manager)
+	composer require slim/slim:"4.*"
+-- Install a PSR-7 Implementation and ServerRequest Creator
+	composer require slim/psr7
+-- 		
+
+
+
+## Dockerfile
+FROM php:7.4-apache
+
+RUN a2enmod rewrite
+
+RUN apt-get update && apt-get install -y \
+        libzip-dev \
+        libcurl4 \
+        libcurl4-openssl-dev \
+        zip \
+        unzip \
+        vim
+
+
+RUN docker-php-ext-install pdo mysqli pdo_mysql zip curl  
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN composer config -g repo.packagist composer https://packagist.org
+
+COPY ./apache2.conf /etc/apache2/sites-available/000-default.conf
+
+WORKDIR /var/www/html
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+CMD ["apache2-foreground"]
+
+EXPOSE 80
+
+
+
+## docker-compose.yml
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: slim-app
+    working_dir: /var/www/html
+    volumes:
+      - ./project:/var/www/html
+    ports:
+      - "8181:80"
+
+
+

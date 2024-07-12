@@ -1,0 +1,248 @@
+			Shell Scripting
+
+sh - Bourne shell
+bash - Bourne-Again Shell
+#! - shebang (also known as a hashbang or sha-bang) is the beginning of a script in Unix-like operating systems.
+
+-- A shell script is a computer program designed to be run by a Unix shell, a command-line interpreter.
+-- Shell scripting is a text file with a list of commands that instruct an operating system to perform certain tasks. 
+-- A shell is an interface that interprets, processes, and executes these commands from the shell script. 
+-- It's helpful to automate repetitive tasks, helping to save time and reduce human error. 			
+-- shell script file is interpretaion specification
+   #! /bin/sh   --> old version
+   #! /usr/bin/bash --> latest version
+-- We write comments in shell scripting file using `#` symbol
+-- Linux built-in variables are written with $ symbol and capital letters
+   ex : $PWD, $USER etc
+   
+-- The `read` command which takes the input from the keyboard and assigns it as the value of the variable    
+   echo "What is your name?"
+   read PERSON
+   echo "Hello, $PERSON"
+-- In bash, we can take user input using the read command.
+-- To prompt the user with a custom message, use the -p flag.
+   read -p "Enter your age" variable_name
+   read -p "Enter firstname : " firstname
+   read -p "Enter lastname : " lastname
+   echo $firstname $lastname   
+
+-- define variables
+#!/bin/bash
+# A simple variable example
+greeting=Hello
+name=Tux
+echo $greeting $name
+
+-- Numerical expressions can also be calculated and stored in a variable using the syntax below:
+var=$((expression))
+
+
+-- conditional statement
+
+if [ conditions ]
+    then
+         commands
+fi
+
+Example : 
+read x
+read y
+if [ $x -gt $y ]
+then
+echo X is greater than Y
+elif [ $x -lt $y ]
+then
+echo X is less than Y
+elif [ $x -eq $y ]
+then
+echo X is equal to Y
+fi
+
+
+if [ $a -gt 40 -a $b -lt 6 ]     -a --> AND   -o --> OR
+
+
+-- Loop with numbers
+for i in {1..5}
+do
+    echo $i
+done
+
+-- Loop with strings
+for X in cyan magenta yellow  
+do
+	echo $X
+done
+
+-- While loop
+i=1
+while [[ $i -le 10 ]] ; do
+   echo "$i"
+  (( i += 1 ))
+done
+
+
+-- Using the find command
+find . -type f -name "*.sh"
+
+-- Loop through the output of a command (listing files in the current directory)
+for file in $(ls); do
+  echo "File: $file"
+done
+
+
+-- C-style for loop
+for ((i=1; i<=5; i++)); do
+  echo "Number: $i"
+done
+
+
+-- Define an array
+fruits=("apple" "banana" "cherry")
+
+Loop through array elements
+for fruit in "${fruits[@]}"; do
+  echo "Fruit: $fruit"
+done
+
+
+-- Loop with break and continue
+for i in {1..10}; do
+  if [ $i -eq 5 ]; then
+    echo "Skipping number 5"
+    continue
+  fi
+  if [ $i -eq 8 ]; then
+    echo "Breaking at number 8"
+    break
+  fi
+  echo "Number: $i"
+done
+
+
+
+
+# Main Use Cases
+-- Shell scripting is primarily used to automate repetitive system tasks
+-- To backup files
+-- Task Scheduling (or) To run cron tasks in projects
+-- Monitoring system resources
+-- Creating and Managing user accounts
+-- Files and Directories management
+-- Database monitoring
+-- Custom Command Creation
+-- Interaction with APIs: Use shell scripts to make API calls and process the responses.
+
+
+# Rename all .txt files to .bak
+for file in *.txt; do
+  mv "$file" "${file%.txt}.bak"
+done
+
+
+# Check disk usage and alert if usage exceeds 90%
+usage=$(df / | grep / | awk '{ print $5 }' | sed 's/%//')
+if [ $usage -gt 90 ]; then
+  echo "Disk space critical: $usage% used"
+fi
+
+
+# Convert all .csv files to .txt
+for file in *.csv; do
+  mv "$file" "${file%.csv}.txt"
+done
+
+# Backup home directory
+tar -czf backup-$(date +%F).tar.gz /home/user/
+
+# Create a new user and set password
+sudo useradd newuser
+echo "newuser:password" | sudo chpasswd
+
+# Add a cron job to run a script every day at midnight
+(crontab -l ; echo "0 0 * * * /path/to/script.sh") | crontab -
+
+# Find and count occurrences of "ERROR" in log file
+grep -c "ERROR" /var/log/syslog
+
+
+# Replace "foo" with "bar" in all .txt files
+sed -i 's/foo/bar/g' *.txt
+
+# Apply a configuration to multiple servers
+for server in server1 server2 server3; do
+  ssh user@$server 'sudo cp /path/to/config /etc/config'
+done
+
+
+# Run a series of tests and log the results
+for test in test1.sh test2.sh test3.sh; do
+  ./$test >> test_results.log
+done
+
+
+
+https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/
+https://www.tutorialspoint.com/unix/unix-using-variables.htm
+
+
+
+
+php -m | grep pdo
+php -m | grep PDO
+php -m | grep -i pdo
+php -m | head -5
+php -m | tail -6
+php -m | grep xml
+php -m | grep -i  xml
+
+ls -la | head -5
+ls -la -t | head -6
+	
+head -10 .bashrc
+tail -10 .bashrc
+
+We can create alias or shortcut in .bashrc file
+alias ll='ls -alF'
+alias connect-sez='openvpn --config sez-vpn-linux.ovpn'
+
+Apply .bashrc Changes:
+source ~/.bashrc
+
+
+to copy and replace text to a file (Overwrite Mode)
+echo "something" > user.sh 
+
+to copy and append text to file (Append Mode)
+echo "something elseee" >> user.sh
+
+
+### vim editor shortcuts
+yy - copy current line
+p - paste
+yyp - duplicate line
+dd - remove current line
+o - enter new empty line
+gg - go to top of the file
+G - go to end of the file
+u - undo
+Ctrl+r  - redo undo
+/pattern - to search for a pattern
+n - next line after search
+N - previous line after search
+:%s/old/new/g - Replace all occurrences of old with new in the entire file.
+:s/old/new/g - Replace all occurrences of old with new in the current line.
+:%s/old/new/gc - Replace all occurrences of old with new in the entire file with 
+
+:wq (or) :x  - write and quite
+q - only quit
+q! - Quit Vim without saving changes
+
+
+
+
+
+
+ 
+
+

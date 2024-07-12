@@ -12,7 +12,10 @@ https://symfony.com/doc/5.4/setup.html
 ## If you are building a traditional web application:
 symfony new --webapp my_project  or symfony new --full my_project
 symfony new my_project_directory --version=5.4 --webapp
-	
+
+docker exec -it symfony-app composer create-project symfony/skeleton:"5.4.*" .	
+docker exec -it symfony-app composer require webapp
+
 composer create-project symfony/skeleton:"^5.4" my_project_directory
 cd my_project_directory
 composer require webapp
