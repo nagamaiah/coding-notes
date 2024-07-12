@@ -16,4 +16,37 @@
 	sudo systemctl status ssh (or) sudo service ssh status
 	
 	
-				
+-- To configure ssh options
+   cat /etc/ssh/sshd_config
+   cat /etc/ssh/sshd_config | grep Port
+
+
+-- If your Ubuntu system has a firewall enabled, such as UFW, CSF or even iptables rules that block the SSH port. You’ll need to allow SSH connections. 
+   sudo ufw allow ssh   // This command will enable SSH traffic on the default SSH port (22).
+   sudo ufw status   // to check ssh status 
+   
+-- To allow the port 22 in your iptables, you can run the following command:
+   iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+-- Connect remote servers vis SSH
+   ssh username@hostname_or_IP
+   ssh -p port_number username@IP_address
+
+
+
+
+
+
+
+https://hostman.com/tutorials/how-to-install-and-configure-ssh-on-ubuntu-22-04/
+https://hostman.com/tutorials/how-to-install-and-configure-ssh-on-ubuntu-22-04/
+
+
+
+
+
+
+
+
+
+       				

@@ -49,7 +49,7 @@
 		upper/lowercase and singular/plural forms of words.
 
 	11. guzzlehttp/guzzle
-		Guzzle is a PHP HTTP client library. guzzle/guzzle is deprecated.
+		Guzzle is a PHP HTTP client library. guzzle/guzzle is deprecated. Used to access api's from php code
 
 	12. twig/twig
 		Twig, the flexible, fast, and secure template language for PHP
@@ -72,7 +72,17 @@
 		*Design Patterns
 
 	14. php-di/php-di
-		The dependency injection container for humans
+		The dependency injection container for humans.
+		The PHP Framework Interop Group (PHP-FIG) has produced the PSR-11 that describes the recommended interface to a PHP DI container
+		The di container should implement psr-11 container interface. use `composer require psr/container`
+		We need to implement its 
+			Psr\Container\ContainerInterface, 
+			Psr\Container\ContainerExceptionInterface,
+			Psr\Container\NotFoundExceptionInterface.
+		We implement our custom di container using above interfaces (or) we can directly use php-di package. `composer require php-di/php-di`
+		
+		https://patrick-assoa-adou.medium.com/writing-a-simple-dependency-injection-container-in-php-lessons-learned-17d3af3626ea
+		https://hiddenhat.press/php-dependency-injection/
 
 	15. doctrine/orm
 		Object-Relational-Mapper for PHP
