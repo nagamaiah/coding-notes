@@ -1,6 +1,6 @@
 
 
-github personal access token -> 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
+GPAT -> REMOVE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
 use this for username and password while pushing to remote repo.
 
 Generate ssh keys
