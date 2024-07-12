@@ -1,19 +1,5 @@
 
 
-Generate ssh keys
-ssh-keygen -t ed25519 -C "nagamaiah63@gmail.com"
-
-Start the ssh-agent in the background.
-eval "$(ssh-agent -s)"
-
-Add your SSH private key to the ssh-agent.
-ssh-add ~/.ssh/id_ed25519
-
-Adding a new SSH key to your account
-cat ~/.ssh/id_ed25519.pub
-
-Settings -> Access -> SSH and GPG keys -> Add SSH key
-
 
 If you're cloning GitHub repositories using HTTPS, we recommend you use GitHub CLI or 
 Git Credential Manager (GCM) to remember your credentials.
