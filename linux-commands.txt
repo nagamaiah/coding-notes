@@ -194,7 +194,72 @@ ________________________________________________________________________________
 	systemctl status docker
 	systemctl restart docker
 	systemctl status mysql
+
+
+-----------------------------------------------------------------------------------------------------
+
+php -m | grep pdo
+php -m | grep PDO
+php -m | grep -i pdo
+php -m | head -5
+php -m | tail -6
+php -m | grep xml
+php -m | grep -i  xml
+
+ls -la | head -5
+ls -la -t | head -6
 	
+head -10 .bashrc
+tail -10 .bashrc
+
+We can create alias or shortcut in .bashrc file
+alias ll='ls -alF'
+alias connect-sez='openvpn --config sez-vpn-linux.ovpn'
+
+Apply .bashrc Changes:
+source ~/.bashrc
+
+
+to copy and replace text to a file (Overwrite Mode)
+echo "something" > user.sh 
+
+to copy and append text to file (Append Mode)
+echo "something elseee" >> user.sh
+
+-------------------------------------------------------------------------------------------------------
+	Vim editor shortcuts
+yy - copy current line
+p - paste
+yyp - duplicate line
+dd - remove current line
+o - enter new empty line
+gg - go to top of the file
+G - go to end of the file
+u - undo
+Ctrl+r  - redo undo
+/pattern - to search for a pattern
+n - next line after search
+N - previous line after search
+:%s/old/new/g - Replace all occurrences of old with new in the entire file.
+:s/old/new/g - Replace all occurrences of old with new in the current line.
+:%s/old/new/gc - Replace all occurrences of old with new in the entire file with 
+
+:wq (or) :x  - write and quite
+q - only quit
+q! - Quit Vim without saving changes
+
+:set number - Absolute Line Numbers
+:set nonumber - disable numbers
+:set number! - toggle numbers
+
+:set relativenumber - Relative Line Numbers
+:set norelativenumber - disable the relative line numbering
+
+:line_number - go to line
+:1006 - go to 1006 line 
+
+Vim editor settings file
+vim ~/.vimrc
 
 
 

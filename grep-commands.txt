@@ -25,4 +25,26 @@ Options
 -L, --files-without-match: Prints the file name that does not contain the provided matching pattern.
 
 
+php -m | grep pdo
+php -m | grep PDO
+php -m | grep -i pdo
+php -m | head -5
+php -m | tail -6
+php -m | grep xml
+php -m | grep -i  xml
+
+
+ll | grep index.php
+ll | grep *.log
+
+ll | grep -c index.php
+ll | grep -c  *.log
+
+ls -la | head -5
+ls -la -t | head -6
+	
+head -10 .bashrc
+tail -10 .bashrc
+
+
 

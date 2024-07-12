@@ -14,8 +14,7 @@
 	
 	check running status
 	sudo systemctl status ssh (or) sudo service ssh status
-	
-	
+		
 -- To configure ssh options
    cat /etc/ssh/sshd_config
    cat /etc/ssh/sshd_config | grep Port
@@ -33,20 +32,7 @@
    ssh -p port_number username@IP_address
 
 
-
-
-
-
-
 https://hostman.com/tutorials/how-to-install-and-configure-ssh-on-ubuntu-22-04/
-https://hostman.com/tutorials/how-to-install-and-configure-ssh-on-ubuntu-22-04/
-
-
-
-
-
-
-
 
 
        				

@@ -181,68 +181,6 @@ for test in test1.sh test2.sh test3.sh; do
 done
 
 
-
 https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/
 https://www.tutorialspoint.com/unix/unix-using-variables.htm
-
-
-
-
-php -m | grep pdo
-php -m | grep PDO
-php -m | grep -i pdo
-php -m | head -5
-php -m | tail -6
-php -m | grep xml
-php -m | grep -i  xml
-
-ls -la | head -5
-ls -la -t | head -6
-	
-head -10 .bashrc
-tail -10 .bashrc
-
-We can create alias or shortcut in .bashrc file
-alias ll='ls -alF'
-alias connect-sez='openvpn --config sez-vpn-linux.ovpn'
-
-Apply .bashrc Changes:
-source ~/.bashrc
-
-
-to copy and replace text to a file (Overwrite Mode)
-echo "something" > user.sh 
-
-to copy and append text to file (Append Mode)
-echo "something elseee" >> user.sh
-
-
-### vim editor shortcuts
-yy - copy current line
-p - paste
-yyp - duplicate line
-dd - remove current line
-o - enter new empty line
-gg - go to top of the file
-G - go to end of the file
-u - undo
-Ctrl+r  - redo undo
-/pattern - to search for a pattern
-n - next line after search
-N - previous line after search
-:%s/old/new/g - Replace all occurrences of old with new in the entire file.
-:s/old/new/g - Replace all occurrences of old with new in the current line.
-:%s/old/new/gc - Replace all occurrences of old with new in the entire file with 
-
-:wq (or) :x  - write and quite
-q - only quit
-q! - Quit Vim without saving changes
-
-
-
-
-
-
- 
-
 
