@@ -1,0 +1,39 @@
+								Search Engine Optimization
+
+-- SEO is a process designed to optimize a website for search engines. It helps websites achieve a higher ranking in search engine results 
+   when people search for keywords related to their products and services.
+-- 
+-- Types of SEO
+   On-Page : 
+   Off-Page : 
+   
+-- Types of Search Engines : Google, Bing, Yahoo, DuckDuckGo, Ecosia, Ask.com etc.,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Low Text-HTML ratio
+-- It means that you have a lot of code, and not that much visible content for users to read. 
+-- The amount of text content on a web page is low compared to the amount of HTML code
+
+
+
+
+
+https://www.youtube.com/watch?v=MYE6T_gd7H0
+https://www.youtube.com/watch?v=tu501rOVMGc
+https://www.youtube.com/watch?v=xsVTqzratPs
+https://www.javatpoint.com/seo-tutorial
+https://www.geeksforgeeks.org/search-engine-optimization-seo-basics/
+
+   							
