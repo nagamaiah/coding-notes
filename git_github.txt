@@ -1,12 +1,21 @@
 
 
-github personal access token -> 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
+github personal access token -> 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
 use this for username and password while pushing to remote repo.
 
-
+Generate ssh keys
 ssh-keygen -t ed25519 -C "nagamaiah63@gmail.com"
-generated ssh key is :
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINloP1oc9HsbVm0dQaB3haOq++WlDNE5zCjkLBJtx7m2 nagamaiah63@gmail.com
+
+Start the ssh-agent in the background.
+eval "$(ssh-agent -s)"
+
+Add your SSH private key to the ssh-agent.
+ssh-add ~/.ssh/id_ed25519
+
+Adding a new SSH key to your account
+cat ~/.ssh/id_ed25519.pub
+
+Settings -> Access -> SSH and GPG keys -> Add SSH key
 
 
 If you're cloning GitHub repositories using HTTPS, we recommend you use GitHub CLI or 
