@@ -588,6 +588,67 @@ https://stackoverflow.com/questions/15843688/what-is-the-best-column-type-for-a-
 
 
 
+6. JSON functions --  https://www.digitalocean.com/community/tutorials/working-with-json-in-mysql
+-- Create a JSON type column
+	car_properties JSON not null
+## Insert JSON data into json column or field
+insert into cars(car_name, car_properties) values ('audi', '{"color":"blue","seater":"5","price":"600000"}');
+insert into cars(car_name, car_properties) values ('audi', JSON_OBJECT("color","red","seater","7","price","900000"));
+insert into cars(car_name, car_properties) values ('audi', JSON_OBJECT("color","violate","color","green","price","900000"));
+insert into cars(car_name, car_properties) values ('audi', JSON_ARRAY("color","white","seater","4","price","400000"));
+insert into cars(car_name, car_properties) values ('lambo', JSON_OBJECT("color",JSON_ARRAY("green","orange","violate"),"seater","7","price","900000"));
+insert into cars(car_name, car_properties) values ('ferrari', JSON_MERGE_PRESERVE('{"color":"purple"}', '{"seater":"6"}'));
+insert into cars(car_name, car_properties) values ('ferrari', JSON_MERGE_PRESERVE(JSON_OBJECT("color","yellow"), JSON_OBJECT("seater","9")));
+	
+-- In MySQL, when you pass multiple same keys into JSON data, the last occurrence of the key will overwrite the previous ones.
+-- To get json data type of a column
+	SELECT JSON_TYPE(car_properties) FROM cars;
+	SELECT JSON_TYPE(car_properties) FROM cars where car_id = 2;
+-- To get json object keys and to get length of json object
+	select JSON_KEYS('{"name":"raj","age":33,"salary":30000}');
+	select JSON_KEYS('["name","raj","age",33,"salary",30000]');
+	select JSON_TYPE('{"name":"raj","age":33,"salary":30000}');
+	select JSON_TYPE('["name","raj","age",33,"salary",30000]');
+	select JSON_LENGTH('["name","raj","age",33,"salary",30000]');
+	select JSON_LENGTH('{"name":"raj","age":33,"salary":3000.33, "sub":false, "abc":null}');
+	
+## Reading the Data from the JSON Field
+-- select rows using a JSON field, Path expressions use a dollar sign symbol ($) and the target object keys.
+-- When used in combination with the JSON_EXTRACT function, you can retrieve the values for the specified column.
+	select JSON_EXTRACT(car_properties, '$.color') from cars where car_id = 5;
+	select JSON_EXTRACT(`car_properties`, '$.color[2]') from cars where car_id = 5;
+-- Alternatively, the JSON_EXTRACT function has the alias -> that you can use to make your queries more readable
+	select car_properties -> '$.color' as colorrrr from cars where car_id = 5;
+	select car_properties -> '$.color.color2' from cars where car_id = 9;	
+-- Need to implement practically
+	SELECT JSON_ARRAYAGG(
+    	JSON_OBJECT('brand', c.brand, 'model', c.model,
+        'owner', JSON_OBJECT('id', o.id, 'firstname', o.firstname, 'lastname', o.lastname)
+	    )
+	)
+	FROM cars AS c 
+	JOIN owners AS o ON o.id = c.owner_id
+	
+## Updating Data in the JSON Field 
+-- You can update data in JSON fields with the JSON_INSERT, JSON_REPLACE, and JSON_SET functions. These functions also require 
+   a path expression to specify which parts of the JSON object to modify. The output of these functions is a valid JSON object 
+   with the changes applied.
+-- All of these functions seem identical but there is a difference in the way they behave.
+	1. The JSON_INSERT function will only add the property to the object if it does not exists already. New key:value pair
+	2. The JSON_REPLACE function substitutes the property only if it is found.
+	3. The JSON_SET function will add the property if it is not found else replace it.
+   update cars set car_properties = JSON_REPLACE(car_properties, '$.names33333', null) where car_id = 5;
+   update cars set car_properties = JSON_SET(car_properties, '$.names55555', "namessssss") where car_id = 5;
+
+## Deleting Data from the JSON Field
+-- You can delete data in JSON fields with the JSON_REMOVE function and DELETE.
+-- JSON_REMOVE allows you to delete a certain key/value from your JSON columns.
+	update cars set car_properties = JSON_REMOVE(car_properties, '$.names', '$.seater', '$.names22') where car_id = 5;
+	update cars set car_properties = JSON_REMOVE(car_properties, '$.color[2]') where car_id = 5;
+
+
+
+
 
 -- CONCAT(str1,str2,...) : Returns the string that results from concatenating the arguments. May have one or more arguments.
    CONCAT() returns NULL if any argument is NULL.
@@ -837,6 +898,7 @@ check table testing_table;
 CREATE TABLE new_table_name LIKE pricerules; (Use LIKE to create an empty table based on the definition of another table).
 
 SELECT VERSION();
+SELECT DATABASE();  To show current or selected database
 SHOW INDEXES FROM parties;
 SHOW KEYS FROM recentcontacts WHERE Key_name = 'PRIMARY';
 SHOW VARIABLES LIKE 'sql_mode';
