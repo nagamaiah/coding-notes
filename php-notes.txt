@@ -266,6 +266,30 @@ $currentTimezone = date_default_timezone_get();
 $setTimezone = date_default_timezone_set('Asia/Kolkata'); IST
 
 
+--------------------------------------------------------------------------------------------------------------------------
+					php cookies
+-- The HttpOnly cookie attribute is a flag that can be set on cookies to prevent client-side scripts (such as JavaScript) from accessing the cookie.
+-- This provides an additional layer of security, particularly against Cross-Site Scripting (XSS) attacks.
+-- When a cookie has the HttpOnly flag, it is only sent with HTTP(S) requests and not accessible via document.cookie in JavaScript, thus protecting sensitive information stored in the cookie.
+-- In PHP, you can set a cookie with the HttpOnly attribute using the setcookie() function.
+    setcookie(
+        "cookie_name",       // Name of the cookie
+        "cookie_value",      // Value of the cookie
+        time() + 3600,       // Expiry time (1 hour from now)
+        "/",                 // Path ("/" means the cookie is available in the entire domain)
+        "example.com",       // Domain (optional)
+        true,                // Secure flag (only send cookie over HTTPS)
+        true                 // HttpOnly flag (accessible only via HTTP/S)
+    );
+-- cookie_name: The name of the cookie.
+   cookie_value: The value of the cookie.
+   expiry time: A timestamp that defines when the cookie expires (using time() for the current time).
+   path: The URL path for which the cookie is valid.
+   domain: The domain that can access the cookie.
+   secure flag: If true, the cookie will only be sent over HTTPS connections.
+   HttpOnly flag: If true, the cookie is inaccessible via JavaScript.					
+
+					
 ----------------------------------------------------------------------------------------------------------------------
 
 Most PHP values can also be converted to strings for permanent storage. This method is called "serialization", 

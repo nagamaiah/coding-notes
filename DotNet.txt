@@ -1,0 +1,356 @@
+						.Net Core 
+
+### Install and setup .Net in ubuntu 22.04
+--  Register the Ubuntu backports package repository
+	sudo add-apt-repository ppa:dotnet/backports						
+    Unregister the Ubuntu .NET backports package repository
+    	sudo add-apt-repository --remove ppa:dotnet/backports
+
+-- .NET is a broad platform used for developing all kinds of applications across various domains (web, desktop, mobile, cloud, etc.).
+-- ASP.NET is a subset of .NET specifically designed for web development. It's part of the .NET ecosystem but focused solely on building web apps and services.
+
+.Net is not a language. It's a framework developed by Microsoft.
+.NET Core is a cross-platform, open-source framework for building modern applications developed by Microsoft
+It can run on various operating systems like Windows, macOS, and Linux.
+
+.NET 6 is the latest Long-Term Support (LTS) version, providing significant improvements in performance, productivity, and functionality.
+
+ .NET 6 is fully open-source, with an active community and contributions from developers around the world.
+
+Key Features of .NET Core
+
+Cross-Platform: Run applications on multiple operating systems.
+Open-Source: Contribute to and customize the framework.
+Performance: Optimized for speed and efficiency.
+Modern Development: Supports modern development practices like dependency injection and cloud-native development.
+Flexibility: Choose from different hosting models (console, web, cloud).
+
+
+# Install and Setup
+
+https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?tabs=dotnet6&pivots=os-linux-ubuntu-2204
+
+# Download Microsoft signing key and repository
+wget https://packages.microsoft.com/config/$ID/$VERSION_ID/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+
+# Install Microsoft signing key and repository
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Clean up
+rm packages-microsoft-prod.deb
+
+# Update packages
+sudo apt update
+
+Error: [/usr/share/dotnet/host/fxr] does not exist
+
+-- Quickly install a bundle with both the SDK and the runtime
+    sudo apt update && sudo apt install dotnet6
+    (OR)
+-- Install .net SDK
+    sudo apt-get update && \
+      sudo apt-get install -y dotnet-sdk-6.0
+-- Instal .net RUNTIME    
+    sudo apt-get update && \
+      sudo apt-get install -y aspnetcore-runtime-6.0
+-- Check version
+    dotnet --version  
+ 
+# Uninstall .net 
+sudo apt remove --purge dotnet-sdk-*
+sudo apt remove --purge aspnetcore-runtime-*
+sudo apt autoremove
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+### C# or C-Sharp
+
+# run C# code in ubuntu 
+-- https://terminalroot.com/how-to-install-csharp-on-ubuntu-and-getting-started/
+-- Create a project 
+	dotnet new console -o MyApp (or) dotnet new console -o ./
+-- Edit the Program.cs file
+	Console.WriteLine("Hello, C Sharp via Ubuntu 22.04!");
+-- Now run it at runtime:
+	dotnet run			
+-- Applications written in C# use the .NET Framework, so it makes sense to use Visual Studio
+	Get started with c# --> https://www.w3schools.com/cs/cs_getstarted.php
+	https://visualstudio.microsoft.com/vs/community/
+	Once the Visual Studio Installer is downloaded and installed, choose the .NET workload and click on the Modify/Install button.
+	After the installation is complete, click on the Launch button to get started with Visual Studio.
+
+-- C# (C-Sharp) is a  OOP programming language developed by Microsoft that runs on the .NET Framework.
+-- C# is used to develop web apps, desktop apps, mobile apps, games and much more.
+-- To get a datatype of variable use GetType()
+    int age = 32;
+    age.GetType();
+-- ?? is null coalacing operator used to set default if first is null
+-- ?. is null conditional operator
+    int? age = null;
+        Console.WriteLine(age?.GetType());
+        
+        string str = "null";
+        int? length = str?.Length;
+        Console.WriteLine(length); 
+        
+        
+using System;
+
+public class App
+{
+    public static void Main(string[] args)
+    {
+        string firstname = "Nag";
+        string lastname = "Kumar";
+        
+        App app = new App();
+        Console.WriteLine(app.getSomething());
+        Console.WriteLine(app.getFullname(firstname, lastname));
+    }
+    
+    public string getSomething()
+    {
+        return "Somethings";
+    }
+
+    protected string getFullname(string fname, string lname){
+        // return fname+lname; // with operator
+        //return $"{fname} {lname}";  // string interpolation
+        //return String.Concat(fname,lname); // concat strings
+        return String.Join(" Separator ",fname,lname); // join with a separator
+    }
+}
+-- In C#, variables declared inside an if or else block are scoped locally to that block. Therefore, the variable meminfo is not 
+   accessible outside the block.
+   You need to declare the meminfo variable outside of the if-else block so that it is accessible in the entire method.
+   	using System;
+	
+	namespace Nag {
+
+	public class MathOperations
+	{
+	    static void Main(string[] args)
+	    {
+		Console.WriteLine(UserInfo(username: "Goshalll", age: 32, membership: true));
+	    }
+
+	    static string UserInfo(string username, int age, bool membership = false)
+	    {
+		string meminfo; // Declare the variable outside the if-else block
+
+		if(membership)
+		{
+		    meminfo = "User has membership"; // Assign value based on condition
+		}
+		else
+		{
+		    meminfo = "User doesn't have membership"; // Assign value based on condition
+		}
+
+		return $"Username is {username}. User age is {age}. {meminfo}";
+	    }
+	}
+	}
+
+	
+# Methods in C#
+-- In C#, a method is a block of code that performs a specific task and can be called by name to execute that task.
+-- Methods are used to organize code into reusable units, making programs easier to write, understand, and maintain.
+-- A method consists of following
+	Access Modifiers
+	Return Type	
+	Method Name
+	Parameters (optional)
+	Method Body
+	[AccessModifier] [ReturnType] [MethodName]([Parameter List])
+	{
+	    // Method body
+	    // Optional return statement if the return type is not void
+	}
+-- A method that does not return any value uses the void keyword as the return type.
+	public void DisplayMessage()
+	{
+	    Console.WriteLine("Hello, World!");
+	}
+-- A method that returns a value must specify the return type and include a return statement inside the method body.
+	public int Multiply(int a, int b)
+	{
+	    return a * b;
+	}
+-- In C#, you can define multiple methods with the same name but different signatures (different number or types of parameters). 
+   This is known as METHOD OVERLOADING. Multiple methods can have the same name with different parameters
+	public int Add(int a, int b)
+	{
+	    return a + b;
+	}
+
+	public double Add(double a, double b)
+	{
+	    return a + b;
+	}
+
+	public int Add(int a, int b, int c)
+	{
+	    return a + b + c;
+	}
+-- A static method belongs to the class rather than to a specific instance of the class. It can be called without creating an object of the class.
+-- An instance method is associated with an instance of a class. You need to create an object of the class to call the method.
+	public class Calculator
+	{
+	    public int Add(int a, int b)
+	    {
+		return a + b;
+	    }
+	}
+
+	// Create an instance of Calculator to call the method
+	Calculator calc = new Calculator();
+	int result = calc.Add(3, 7);
+-- An instance method is associated with an instance of a class. You need to create an object of the class to call the method.
+-- parameters vs arguments
+	parameters : Parameters are variables that are declared in the method signature to receive values when the method is called. 
+		     They are defined in the method declaration. Parameters act as placeholders for the actual values (arguments)  
+	arguments :  Arguments are the actual values or expressions that you pass to a method when invoking it. 
+		     Passed in the method call.
+	
+-- Methods can have parameters with default values, allowing the caller to omit them.
+	public void PrintMessage(string message = "Default Message")
+	{
+	    Console.WriteLine(message);
+	}
+
+	// Calling the method
+	PrintMessage(); // Outputs: Default Message
+	PrintMessage("Custom Message"); // Outputs: Custom Message
+-- you can pass default null values to method parameters by specifying null as the default value in the method signature.
+	public void Greet(string name = null)
+-- Using Nullable : you can use the Nullable<T> type (or the shorthand T?) to allow null values. 
+	public void DisplayAge(int? age = null)
+	{
+	    if (age.HasValue)
+	    {
+		Console.WriteLine($"Age: {age}");
+	    }
+	    else
+	    {
+		Console.WriteLine("Age: Not provided");
+	    }
+	}
+
+	// Usage
+	DisplayAge();        // Outputs: Age: Not provided
+	DisplayAge(30);      // Outputs: Age: 30
+-- Method with params Keyword : The params keyword allows a method to accept a variable number of arguments.
+	public void PrintNumbers(params int[] numbers)
+	{
+	    foreach (int number in numbers)
+	    {
+		Console.WriteLine(number);
+	    }
+	}
+
+	// Calling the method
+	PrintNumbers(1, 2, 3, 4, 5);
+-- Asynchronous methods in c#. async and await in c#.  (c# async and await example code snippets ?  in chatgpt)
+	using System;
+	using System.Threading.Tasks;
+
+	class Program
+	{
+	    static async Task Main(string[] args)
+	    {
+		Console.WriteLine("Starting the task...");
+		
+		string result = await FetchDataAsync();
+		
+		Console.WriteLine(result);
+		Console.WriteLine("Task completed.");
+	    }
+
+	    static async Task<string> FetchDataAsync()
+	    {
+		await Task.Delay(3000); // Simulating a delay
+		return "Data fetched successfully!";
+	    }
+	}
+	
+	
+	using System;
+	using System.Threading.Tasks;
+
+	class Program
+	{
+	    static async Task Main(string[] args)
+	    {
+		Console.WriteLine("Starting multiple tasks...");
+
+		Task<string> task1 = FetchDataAsync("Task 1", 2000);
+		Task<string> task2 = FetchDataAsync("Task 2", 3000);
+		
+		string[] results = await Task.WhenAll(task1, task2);
+		
+		foreach (string result in results)
+		{
+		    Console.WriteLine(result);
+		}
+		
+		Console.WriteLine("All tasks completed.");
+	    }
+
+	    static async Task<string> FetchDataAsync(string taskName, int delay)
+	    {
+		await Task.Delay(delay);
+		return $"{taskName}: Data fetched after {delay}ms.";
+	    }
+	}
+
+## OOPs in C#
+-- Class is blueprint or template for objects
+-- Object is an instance of a class. Object created using `new` keyword. Object fields and methods are accessed using dot . operater
+	Car myCar = new Car();
+	myCar.color;
+	myCar.getSpeed();
+-- A constructor in C# is a special method that is called when an instance of a class is created. Its main purpose is to initialize 
+   objects of the class. The constructor has the same name as the class and does not have a return type (not even void).
+-- 
+
+Method Parameters, Parameters & Arguments
+Default Parameters and Return values
+Named Arguments
+Method Overloading : multiple methods can have the same name with different parameters  
+		
+	
+-------------------------------------------------------------------------------------------------------------------------------
+### ASP.net Core 
+
+-- ASP.NET Core is an open-source, cross-platform and improved version of asp.net
+-- ASP.NET stands for Active Server Pages Network Enabled Technologies
+-- ASP.NET core is released in 2016
+	Framework	     : .NET Core/.NET 5+ (Cross-platform)
+	Performance          : Lightweight, high performance
+	Cross-Platform       : Yes
+	Development Models   : Unified MVC, Web API, Razor Pages
+	Hosting		     : IIS, Kestrel, Apache, Nginx
+	Open Source	     : Yes
+	Recommended for      : New and modern projects
+-- 
+
+ASP.NET Core in .NET 6
+dotnet new webapi -n MyWebApi
+cd MyWebApi
+dotnet run
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+

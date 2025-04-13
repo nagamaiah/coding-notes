@@ -1,0 +1,48 @@
+							NEXTJS 
+
+-- Next.js is a React framework that helps developers build web applications
+-- Next.js is open-source and lightweight. It's based on React babel and webpack, which provides an out-of-the-box solution for server-side rendering (SSR) of React components.
+-- We need nodejs, npm and npx to be installed in our machine to work with nextjs
+	npx create-next-app@latest
+
+-- Next.js Main Features
+	Routing
+	Rendering
+	Data Fetching
+	Styling
+	Optimizations
+	TypeScript
+
+
+
+
+
+# Routing (Next.js has two different routers: the App Router and the Pages Router.)
+-- App Router (v13+)
+1. The App Router is a newer router that allows you to use React's latest features, such as Server Components and Streaming.
+2. Follows a folder-based file routing under the /app directory.
+3. Built around React Server Components (RSC) for a modern, server-first approach.
+4. Dynamic Routing by Default (e.g., loading.js, layout.js, etc.).
+5. Supports React Server Components (better performance by reducing client-side JavaScript).
+6. Uses special files like layout.js, page.js, loading.js, etc., for modular organization.
+7. Supports nested layouts and shared layouts naturally.
+8. Uses modern APIs: fetch, async/await directly in server components (e.g., no need for getServerSideProps).
+For new projects, the App Router is generally the best choice as it aligns with modern web development practices and the future of Next.js.
+
+-- Page Router									
+1. The Pages Router is the original Next.js router, which allowed you to build server-rendered React applications and continues to be supported for older Next.js applications.
+2. Based on the /pages directory.
+3. Works with traditional React components.
+4. Requires explicit handling of routing logic
+5. Only supports Client Components.
+6. Single file for each route.
+7. Requires manual implementation for shared layouts.
+8. Uses older APIs like 
+	getStaticProps, 
+	getServerSideProps,
+	getInitialProps.
+
+
+
+
+
