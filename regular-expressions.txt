@@ -9,7 +9,7 @@
 
 -- [fgh] Character Set
 -- [^hkj] negate Character Set
--- (word|curd) Grouping 
+-- (word|curd) Grouping
 -- (^word) negate Grouping
 
 

@@ -1,0 +1,370 @@
+
+# What is api
+-- API (Application Programming Interface) is, describing it as a set of rules and protocols enabling different software applications 
+   to communicate and exchange data.
+
+
+# API Concepts
+-- Api Architecture Types
+-- Types of Api's
+-- Key Practices / Best Practices
+-- Api Development Process
+-- Api Security
+-- Api Gateway
+
+
+# Types of Apis
+-- Public Apis
+-- Partner Apis
+-- Internal / Private apis
+-- Composite apis
+
+# Api Development Process 
+-- the API development process typically involves several key steps to create a reliable, secure, and well-documented API
+1. Planning Your API : Planning your API involves defining its purpose, understanding developer needs, identifying resources, and outlining 
+   endpoints with appropriate HTTP methods while considering both functional and non-functional requirements. 
+2. API Design : The API design phase focuses on defining endpoints, methods, parameters, and data formats while choosing the right architecture 
+   (REST, SOAP, GraphQL) and ensuring usability, security, scalability, and proper handling of authentication, rate limiting, and versioning.
+3. API Development (Building Endpoints) : After design, API development begins with setting up the tech stack and writing code to implement 
+   functionality, including building endpoints (GET, POST, PUT, DELETE) that handle specific operations like fetching products or creating orders.
+4. API testing : ensures the API works as intended by validating endpoints, methods, and data formats, using tools like Postman or automated 
+   tests to check functionality, performance, security, and reliability through unit, integration, and other test types.
+5. Monitoring and Optimizing : After deployment, API monitoring tracks performance metrics like uptime and response time using tools like 
+   CloudWatch, while ongoing optimization involves analyzing logs, setting alerts, and incorporating user feedback for continuous improvement.
+
+
+# Api Gateway
+-- An API Gateway serves as a critical component, particularly in microservice architectures. It acts as a reverse proxy 
+   and the single entry point into the system for clients. This helps simplify API design, implementation, and management
+-- Here are 5 key concepts about API Gateways based on the sources:
+1. Single Entry Point and Reverse Proxy: 
+-- The API Gateway is the sole point of access for clients interacting with backend services. It operates as a reverse proxy, 
+   directing incoming client requests to the appropriate internal services.
+2. Centralized Security Management: 
+-- It provides a central location to enforce security requirements. This includes handling authentication for API requests and 
+   validating access tokens, often by interacting with authorization servers. It also offers threat protection features like 
+   regulating traffic to mitigate DDoS attacks and implementing security best practices.
+3.  Traffic Management and Control: 
+-- API Gateways can control and regulate traffic flowing to backend services. This involves features like rate limiting 
+   (controlling the number of requests allowed within a time frame), throttling, and integrating with load balancers to 
+   distribute traffic across multiple service instances.
+4.  Request Routing and Service Discovery: 
+-- The gateway is responsible for routing client requests to the correct backend microservices. It utilizes information from 
+   a service registry to perform service discovery, keeping track of the network locations and availability of service instances.
+5.  Monitoring and Analytics Hub: 
+-- Since all traffic passes through the API Gateway, it is a critical point for monitoring the system. It allows capturing data flow 
+   information and provides insights into metrics such as the number of requests, performance statistics, and policy adherence, 
+   which is valuable for IT administration and policies.
+   
+   
+# Api architecture types
+-- REST
+-- SOAP
+-- Websocket
+-- Webhook
+-- GraphQL
+-- gRPC
+
+
+# Api Security Standards (or) Rules
+1. Authentication
+2. Authorization
+3. Use HTTPS Only
+4. Input Validation & Injection Protection
+5. Rate Limiting & Throttling
+6. Error Handling
+7. Logging & Monitoring
+8. CORS (Cross-Origin Resource Sharing)
+9. Versioning
+ 
+
+
+
+# Api Authentication methods
+-- API Key Authentication
+    Description: A simple token (API key) passed in the request header or URL.
+    Usage: Public APIs, basic usage tracking.
+    Pros: Easy to implement.
+    Cons: No user identity; not very secure if exposed.
+
+-- HTTP Basic Authentication
+    Description: Sends username and password encoded in Base64 with each request (Authorization: Basic <base64-encoded>).
+    Usage: Simple internal APIs or testing.
+    Pros: Easy to implement.
+    Cons: Insecure without HTTPS; credentials are sent with every request.
+
+-- Bearer Token (Token-Based) Authentication
+    Description: Sends a token (usually JWT or opaque) in the Authorization: Bearer <token> header.
+    		 The bearer token is included in the Authorization header of subsequent HTTP requests to access api resources
+    Usage: Modern APIs.
+    Pros: Secure if token is signed and used with HTTPS.
+    Cons: Token management and expiration handling required.
+
+-- JWT (JSON Web Token) Authentication
+	
+
+-- OAuth 2.0 (Open Authorization)
+    Description: A comprehensive authorization framework that grants access via access tokens obtained 
+                 using various "flows" (e.g., grant_type: Authorization Code, Client Credentials, password).
+                 OAuth 2.0 is primarily an authorization protocol, not an authentication protocol
+    Usage: Enterprise, user-authorized access (e.g., Google, Facebook APIs).
+    Pros: Scalable, secure, supports delegated access.
+    Cons: Complex to implement.
+
+-- Session-Based Authentication
+    Description: User logs in, server creates a session and sends a session ID (usually as a cookie).
+    Usage: Web apps, legacy systems.
+    Pros: Simple for browser-based clients.
+    Cons: Doesn’t scale well in distributed systems without session stores.
+
+-- HMAC (Hash-based Message Authentication Code)
+    Description: Clients sign each request using a secret key and hashing algorithm.
+    Usage: Financial APIs, secure environments.
+    Pros: Secure against tampering.
+    Cons: Complex to implement correctly.
+
+# Header Parameter
+Authorization: Bearer <token>
+
+curl --request GET \	
+    'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V' \
+     --header "Authorization: Bearer NgCXRK...MzYjw"
+
+
+# OAuth grant_type parameter specifies the method by which a client obtains an access token.
+1. Authorization Code (authorization_code)
+Used by web and mobile apps.
+Involves a user authorizing access via a browser redirect.
+Most secure, especially when using PKCE.
+Example use: Google sign-in in a web app.
+
+2. Resource Owner Password Credentials (password)
+User provides username and password directly to the client.
+Suitable only for trusted applications.
+Not recommended for public clients or third-party apps. 
+
+3. Client Credentials (client_credentials)
+Used for machine-to-machine (M2M) applications.
+No user involvement — the client authenticates with its credentials.
+Example: backend server accessing an API.
+
+4. Refresh Token (refresh_token)
+Used to obtain a new access token using a valid refresh token.
+Only available after initial authentication with other grant types (like authorization_code).
+
+
+# What is OAuth
+-- OAuth is an authorization framework that allows third-party applications to access user data without exposing the user’s credentials (like passwords).
+-- Example : 
+   User clicks "Login with Google"
+   App redirects to Google (authorization server)
+   User logs in and authorizes access
+   Google redirects back to your app with an authorization code
+   Your app exchanges the code for an access token
+   App uses the token to access the user's data
+
+
+
+# OAuth Authorization Code Flow (https://developer.spotify.com/documentation/web-api/tutorials/code-flow)
+-- The OAuth authorization flow, which is a type of access token flow supported by OAuth 2.0, helps exchange authorization codes 
+   for tokens, assuming your application is server-side
+-- The authorization code flow is suitable for long-running applications (e.g. web and mobile apps) where the user grants permission only once.   
+-- The steps involved in the OAuth authorization flow
+Step 1: The user clicks on a "Login" button in the regular web application
+Step 2: The user is redirected to the authorization server. This authorization server authenticates the client and confirms they 
+        can access the requested resources  
+Step 3: The authorization server then redirects the user to a login and authorization prompt
+Step 4: The user enters their credentials to log in to the application and authorize it. The server contacts the owner of the resources 
+        to confirm authorization    
+Step 5: The authorization server redirects the user back to the web application with an authorization code. This code is typically for one-time use
+Step 6: The application sends the authorization code back to the authorization server, along with the application's Client Secret and Client ID
+Step 7: The authorization server verifies and validates the authorization code, Client Secret, and Client ID
+Step 8: The authorization server sends a response back to the application containing ID and Access Tokens
+Step 9: The application can now use the Access Token to call APIs and access user information
+Step 10: The API responds with the data that has been requested
+
+
+# OAuth Client Credentials Flow (https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
+-- It's one of the ways supported by OAuth 2.0 to retrieve an access token
+-- This is one of the OAuth 2.0 grant types used to obtain an access token.
+-- This flow is particularly relevant for machine-to-machine (M2M) applications like daemons, backend services, and command-line interfaces, 
+   where the system authenticates and grants permissions without involving end users
+-- The steps involved in the Client Credentials Flow   
+Step 1: The application authenticates with the OAuth authorization server by passing its Client Secret and Client ID
+Step 2: The authorization server checks and verifies the Client Secret and Client ID
+Step 3: The authorization server returns an Access Token to the application
+Step 4: The Access Token then allows the application to access the target API with the required user account or permissions
+Step 5: The API responds with the requested data
+
+
+
+https://www.youtube.com/watch?v=GZvSYJDk-us&list=LL&index=15&t=243s
+https://chatgpt.com/c/682ee200-9aa4-8009-8a90-96629718296b
+https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow
+
+
+
+# php code examples 
+
+#  Using Username and Password (Password Grant Type)
+<?php
+$url = 'https://your-auth-server.com/oauth/token';
+
+$data = [
+    'grant_type' => 'password',
+    'client_id' => 'your-client-id',
+    'client_secret' => 'your-client-secret',
+    'username' => 'user@example.com',
+    'password' => 'user-password',
+    'scope' => ''
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$token = json_decode($response, true);
+
+if (isset($token['access_token'])) {
+    echo "Bearer Token: " . $token['access_token'];
+} else {
+    echo "Error: " . $response;
+}
+?>
+
+
+# Using Client ID and Client Secret (Client Credentials Grant)
+<?php
+$url = 'https://your-auth-server.com/oauth/token';
+
+$data = [
+    'grant_type' => 'client_credentials',
+    'client_id' => 'your-client-id',
+    'client_secret' => 'your-client-secret',
+    'scope' => ''
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$token = json_decode($response, true);
+
+if (isset($token['access_token'])) {
+    echo "Bearer Token: " . $token['access_token'];
+} else {
+    echo "Error: " . $response;
+}
+?>
+
+
+# Authorization: Basic base64(client_id:client_secret) -- (Client Credentials Grant)
+<?php
+$clientId = 'your-client-id';
+$clientSecret = 'your-client-secret';
+$url = 'https://your-auth-server.com/oauth/token';
+
+// Encode client_id and client_secret in base64
+$auth = base64_encode("$clientId:$clientSecret");
+
+$data = [
+    'grant_type' => 'client_credentials',
+    'scope' => ''
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/x-www-form-urlencoded',
+    'Authorization: Basic ' . $auth
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$token = json_decode($response, true);
+
+if (isset($token['access_token'])) {
+    echo "Bearer Token: " . $token['access_token'];
+} else {
+    echo "Error: " . $response;
+}
+?>
+
+
+
+# Authorization: Basic (Authenticate client to get token)
+-- A Basic Authentication header used to send client credentials (or user credentials) encoded in base64.
+-- Authorization: Basic <base64(client_id:client_secret)>
+   $authHeader = "Authorization: Basic ".base64_encode($username.":".$password)
+-- POST /oauth/token HTTP/1.1
+   Authorization: Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0
+   Content-Type: application/x-www-form-urlencoded
+   
+   grant_type=client_credentials
+
+# Authorization: Bearer (Authenticate request to access a resource)
+-- A Bearer Token is a string (usually a JWT) that you present to prove your identity after authentication.
+-- Authorization: Bearer <access_token>
+-- Used to access protected resources after you’ve already obtained the token from the server.
+-- GET /api/user HTTP/1.1
+   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+
+
+
+
+# Python (Client Credentials Grant)
+import requests
+from requests.auth import HTTPBasicAuth
+
+url = 'https://auth.example.com/oauth/token'
+client_id = 'your-client-id'
+client_secret = 'your-client-secret'
+
+data = {
+    'grant_type': 'client_credentials',
+    'scope': 'read:data write:data'
+}
+
+response = requests.post(
+    url,
+    data=data,
+    auth=HTTPBasicAuth(client_id, client_secret)
+)
+
+print(response.json())
+
+
+# Python (Authorization Code Grant — Step 2)
+import requests
+
+url = 'https://auth.example.com/oauth/token'
+data = {
+    'grant_type': 'authorization_code',
+    'client_id': 'your-client-id',
+    'client_secret': 'your-client-secret',
+    'code': 'AUTHORIZATION_CODE_FROM_CALLBACK',
+    'redirect_uri': 'https://your-app.com/callback'
+}
+response = requests.post(url, data=data)
+print(response.json())
+
+
+
+# Testing with Public Providers
+-- Google auth URL: https://accounts.google.com/o/oauth2/v2/auth
+-- Google token URL: https://oauth2.googleapis.com/token
+-- Userinfo endpoint: https://openidconnect.googleapis.com/v1/
+
+
