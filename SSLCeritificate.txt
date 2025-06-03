@@ -1,0 +1,127 @@
+			SSLCertificate for secure connection (HTTPS)
+
+-- To add HTTPS to a website, you need to obtain an SSL/TLS certificate and configure your web server to use it.
+-- Buy or Get a Free SSL Certificate
+
+# Free option (recommended):
+-- Let's Encrypt — trusted by most browsers.
+-- Use tools like Certbot to automate setup.
+
+# Paid options:
+-- Use if you need extended validation (EV) or wildcard certificates.
+-- Providers: DigiCert, Sectigo, GlobalSign, etc.
+
+
+# Create a Self-Signed SSL Certificate
+-- mkdir -p /etc/apache2/ssl  and  cd /etc/apache2/ssl
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout ssl/laravel11-ssl.key \
+  -out ssl/laravel11-ssl.crt \
+  -subj "/C=US/ST=Local/L=Local/O=Dev/OU=Dev/CN=laravel11-docker.com"			
+
+-- CN (Common Name)  
+
+# Enable SSL and mod_rewrite Modules
+sudo a2enmod ssl
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+
+# Create/Modify the SSL Virtual Host
+sudo nano /etc/apache2/sites-available/loca.devcode.com-ssl.conf
+
+<VirtualHost *:443>
+    ServerName loca.devcode.com
+    DocumentRoot "/var/www/loca.devcode.com"
+
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/loca.devcode.com.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/loca.devcode.com.key
+
+    <Directory "/var/www/loca.devcode.com">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+
+# Redirect HTTP to HTTPS (Optional)
+<VirtualHost *:80>
+    ServerName loca.devcode.com
+    Redirect permanent / https://loca.devcode.com/
+</VirtualHost>
+
+# Enable the Site and Restart Apache
+sudo a2ensite loca.devcode.com-ssl.conf
+sudo systemctl restart apache2
+
+
+# Update /etc/hosts (if not already set)
+sudo nano /etc/hosts
+
+
+
+  
+# Configure SSL Certificate on server
+  -- Apache
+  	SSLEngine on
+	SSLCertificateFile /path/to/cert.pem
+	SSLCertificateKeyFile /path/to/private.key
+	SSLCertificateChainFile /path/to/chain.pem
+
+  -- nginx
+  	server {
+	    listen 443 ssl;
+	    server_name yourdomain.com;
+
+	    ssl_certificate /path/to/cert.pem;
+	    ssl_certificate_key /path/to/private.key;
+
+	    ...
+	}
+
+
+
+
+
+# Docker - Apache server
+
+-- Copy certs and vhost
+COPY ssl /etc/apache2/ssl
+COPY default.conf /etc/apache2/sites-available/000-default.conf
+
+# docker/apache/default.conf (Apache virtual host file)
+<VirtualHost *:80>
+    ServerName loca.devcode.com
+    Redirect permanent / https://loca.devcode.com/
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName loca.devcode.com
+    DocumentRoot /var/www/html/public
+
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/loca.devcode.com.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/loca.devcode.com.key
+
+    <Directory /var/www/html/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+
+
+#  Common Types of Paid SSL
+| Type                         | Description                                | Use Case                         |
+| ---------------------------- | ------------------------------------------ | -------------------------------- |
+| **DV** (Domain Validation)   | Basic validation (just owns domain)        | Blogs, small sites               |
+| **OV** (Org Validation)      | Validates business identity                | Business & company websites      |
+| **EV** (Extended Validation) | Full legal + domain validation (green bar) | E-commerce, banks, high-trust    |
+| **Wildcard**                 | Covers `*.yourdomain.com`                  | Subdomains on same domain        |
+| **Multi-Domain (SAN)**       | Covers multiple domains                    | Agencies, apps with many domains |
+
+
+
