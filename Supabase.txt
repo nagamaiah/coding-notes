@@ -1,0 +1,7 @@
+# Supabase
+
+-- Supabase is a modern development platform built around PostgreSQL.
+-- It provides a fully managed Postgres database as the foundation for your project.
+-- Built-in authentication and authorization features simplify user management.
+-- It offers instant RESTful and GraphQL APIs, Edge Functions, and real-time data syncing.
+-- Supabase also includes storage solutions and vector embedding support for AI-powered apps.
