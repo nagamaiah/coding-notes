@@ -1,0 +1,121 @@
+                Webhooks ("Push" notifications from external services)
+
+# A webhook is an automated way for one application to send real-time information to another application when a specific event occurs
+
+# Webhook Provider (Sender / Publisher / Source)
+-- The service that sends the webhook request when an event occurs.
+-- Examples : Stripe, Github
+-- Think of this as the event generator.
+
+# Webhook Consumer (Receiver / Listener / Subscriber)
+-- The application that receives the webhook data and handles it.
+-- Your PHP/Python app is the webhook consumer. (public and https url)
+    https://local.dummy.com/webhook.php
+    https://local.dummy.com/stripe-success
+-- This is your server code that listens for the event.
+
+
+# Webhook URL (Endpoint)
+-- he publicly accessible URL where webhook payloads are delivered via HTTP POST.
+
+# Webhook Payload
+-- The data sent in the webhook (usually JSON).
+-- Event type, Metadata (user ID, order ID, timestamps, etc.)
+
+
+# HTTP Headers
+-- Webhook providers often send special headers for:
+-- Authentication (e.g., X-Signature)
+-- Content-Type (application/json)
+-- Event type (X-Event-Type)
+-- Use headers to verify webhook authenticity.
+
+# Signature / Secret Key
+-- A way to verify the request really came from the webhook provider (not a fake).
+-- Provider sends a signature (HMAC) in headers; you re-generate it using a secret key to match.
+-- Example: Stripe's Stripe-Signature header
+-- It's like a digital handshake to prove it's genuine.
+
+# Retry Mechanism
+-- If your webhook URL is down or returns a failure (e.g., 500), the provider will retry after some time.
+-- Example: GitHub retries webhooks multiple times
+-- You should log failures and make sure your endpoint returns 200 OK.
+
+# Acknowledgment / Response Code
+-- Your server must return an HTTP status code (usually 200 OK) to confirm successful handling.
+    return http_response_code(200);
+-- Other Codes:
+    400 Bad Request: Wrong data
+    500 Internal Server Error: Your script crashed
+-- If you don’t reply with 200, the provider might retry or mark it failed.
+
+# Subscription
+-- In some systems, you must explicitly "subscribe" to the events you want.
+-- Example: In Stripe or GitHub, you select events like checkout.session.completed or push.
+-- This is like saying, "Tell me only about X, Y, Z events".
+
+
+# Use cases
+-- Payment success
+-- Email delivery
+-- Order shipment
+-- Order shipment (GitHub/GitLab webhooks for push events)
+
+---------------------------------------------------------------------------------------------------------------
+# Create and use real-time webhook in php application
+
+1. Create a Webhook Endpoint in PHP
+// File: webhook.php
+<?php
+// 1. Get the raw POST body
+$input = file_get_contents("php://input");
+
+// 2. Log or parse it
+file_put_contents("webhook_log.txt", date("Y-m-d H:i:s") . "\n" . $input . "\n\n", FILE_APPEND);
+
+// 3. Optionally decode JSON
+$data = json_decode($input, true);
+
+// 4. Example: Check event type and act
+if (isset($data['event']) && $data['event'] === 'payment_success') {
+    // Do something, like update DB
+    file_put_contents("webhook_log.txt", "Payment received for Order ID: " . $data['order_id'] . "\n", FILE_APPEND);
+}
+
+// 5. Respond to sender
+http_response_code(200);
+echo "Webhook received.";
+?>
+
+2. Make This File Public, HTTPS and reacheble
+    https://yourdomain.com/webhook.php
+
+3. Register This Webhook URL in event Provider/Publisher
+-- Go to the external service (like Stripe, Razorpay, GitHub, etc.) and set your webhook URL:
+-- Stripe Dashboard → Developers → Webhooks → Add endpoint
+-- Enter you webhook url and select events
+
+4. You test using postman or stripe cli
+
+
+
+# Webhook Terminology
+| Term             | Role in Webhook                              |
+| ---------------- | -------------------------------------------- |
+| Provider         | Sends webhook (e.g., Stripe, GitHub)         |
+| Consumer         | Receives webhook (your PHP app)              |
+| Webhook URL      | Public endpoint (e.g., `/webhook.php`)       |
+| Event            | The action (e.g., `payment_succeeded`)       |
+| Payload          | The data sent (usually JSON)                 |
+| Headers          | Additional metadata (e.g., auth, event type) |
+| Secret/Signature | Validates the authenticity                   |
+| Retry            | If webhook fails, provider resends           |
+| Acknowledgment   | Your response (`200 OK`)                     |
+| Subscription     | Choosing which events to receive             |
+
+
+# Key differences b/w api and webhook
+-- APIs are often used for "pulling" data, where an application requests information. Webhooks are a "push" mechanism, 
+   where information is sent automatically when an event occurs.
+-- Webhooks are generally more efficient because they avoid constant polling and only transmit data 
+   when needed, saving resources for both applications. 
